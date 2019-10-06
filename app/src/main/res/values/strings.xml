@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">tr</string>
+    <string name="e_u">Enter Username </string>
+    <string name="e_ph">Enter Mobile Number </string>
+    <string name="e_ad">Enter Email Address </string>
+    <string name="sign_up">Sign Up</string>
+</resources>

@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "297508623396",
+    "firebase_url": "https://ticketr-e681d.firebaseio.com",
+    "project_id": "ticketr-e681d",
+    "storage_bucket": "ticketr-e681d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:297508623396:android:9a6fa8cfe8205fe626b4b1",
+        "android_client_info": {
+          "package_name": "com.lerex.tr"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "297508623396-om1v0uiqft20ue3kqh0lup57op77726v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.lerex.tr",
+            "certificate_hash": "14710663aaac72c5975e6c106089480375b28f7a"
+          }
+        },
+        {
+          "client_id": "297508623396-04mtefg3t5g0ajjvhai60ebe0f4q2f37.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBAq0hP_AUNchGOH7lFpLbEjcmGROOCtUU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "297508623396-04mtefg3t5g0ajjvhai60ebe0f4q2f37.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
