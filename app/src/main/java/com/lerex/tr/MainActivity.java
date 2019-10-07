@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
                 ph_no=ePh.getText().toString();
                 email=eEa.getText().toString();
                 u1 = new user1(u_name,ph_no,email);
-                mydb.child(ph_no).setValue(u1);;
+                mydb.child(ph_no).setValue(u1);
             }
         });
 
