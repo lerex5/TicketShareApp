@@ -4,4 +4,5 @@
     <string name="e_ph">Enter Mobile Number </string>
     <string name="e_ad">Enter Email Address </string>
     <string name="sign_up">Sign Up</string>
+    <string name="seller_activity">Seller Activity</string>
 </resources>
