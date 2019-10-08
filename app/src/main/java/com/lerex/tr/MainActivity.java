@@ -31,22 +31,23 @@ class user1 {
 
 public class MainActivity extends AppCompatActivity {
 
-    private DatabaseReference mydb = FirebaseDatabase.getInstance().getReference("Users");
-    public static String u_name,ph_no,email;
-    user1 u1;
+    private DatabaseReference mydb = FirebaseDatabase.getInstance().getReference("Users");//RealTime Database Connection
+    private static String u_name,ph_no,email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);//FullScreening The Application
+
         setContentView(R.layout.activity_main);
-        final Button signup=(Button)findViewById(R.id.sign_up);
+        final Button signup=findViewById(R.id.sign_up);
         final EditText eU,ePh,eEa;
-        eU=(EditText)findViewById(R.id.username);
-        ePh=(EditText)findViewById(R.id.phone_number);
-        eEa=(EditText)findViewById(R.id.e_add);
+        eU=findViewById(R.id.username);
+        ePh=findViewById(R.id.phone_number);
+        eEa=findViewById(R.id.e_add);
 
 
         signup.setOnClickListener(new View.OnClickListener() {
@@ -54,8 +55,8 @@ public class MainActivity extends AppCompatActivity {
                 u_name=eU.getText().toString();
                 ph_no=ePh.getText().toString();
                 email=eEa.getText().toString();
-                u1 = new user1(u_name,ph_no,email);
-                mydb.child(ph_no).setValue(u1);
+                user1 u1 = new user1(u_name,ph_no,email);
+                mydb.child(ph_no).setValue(u1);//Db entry
                 Intent intent=new Intent(MainActivity.this,sellActivity.class);
                 startActivity(intent);
             }
