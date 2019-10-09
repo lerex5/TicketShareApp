@@ -7,4 +7,7 @@
     <string name="seller_activity">Seller Activity</string>
     <string name="add_tickets">Add Tickets</string>
     <string name="textview">TextView</string>
+    <string name="enter_password">Enter Password</string>
+    <string name="login">Login</string>
+    <string name="re_enter_password">Re-enter Password</string>
 </resources>

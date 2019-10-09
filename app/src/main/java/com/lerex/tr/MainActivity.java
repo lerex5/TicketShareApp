@@ -43,14 +43,14 @@ public class MainActivity extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);//FullScreening The Application
 
         setContentView(R.layout.activity_main);
-        final Button signup=findViewById(R.id.sign_up);
-        final EditText eU,ePh,eEa;
-        eU=findViewById(R.id.username);
-        ePh=findViewById(R.id.phone_number);
-        eEa=findViewById(R.id.e_add);
+        //final Button signup=findViewById(R.id.sign_up);
+        //final EditText eU,ePh,eEa;
+        //eU=findViewById(R.id.username);
+        //ePh=findViewById(R.id.phone_number);
+        //eEa=findViewById(R.id.e_add);
 
 
-        signup.setOnClickListener(new View.OnClickListener() {
+        /*signup.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 u_name=eU.getText().toString();
                 ph_no=ePh.getText().toString();
@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent=new Intent(MainActivity.this,sellActivity.class);
                 startActivity(intent);
             }
-        });
+        });*/
 
     }
 }
