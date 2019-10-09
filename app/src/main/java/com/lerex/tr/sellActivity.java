@@ -56,10 +56,20 @@ public class sellActivity extends AppCompatActivity {
 
                 //instantiate popup window
                 aPop = new PopupWindow(customView, LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-
+                aPop.setFocusable(true);
+                aPop.update();
                 //display the popup window
                 aPop.showAtLocation(sellerLayout, Gravity.CENTER, 0, 0);
+
+                Button Add1=customView.findViewById(R.id.btnAdd1);
+                Add1.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        aPop.dismiss();
+                    }
+                });
             }
         });
+
     }
 }

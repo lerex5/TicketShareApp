@@ -1,13 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mypopup"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#673AB7"
-    android:id="@+id/mypopup">
-    <Button
-        android:layout_width="match_parent"
+    android:background="#259EE6">
+
+    <TextView
+        android:id="@+id/etRef"
+        android:layout_width="220dp"
+        android:layout_height="1dp"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:id="@+id/etName"
+        android:layout_width="218dp"
+        android:layout_height="37dp"
+        android:layout_below="@id/etRef"
+        android:layout_alignStart="@id/etRef"
+        android:layout_alignEnd="@id/etRef"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="2dp"
+        android:ems="10"
+        android:hint="Enter Event Name"
+        android:inputType="text"
+        android:textAlignment="center"
+        android:textSize="14sp"
+        tools:ignore="HardcodedText" />
+
+    <EditText
+        android:id="@+id/etDate"
+        android:layout_width="219dp"
         android:layout_height="wrap_content"
-        android:text="@string/e_ph"
-        />
+        android:layout_below="@id/etName"
+        android:layout_alignStart="@id/etName"
+        android:layout_alignEnd="@id/etName"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="1dp"
+        android:ems="10"
+        android:hint="Enter Event Date"
+        android:inputType="date"
+        android:textAlignment="center"
+        android:textSize="14sp"
+        tools:ignore="HardcodedText" />
+
+    <EditText
+        android:id="@+id/etCost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/etDate"
+        android:layout_alignStart="@id/etDate"
+        android:layout_alignEnd="@id/etDate"
+        android:layout_marginTop="40dp"
+        android:ems="10"
+        android:hint="Enter the cost of one ticket"
+        android:inputType="numberDecimal"
+        android:textAlignment="center"
+        android:textSize="14sp"
+        tools:ignore="HardcodedText" />
+
+    <EditText
+        android:id="@+id/etNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/etCost"
+        android:layout_alignStart="@id/etCost"
+        android:layout_alignEnd="@id/etCost"
+        android:layout_marginTop="40dp"
+        android:ems="10"
+        android:hint="Enter the number of tickets"
+        android:inputType="number"
+        android:textAlignment="center"
+        android:textSize="14sp"
+        tools:ignore="HardcodedText" />
+
+    <Button
+        android:id="@+id/btnAdd1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/etNumber"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
+        android:text="Add"
+        tools:ignore="HardcodedText,UnknownId" />
 
 </RelativeLayout>
