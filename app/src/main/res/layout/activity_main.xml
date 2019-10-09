@@ -6,9 +6,11 @@
     android:layout_height="match_parent"
     android:background="#000000"
     tools:context="com.lerex.tr.MainActivity">
-    <fragment
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
 
+    <FrameLayout
+        android:id="@+id/ls_placeholder"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

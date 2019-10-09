@@ -1,6 +1,8 @@
 package com.lerex.tr;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -43,6 +45,11 @@ public class MainActivity extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);//FullScreening The Application
 
         setContentView(R.layout.activity_main);
+
+        final FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.ls_placeholder,new Login() );
+        ft.commit();
+
         //final Button signup=findViewById(R.id.sign_up);
         //final EditText eU,ePh,eEa;
         //eU=findViewById(R.id.username);
