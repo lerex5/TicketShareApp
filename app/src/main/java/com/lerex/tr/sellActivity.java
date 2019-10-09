@@ -9,9 +9,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.PopupWindow;
 import android.view.Window;
 import android.view.WindowManager;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Date;
 
@@ -33,7 +37,15 @@ public class sellActivity extends AppCompatActivity {
 
     private PopupWindow aPop;
     private ConstraintLayout sellerLayout;
+    private DatabaseReference mydb = FirebaseDatabase.getInstance().getReference("Tickets");//RealTime Database Connection
+    protected void addTickets(){
+        EditText eName = findViewById(R.id.etName);
+        EditText eDate = findViewById(R.id.etDate);
+        EditText eCost = findViewById(R.id.etCost);
+        EditText eNo = findViewById(R.id.etNumber);
+        event newEvent = new event(eName.getText().toString(),eCost.getText().toString(),(Date) eDate.getText(),Integer.valueOf(eNo.getText().toString()));
 
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +77,7 @@ public class sellActivity extends AppCompatActivity {
                 Add1.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        addTickets();
                         aPop.dismiss();
                     }
                 });
