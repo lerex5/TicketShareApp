@@ -20,10 +20,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.Date;
 
 class event {
-    public String eventName,cost;
+    public String eventName,cost,sellerId;
     public Date eventDate;
     public int noOfTickets;
-
     public  event(String eventName,String cost,Date eventDate,int noOfTickets){
         this.eventDate=eventDate;
         this.eventName=eventName;
