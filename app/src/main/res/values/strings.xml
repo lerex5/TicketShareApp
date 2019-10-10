@@ -10,4 +10,6 @@
     <string name="enter_password">Enter Password</string>
     <string name="login">Login</string>
     <string name="re_enter_password">Re-enter Password</string>
+    <string name="enter_email_id">Enter Email Id</string>
+    <string name="DHA">Don\'t have an account ,Sign up now </string>
 </resources>
