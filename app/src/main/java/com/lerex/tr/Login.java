@@ -1,25 +1,48 @@
 package com.lerex.tr;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import androidx.fragment.app.Fragment;
+import android.view.Window;
+import android.view.WindowManager;
+import androidx.appcompat.app.AppCompatActivity;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
-public class Login extends Fragment{
+public class Login extends AppCompatActivity {
 
+    private DatabaseReference mydb = FirebaseDatabase.getInstance().getReference("Users");//RealTime Database Connection
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
-        // Defines the xml file for the fragment
-        return inflater.inflate(R.layout.loginlayout, parent, false);
-    }
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
-    // This event is triggered soon after onCreateView().
-    // Any view setup should occur here.  E.g., view lookups and attaching view listeners.
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        // Setup any handles to view objects here
-        // EditText etFoo = (EditText) view.findViewById(R.id.etFoo);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);//FullScreening The Application
+
+        setContentView(R.layout.loginlayout);
+
+        //final FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        //ft.replace(R.id.ls_placeholder,new Login() );
+        //ft.commit();
+
+        //final Button signup=findViewById(R.id.sign_up);
+        //final EditText eU,ePh,eEa;
+        //eU=findViewById(R.id.username);
+        //ePh=findViewById(R.id.phone_number);
+        //eEa=findViewById(R.id.e_add);
+
+
+        /*signup.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                u_name=eU.getText().toString();
+                ph_no=ePh.getText().toString();
+                email=eEa.getText().toString();
+                user1 u1 = new user1(u_name,ph_no,email);
+                mydb.child(ph_no).setValue(u1);//Db entry
+                Intent intent=new Intent(MainActivity.this,sellActivity.class);
+                startActivity(intent);
+            }
+        });*/
+
     }
 }
