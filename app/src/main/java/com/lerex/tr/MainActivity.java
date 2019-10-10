@@ -46,9 +46,9 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
 
-        final FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.ls_placeholder,new Login() );
-        ft.commit();
+        //final FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        //ft.replace(R.id.ls_placeholder,new Login() );
+        //ft.commit();
 
         //final Button signup=findViewById(R.id.sign_up);
         //final EditText eU,ePh,eEa;
