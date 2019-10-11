@@ -19,6 +19,7 @@ import com.lerex.tr.R;
 
 public class MainActivity extends AppCompatActivity {
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +30,16 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
 
+        //Button log=findViewById(R.id.login);
+        TextView sign=findViewById(R.id.signup);
+
+        sign.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(MainActivity.this,SignupActivity.class);
+                startActivity(i);
+            }
+        });
 
     }
 }
