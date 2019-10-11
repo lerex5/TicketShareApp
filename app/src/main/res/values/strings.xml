@@ -11,7 +11,7 @@
     <string name="login">Login</string>
     <string name="re_enter_password">Re-enter Password</string>
     <string name="enter_email_id">Enter Email Id</string>
-    <string name="DHA">Don\'t have an account ,</string>
+    <string name="DHA">Don\'t have an account ,Sign up now</string>
     <string name="enter_your_email_id">Enter your email id</string>
     <string name="type_your_password">Type your password</string>
     <string name="retype_password">Retype Password</string>
