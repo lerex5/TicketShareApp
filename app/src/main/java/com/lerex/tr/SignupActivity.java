@@ -22,7 +22,6 @@ public class SignupActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private EditText email,password,retypepassword;
-    private Button signupbtn;
 
     protected void RegisterUser(){
 
@@ -38,7 +37,14 @@ public class SignupActivity extends AppCompatActivity {
             Toast.makeText(this, "A Field is Empty", Toast.LENGTH_SHORT).show();
             return;
         }
-
+        if (TextUtils.isEmpty(srpassword)){
+            Toast.makeText(this, "A Field is Empty", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (!spassword.equals(srpassword)){
+            Toast.makeText(this, "Password does not match", Toast.LENGTH_SHORT).show();
+            return;
+        }
         mAuth.createUserWithEmailAndPassword(semail, spassword)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -51,8 +57,9 @@ public class SignupActivity extends AppCompatActivity {
                                 Toast.makeText(SignupActivity.this, "registration successful",
                                         Toast.LENGTH_SHORT).show();
                                 finish();
-                                //artActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+                                startActivity(new Intent(getApplicationContext(), MainActivity.class));
                             }else{
+
                                 Toast.makeText(SignupActivity.this, "Couldn't register, try again",
                                         Toast.LENGTH_SHORT).show();
                             }
@@ -72,7 +79,7 @@ public class SignupActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_signup);
         mAuth = FirebaseAuth.getInstance();
-        signupbtn=findViewById(R.id.btnSignup);
+        Button signupbtn = findViewById(R.id.btnSignup);
         signupbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
