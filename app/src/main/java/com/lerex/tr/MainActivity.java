@@ -7,11 +7,17 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.IgnoreExtraProperties;
@@ -27,7 +33,23 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseUser currentUser;
 
     protected void loginToApp(){
-
+        String eid=emailid.getText().toString().trim();
+        String pass=password.getText().toString().trim();
+        mAuth.signInWithEmailAndPassword(eid, pass)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()){
+                            currentUser = mAuth.getCurrentUser();
+                            finish();
+                            startActivity(new Intent(getApplicationContext(),
+                                    sellActivity.class));
+                        }else {
+                            Toast.makeText(MainActivity.this, "couldn't login",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
     }
 
     @Override
@@ -42,9 +64,12 @@ public class MainActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
-        //if(currentUser!=NULL){
 
-        //}
+        if(currentUser!=null){
+            String userid = currentUser.getUid();
+            Toast.makeText(MainActivity.this, userid,
+                    Toast.LENGTH_SHORT).show();
+        }
 
         Button logIn=findViewById(R.id.login);
         TextView sign=findViewById(R.id.signup);
