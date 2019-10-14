@@ -62,11 +62,11 @@ public class MainActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
 
-        if(currentUser!=null){
+        /*if(currentUser!=null){
             String userid = currentUser.getUid();
             Toast.makeText(MainActivity.this, userid,
                     Toast.LENGTH_SHORT).show();
-        }
+        }*/
 
         Button logIn=findViewById(R.id.login);
         TextView sign=findViewById(R.id.signup);

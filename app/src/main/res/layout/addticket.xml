@@ -7,10 +7,22 @@
     android:background="@drawable/etborder2">
 
     <TextView
-        android:id="@+id/etRef"
+
         android:layout_width="220dp"
         android:layout_height="1dp"
-        android:layout_centerHorizontal="true" />
+         />
+    <AutoCompleteTextView
+        android:id="@+id/etRef"
+        android:layout_width="218dp"
+        android:layout_height="37dp"
+        android:layout_centerHorizontal="true"
+        android:hint="Enter Event Name"
+        android:inputType="text"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="14sp"
+        tools:ignore="Autofill,HardcodedText"
+        />
 
     <EditText
         android:id="@+id/etName"

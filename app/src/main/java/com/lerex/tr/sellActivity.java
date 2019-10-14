@@ -16,39 +16,59 @@ import android.widget.PopupWindow;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Objects;
 
 class event {
-    public String eventName,cost,sellerId;
-    public Date eventDate;
+    public String eventName,cost,sellerId,buyerId,eventDate;
     public int noOfTickets;
-    public  event(String eventName,String cost,Date eventDate,int noOfTickets){
+
+    public  event(String eventName,String cost,String eventDate,int noOfTickets,String sellerId){
         this.eventDate=eventDate;
         this.eventName=eventName;
         this.cost=cost;
         this.noOfTickets=noOfTickets;
+        this.sellerId=sellerId;
     }
 }
 
 public class sellActivity extends AppCompatActivity {
 
-
+    private event newEvent;
+    private View customView;
     private PopupWindow aPop;
     private ConstraintLayout sellerLayout;
-    private DatabaseReference mydb = FirebaseDatabase.getInstance().getReference("Tickets");//RealTime Database Connection
+    private Button Add,Add1;
+    private ListView lv;
+    private ArrayList<String> Tickets;
+    private ArrayAdapter<String> TickAdapter;
+    private FirebaseAuth mAuth=FirebaseAuth.getInstance();
+
+    //RealTime Database Connection
+    private DatabaseReference mydb = FirebaseDatabase.getInstance().getReference("Tickets");
+    private DatabaseReference availabledb = FirebaseDatabase.getInstance().getReference("Available");
+    private DatabaseReference userdb,moviedb;
+
     protected void addTickets(){
-        EditText eName = findViewById(R.id.etName);
-        EditText eDate = findViewById(R.id.etDate);
-        EditText eCost = findViewById(R.id.etCost);
-        EditText eNo = findViewById(R.id.etNumber);
-       // event newEvent = new event(eName.getText().toString(),eCost.getText().toString(),(Date) eDate.getText(),Integer.valueOf(eNo.getText().toString()));
+        String key = mydb.push().getKey();
+        String curuser = Objects.requireNonNull(mAuth.getCurrentUser()).getEmail();
+        EditText eName = customView.findViewById(R.id.etName);
+        EditText eDate = customView.findViewById(R.id.etDate);
+        EditText eCost = customView.findViewById(R.id.etCost);
+        EditText eNo = customView.findViewById(R.id.etNumber);
+        newEvent = new event(eName.getText().toString(),eCost.getText().toString(),eDate.getText().toString(),Integer.valueOf(eNo.getText().toString()),curuser);
 
-
-
+        moviedb=FirebaseDatabase.getInstance().getReference(eName.getText().toString());
+        userdb= FirebaseDatabase.getInstance().getReference(mAuth.getCurrentUser().getUid());
+        mydb.child(Objects.requireNonNull(key)).setValue(newEvent);
+        moviedb.child(key).setValue("");
+        userdb.child(key).setValue("");
+        availabledb.child(key).setValue("");
     }
 
     @Override
@@ -63,10 +83,10 @@ public class sellActivity extends AppCompatActivity {
 
         sellerLayout=findViewById(R.id.sellerLa);
 
-        Button Add=findViewById(R.id.btnAdd);
-        final ListView lv=findViewById(R.id.lvTickets);
-        final ArrayList<String> Tickets=new ArrayList<>();
-        final ArrayAdapter<String> TickAdapter=new ArrayAdapter<>(this,R.layout.activity_listview,Tickets);
+        Add=findViewById(R.id.btnAdd);
+        lv=findViewById(R.id.lvTickets);
+        Tickets=new ArrayList<>();
+        TickAdapter=new ArrayAdapter<>(this,R.layout.activity_listview,Tickets);
 
 
         Add.setOnClickListener(new View.OnClickListener() {
@@ -74,25 +94,21 @@ public class sellActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //instantiate the popup.xml layout file
                 LayoutInflater layoutInflater = (LayoutInflater) sellActivity.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                final View customView = layoutInflater.inflate(R.layout.addticket,null);
+                customView = Objects.requireNonNull(layoutInflater).inflate(R.layout.addticket,null);
 
                 //instantiate popup window
                 aPop = new PopupWindow(customView, LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
                 aPop.setFocusable(true);
                 aPop.update();
-                //display the popup window
                 aPop.showAtLocation(sellerLayout, Gravity.CENTER, 0, 0);
 
-                final EditText eName = customView.findViewById(R.id.etName);
-                Button Add1=customView.findViewById(R.id.btnAdd1);
+                Add1=customView.findViewById(R.id.btnAdd1);
                 Add1.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        //addTickets();
-
-                        String eN=eName.getText().toString();
-                        aPop.dismiss();
-                        Tickets.add(eN);
+                        addTickets();
+                        aPop.dismiss();//Dismiss pop up
+                        Tickets.add(newEvent.eventName);
                         TickAdapter.notifyDataSetChanged();
                         lv.setAdapter(TickAdapter);
 
