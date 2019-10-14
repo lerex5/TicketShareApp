@@ -8,6 +8,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 class pop extends AppCompatActivity {
 
+    /*private HttpResponse<String> response = Unirest.get("https://api.themoviedb.org/3/movie/now_playing?region=IN&page=1&language=en-US&api_key=cdb6543f56d4ae849f71ed220c46a080")
+            .body("{}")
+            .asString();*/
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
