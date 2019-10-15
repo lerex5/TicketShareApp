@@ -21,8 +21,16 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Objects;
+
+import android.os.AsyncTask;
+import android.util.Log;
+import android.widget.Toast;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import java.util.HashMap;
 
 class event {
     public String eventName,cost,sellerId,buyerId,eventDate;
@@ -47,6 +55,8 @@ public class sellActivity extends AppCompatActivity {
     private ListView lv;
     private ArrayList<String> Tickets;
     private ArrayAdapter<String> TickAdapter;
+    private String TAG = sellActivity.class.getSimpleName();
+    //Auth
     private FirebaseAuth mAuth=FirebaseAuth.getInstance();
 
     //RealTime Database Connection
@@ -84,12 +94,9 @@ public class sellActivity extends AppCompatActivity {
         sellerLayout=findViewById(R.id.sellerLa);
 
         Add=findViewById(R.id.btnAdd);
-        lv=findViewById(R.id.lvTickets);
-        Tickets=new ArrayList<>();
-        TickAdapter=new ArrayAdapter<>(this,R.layout.activity_listview,Tickets);
 
 
-        Add.setOnClickListener(new View.OnClickListener() {
+       /* Add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //instantiate the popup.xml layout file
@@ -114,12 +121,80 @@ public class sellActivity extends AppCompatActivity {
 
                     }
                 });
-
-
             }
-        });
+        });*/
+    }
 
 
+    private class GetmovieResults extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            Toast.makeText(sellActivity.this,"Json Data is downloading",Toast.LENGTH_LONG).show();
 
+        }
+
+        @Override
+        protected Void doInBackground(Void... arg0) {
+            HttpHandler sh = new HttpHandler();
+            // Making a request to url and getting response
+            String url = "https://api.themoviedb.org/3/movie/now_playing?region=IN&page=1&language=en-US&api_key=cdb6543f56d4ae849f71ed220c46a080";
+            String jsonStr = sh.makeServiceCall(url);
+
+            Log.e(TAG, "Response from url: " + jsonStr);
+            if (jsonStr != null) {
+                try {
+                    JSONObject jsonObj = new JSONObject(jsonStr);
+
+                    // Getting JSON Array node
+                    JSONArray movieResults = jsonObj.getJSONArray("results");
+
+                    // looping through All movieResults
+                    for (int i = 0; i < movieResults.length(); i++) {
+                        JSONObject c = movieResults.getJSONObject(i);
+                        String title = c.getString("title");
+
+                        // tmp hash map for single contact
+                        HashMap<String, String> moviesReleased = new HashMap<>();
+
+                        // adding each child node to HashMap key => value
+                        moviesReleased.put("title", title);
+
+                    }
+                } catch (final JSONException e) {
+                    Log.e(TAG, "Json parsing error: " + e.getMessage());
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(getApplicationContext(),"Json parsing error: " + e.getMessage(),
+                                    Toast.LENGTH_LONG).show();
+                        }
+                    });
+
+                }
+
+            } else {
+                Log.e(TAG, "Couldn't get json from server.");
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getApplicationContext(),
+                                "Couldn't get json from server. Check LogCat for possible errors!",
+                                Toast.LENGTH_LONG).show();
+                    }
+                });
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            super.onPostExecute(result);
+            /*lv=findViewById(R.id.lvTickets);
+            Tickets=new ArrayList<>();
+            TickAdapter=new ArrayAdapter<>(this,R.layout.activity_listview,Tickets);*/
+
+        }
     }
 }
