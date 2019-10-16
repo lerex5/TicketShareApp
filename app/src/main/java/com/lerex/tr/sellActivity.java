@@ -94,7 +94,11 @@ public class sellActivity extends AppCompatActivity {
         sellerLayout=findViewById(R.id.sellerLa);
 
         Add=findViewById(R.id.btnAdd);
+        lv=findViewById(R.id.lvTickets);
+        Tickets=new ArrayList<>();
+        TickAdapter=new ArrayAdapter<>(this,R.layout.activity_listview,Tickets);
 
+        new GetmovieResults().execute();
 
        /* Add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -159,6 +163,9 @@ public class sellActivity extends AppCompatActivity {
 
                         // adding each child node to HashMap key => value
                         moviesReleased.put("title", title);
+                        Tickets.add(moviesReleased.get("title"));
+                        TickAdapter.notifyDataSetChanged();
+
 
                     }
                 } catch (final JSONException e) {
@@ -191,10 +198,7 @@ public class sellActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
-            /*lv=findViewById(R.id.lvTickets);
-            Tickets=new ArrayList<>();
-            TickAdapter=new ArrayAdapter<>(this,R.layout.activity_listview,Tickets);*/
-
+            lv.setAdapter(TickAdapter);
         }
     }
 }
