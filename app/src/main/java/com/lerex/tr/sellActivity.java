@@ -98,9 +98,9 @@ public class sellActivity extends AppCompatActivity {
         Tickets=new ArrayList<>();
         TickAdapter=new ArrayAdapter<>(this,R.layout.activity_listview,Tickets);
 
-        new GetmovieResults().execute();
+        //new GetmovieResults().execute();
 
-       /* Add.setOnClickListener(new View.OnClickListener() {
+       Add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //instantiate the popup.xml layout file
@@ -126,7 +126,7 @@ public class sellActivity extends AppCompatActivity {
                     }
                 });
             }
-        });*/
+        });
     }
 
 
@@ -163,8 +163,8 @@ public class sellActivity extends AppCompatActivity {
 
                         // adding each child node to HashMap key => value
                         moviesReleased.put("title", title);
-                        Tickets.add(moviesReleased.get("title"));
-                        TickAdapter.notifyDataSetChanged();
+                        //Tickets.add(moviesReleased.get("title"));
+                        //TickAdapter.notifyDataSetChanged();
 
 
                     }
@@ -198,7 +198,7 @@ public class sellActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
-            lv.setAdapter(TickAdapter);
+            //To Add Modifications For Drop Down List Box
         }
     }
 }
