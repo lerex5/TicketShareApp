@@ -15,4 +15,11 @@
     <string name="enter_your_email_id">Enter your email id</string>
     <string name="type_your_password">Type your password</string>
     <string name="retype_password">Retype Password</string>
+    <string-array name="MovieList">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+
+    </string-array>
 </resources>

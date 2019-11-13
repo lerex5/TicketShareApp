@@ -3,12 +3,14 @@ package com.lerex.tr;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -25,13 +27,14 @@ import java.util.Objects;
 
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.HashMap;
-
+/*
 class event {
     public String eventName,cost,sellerId,buyerId,eventDate;
     public int noOfTickets;
@@ -44,10 +47,10 @@ class event {
         this.sellerId=sellerId;
     }
 }
-
+*/
 public class sellActivity extends AppCompatActivity {
 
-    private event newEvent;
+    //private event newEvent;
     private View customView;
     private PopupWindow aPop;
     private ConstraintLayout sellerLayout;
@@ -64,7 +67,14 @@ public class sellActivity extends AppCompatActivity {
     private DatabaseReference availabledb = FirebaseDatabase.getInstance().getReference("Available");
     private DatabaseReference userdb,moviedb;
 
-    protected void addTickets(){
+
+    private static final String[] COUNTRIES = new String[] {
+            "Belgium", "France", "Italy", "Germany", "Spain"
+    };
+
+
+/*
+    protected void addTicket(){
         String key = mydb.push().getKey();
         String curuser = Objects.requireNonNull(mAuth.getCurrentUser()).getEmail();
         EditText eName = customView.findViewById(R.id.etName);
@@ -80,7 +90,7 @@ public class sellActivity extends AppCompatActivity {
         userdb.child(key).setValue("");
         availabledb.child(key).setValue("");
     }
-
+*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,6 +98,7 @@ public class sellActivity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
 
         setContentView(R.layout.activity_sell);
 
@@ -98,11 +109,17 @@ public class sellActivity extends AppCompatActivity {
         Tickets=new ArrayList<>();
         TickAdapter=new ArrayAdapter<>(this,R.layout.activity_listview,Tickets);
 
-        //new GetmovieResults().execute();
+      //  new GetmovieResults().execute();
 
        Add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent=new Intent(sellActivity.this,addTickets.class);
+                startActivity(intent);
+
+
+                /*
+
                 //instantiate the popup.xml layout file
                 LayoutInflater layoutInflater = (LayoutInflater) sellActivity.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 customView = Objects.requireNonNull(layoutInflater).inflate(R.layout.addticket,null);
@@ -113,18 +130,23 @@ public class sellActivity extends AppCompatActivity {
                 aPop.update();
                 aPop.showAtLocation(sellerLayout, Gravity.CENTER, 0, 0);
 
+                AutoCompleteTextView act =customView.findViewById(R.id.etRef1);
+                ArrayAdapter<String> adapter=new ArrayAdapter<>(sellActivity.this,android.R.layout.simple_dropdown_item_1line,COUNTRIES);
+
+                act.setAdapter(adapter);
+
                 Add1=customView.findViewById(R.id.btnAdd1);
                 Add1.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        addTickets();
+                        addTicket();
                         aPop.dismiss();//Dismiss pop up
                         Tickets.add(newEvent.eventName);
                         TickAdapter.notifyDataSetChanged();
                         lv.setAdapter(TickAdapter);
 
                     }
-                });
+                });*/
             }
         });
     }
@@ -163,8 +185,8 @@ public class sellActivity extends AppCompatActivity {
 
                         // adding each child node to HashMap key => value
                         moviesReleased.put("title", title);
-                        //Tickets.add(moviesReleased.get("title"));
-                        //TickAdapter.notifyDataSetChanged();
+                        Tickets.add(moviesReleased.get("title"));
+                        TickAdapter.notifyDataSetChanged();
 
 
                     }
