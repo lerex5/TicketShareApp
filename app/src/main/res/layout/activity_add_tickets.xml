@@ -4,14 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/etborder2"
-   >
+    >
 
     <TextView
 
         android:id="@+id/mypopup"
         android:layout_width="220dp"
         android:layout_height="1dp"
-         />
+        />
     <AutoCompleteTextView
         android:id="@+id/etRef1"
         android:layout_width="218dp"
@@ -22,7 +22,6 @@
         android:textSize="14sp"
         android:hint="Enter movie name"
         android:completionThreshold="1"
-        android:completionHint="Enter movie name"
         tools:ignore="HardcodedText,LabelFor" />
 
     <EditText
