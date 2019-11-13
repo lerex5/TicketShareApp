@@ -3,11 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/etborder2"
+    android:background="#ffff"
     >
 
     <TextView
-
         android:id="@+id/mypopup"
         android:layout_width="220dp"
         android:layout_height="1dp"
@@ -18,7 +17,6 @@
         android:layout_height="37dp"
         android:layout_centerHorizontal="true"
         android:textAlignment="center"
-        android:textColor="#FFFFFF"
         android:textSize="14sp"
         android:hint="Enter movie name"
         android:completionThreshold="1"
@@ -37,7 +35,6 @@
         android:hint="Enter Event Name"
         android:inputType="text"
         android:textAlignment="center"
-        android:textColor="#FFFFFF"
         android:textSize="14sp"
         tools:ignore="Autofill,HardcodedText"
         tools:layout_marginTop="50dp" />
@@ -55,7 +52,6 @@
         android:hint="Enter Event Date"
         android:inputType="date"
         android:textAlignment="center"
-        android:textColor="#FFFFFF"
         android:textSize="14sp"
         tools:ignore="Autofill,HardcodedText" />
 
@@ -71,7 +67,6 @@
         android:hint="Enter the cost of one ticket"
         android:inputType="numberDecimal"
         android:textAlignment="center"
-        android:textColor="#FFFFFF"
         android:textSize="14sp"
         tools:ignore="Autofill,HardcodedText" />
 
@@ -87,7 +82,6 @@
         android:hint="Enter the number of tickets"
         android:inputType="number"
         android:textAlignment="center"
-        android:textColor="#8B3232"
         android:textSize="14sp"
         tools:ignore="Autofill,HardcodedText" />
 

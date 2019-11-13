@@ -1,20 +1,12 @@
 package com.lerex.tr;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup.LayoutParams;
 import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.PopupWindow;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -23,17 +15,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
-import android.os.AsyncTask;
-import android.util.Log;
-import android.widget.Spinner;
-import android.widget.Toast;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-import java.util.HashMap;
 /*
 class event {
     public String eventName,cost,sellerId,buyerId,eventDate;
@@ -51,9 +33,6 @@ class event {
 public class sellActivity extends AppCompatActivity {
 
     //private event newEvent;
-    private View customView;
-    private PopupWindow aPop;
-    private ConstraintLayout sellerLayout;
     private Button Add,Add1;
     private ListView lv;
     private ArrayList<String> Tickets;
@@ -67,10 +46,6 @@ public class sellActivity extends AppCompatActivity {
     private DatabaseReference availabledb = FirebaseDatabase.getInstance().getReference("Available");
     private DatabaseReference userdb,moviedb;
 
-
-    private static final String[] COUNTRIES = new String[] {
-            "Belgium", "France", "Italy", "Germany", "Spain"
-    };
 
 
 /*
@@ -102,8 +77,6 @@ public class sellActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_sell);
 
-        sellerLayout=findViewById(R.id.sellerLa);
-
         Add=findViewById(R.id.btnAdd);
         lv=findViewById(R.id.lvTickets);
         Tickets=new ArrayList<>();
@@ -117,110 +90,8 @@ public class sellActivity extends AppCompatActivity {
                 Intent intent=new Intent(sellActivity.this,addTickets.class);
                 startActivity(intent);
 
-
-                /*
-
-                //instantiate the popup.xml layout file
-                LayoutInflater layoutInflater = (LayoutInflater) sellActivity.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                customView = Objects.requireNonNull(layoutInflater).inflate(R.layout.addticket,null);
-
-                //instantiate popup window
-                aPop = new PopupWindow(customView, LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-                aPop.setFocusable(true);
-                aPop.update();
-                aPop.showAtLocation(sellerLayout, Gravity.CENTER, 0, 0);
-
-                AutoCompleteTextView act =customView.findViewById(R.id.etRef1);
-                ArrayAdapter<String> adapter=new ArrayAdapter<>(sellActivity.this,android.R.layout.simple_dropdown_item_1line,COUNTRIES);
-
-                act.setAdapter(adapter);
-
-                Add1=customView.findViewById(R.id.btnAdd1);
-                Add1.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        addTicket();
-                        aPop.dismiss();//Dismiss pop up
-                        Tickets.add(newEvent.eventName);
-                        TickAdapter.notifyDataSetChanged();
-                        lv.setAdapter(TickAdapter);
-
-                    }
-                });*/
             }
         });
     }
 
-
-    private class GetmovieResults extends AsyncTask<Void, Void, Void> {
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            Toast.makeText(sellActivity.this,"Json Data is downloading",Toast.LENGTH_LONG).show();
-
-        }
-
-        @Override
-        protected Void doInBackground(Void... arg0) {
-            HttpHandler sh = new HttpHandler();
-            // Making a request to url and getting response
-            String url = "https://api.themoviedb.org/3/movie/now_playing?region=IN&page=1&language=en-US&api_key=cdb6543f56d4ae849f71ed220c46a080";
-            String jsonStr = sh.makeServiceCall(url);
-
-            Log.e(TAG, "Response from url: " + jsonStr);
-            if (jsonStr != null) {
-                try {
-                    JSONObject jsonObj = new JSONObject(jsonStr);
-
-                    // Getting JSON Array node
-                    JSONArray movieResults = jsonObj.getJSONArray("results");
-
-                    // looping through All movieResults
-                    for (int i = 0; i < movieResults.length(); i++) {
-                        JSONObject c = movieResults.getJSONObject(i);
-                        String title = c.getString("title");
-
-                        // tmp hash map for single contact
-                        HashMap<String, String> moviesReleased = new HashMap<>();
-
-                        // adding each child node to HashMap key => value
-                        moviesReleased.put("title", title);
-                        Tickets.add(moviesReleased.get("title"));
-                        TickAdapter.notifyDataSetChanged();
-
-
-                    }
-                } catch (final JSONException e) {
-                    Log.e(TAG, "Json parsing error: " + e.getMessage());
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            Toast.makeText(getApplicationContext(),"Json parsing error: " + e.getMessage(),
-                                    Toast.LENGTH_LONG).show();
-                        }
-                    });
-
-                }
-
-            } else {
-                Log.e(TAG, "Couldn't get json from server.");
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast.makeText(getApplicationContext(),
-                                "Couldn't get json from server. Check LogCat for possible errors!",
-                                Toast.LENGTH_LONG).show();
-                    }
-                });
-            }
-
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void result) {
-            super.onPostExecute(result);
-            //To Add Modifications For Drop Down List Box
-        }
-    }
 }

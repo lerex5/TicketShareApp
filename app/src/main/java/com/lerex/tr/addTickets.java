@@ -35,10 +35,6 @@ public class addTickets extends AppCompatActivity {
     private Button Add1;
 
 
-
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
