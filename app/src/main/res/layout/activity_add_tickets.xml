@@ -22,30 +22,15 @@
         android:completionThreshold="1"
         tools:ignore="HardcodedText,LabelFor" />
 
-    <EditText
-        android:id="@+id/etName"
-        android:layout_width="218dp"
-        android:layout_height="37dp"
-        android:layout_below="@id/etRef1"
-        android:layout_alignStart="@id/etRef1"
-        android:layout_alignEnd="@id/etRef1"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="2dp"
-        android:ems="10"
-        android:hint="Enter Event Name"
-        android:inputType="text"
-        android:textAlignment="center"
-        android:textSize="14sp"
-        tools:ignore="Autofill,HardcodedText"
-        tools:layout_marginTop="50dp" />
+
 
     <EditText
         android:id="@+id/etDate"
         android:layout_width="219dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/etName"
-        android:layout_alignStart="@id/etName"
-        android:layout_alignEnd="@id/etName"
+        android:layout_below="@id/etRef1"
+        android:layout_alignStart="@id/etRef1"
+        android:layout_alignEnd="@id/etRef1"
         android:layout_marginTop="40dp"
         android:layout_marginEnd="1dp"
         android:ems="10"

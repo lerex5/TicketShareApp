@@ -32,8 +32,43 @@ public class addTickets extends AppCompatActivity {
     private String TAG = addTickets.class.getSimpleName();
     private ArrayList<String> Tickets;
     private ArrayAdapter<String> TickAdapter;
-    private Button Add1;
 
+    //Auth
+    private FirebaseAuth mAuth=FirebaseAuth.getInstance();
+
+    //RealTime Database Connection
+    private DatabaseReference mydb = FirebaseDatabase.getInstance().getReference("Tickets");
+    private DatabaseReference availabledb = FirebaseDatabase.getInstance().getReference("Available");
+
+    private class event {
+        public String eventName,cost,sellerId,buyerId,eventDate;
+        public int noOfTickets;
+
+        public  event(String eventName,String cost,String eventDate,int noOfTickets,String sellerId){
+            this.eventDate=eventDate;
+            this.eventName=eventName;
+            this.cost=cost;
+            this.noOfTickets=noOfTickets;
+            this.sellerId=sellerId;
+        }
+    }
+
+    protected void addTicket(){
+        String key = mydb.push().getKey();
+        String curuser = Objects.requireNonNull(mAuth.getCurrentUser()).getEmail();
+        AutoCompleteTextView eName = findViewById(R.id.etRef1);
+        EditText eDate = findViewById(R.id.etDate);
+        EditText eCost = findViewById(R.id.etCost);
+        EditText eNo = findViewById(R.id.etNumber);
+        event newEvent = new event(eName.getText().toString(),eCost.getText().toString(),eDate.getText().toString(),Integer.valueOf(eNo.getText().toString()),curuser);
+
+        DatabaseReference moviedb = FirebaseDatabase.getInstance().getReference(eName.getText().toString());
+        DatabaseReference userdb = FirebaseDatabase.getInstance().getReference(mAuth.getCurrentUser().getUid());
+        mydb.child(Objects.requireNonNull(key)).setValue(newEvent);
+        moviedb.child(key).setValue("");
+        userdb.child(key).setValue("");
+        availabledb.child(key).setValue("");
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,11 +78,13 @@ public class addTickets extends AppCompatActivity {
         Tickets=new ArrayList<>();
         TickAdapter=new ArrayAdapter<>(this,R.layout.activity_listview,Tickets);
         new GetmovieResults().execute();
-        Add1=findViewById(R.id.btnAdd1);
-        Add1.setOnClickListener(new View.OnClickListener() {
+
+
+        Button add1 = findViewById(R.id.btnAdd1);
+        add1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                addTicket();
                 Intent intent=new Intent(addTickets.this,sellActivity.class);
                 startActivity(intent);
             }
@@ -56,7 +93,6 @@ public class addTickets extends AppCompatActivity {
         AutoCompleteTextView act =findViewById(R.id.etRef1);
         ArrayAdapter<String> adapter=new ArrayAdapter<>(addTickets.this,android.R.layout.simple_dropdown_item_1line,Tickets);
         act.setAdapter(adapter);
-
     }
     private class GetmovieResults extends AsyncTask<Void, Void, Void> {
         @Override

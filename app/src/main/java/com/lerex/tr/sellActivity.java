@@ -16,20 +16,6 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
-/*
-class event {
-    public String eventName,cost,sellerId,buyerId,eventDate;
-    public int noOfTickets;
-
-    public  event(String eventName,String cost,String eventDate,int noOfTickets,String sellerId){
-        this.eventDate=eventDate;
-        this.eventName=eventName;
-        this.cost=cost;
-        this.noOfTickets=noOfTickets;
-        this.sellerId=sellerId;
-    }
-}
-*/
 public class sellActivity extends AppCompatActivity {
 
     //private event newEvent;
@@ -49,22 +35,7 @@ public class sellActivity extends AppCompatActivity {
 
 
 /*
-    protected void addTicket(){
-        String key = mydb.push().getKey();
-        String curuser = Objects.requireNonNull(mAuth.getCurrentUser()).getEmail();
-        EditText eName = customView.findViewById(R.id.etName);
-        EditText eDate = customView.findViewById(R.id.etDate);
-        EditText eCost = customView.findViewById(R.id.etCost);
-        EditText eNo = customView.findViewById(R.id.etNumber);
-        newEvent = new event(eName.getText().toString(),eCost.getText().toString(),eDate.getText().toString(),Integer.valueOf(eNo.getText().toString()),curuser);
 
-        moviedb=FirebaseDatabase.getInstance().getReference(eName.getText().toString());
-        userdb= FirebaseDatabase.getInstance().getReference(mAuth.getCurrentUser().getUid());
-        mydb.child(Objects.requireNonNull(key)).setValue(newEvent);
-        moviedb.child(key).setValue("");
-        userdb.child(key).setValue("");
-        availabledb.child(key).setValue("");
-    }
 */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
