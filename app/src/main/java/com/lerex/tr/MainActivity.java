@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
                             currentUser = mAuth.getCurrentUser();
                             finish();
                             startActivity(new Intent(getApplicationContext(),
-                                    sellActivity.class));
+                                    ViewManager.class));
                         }else {
                             Toast.makeText(MainActivity.this, "couldn't login",
                                     Toast.LENGTH_SHORT).show();
