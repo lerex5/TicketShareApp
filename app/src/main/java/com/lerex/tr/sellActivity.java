@@ -53,6 +53,7 @@ public class sellActivity extends AppCompatActivity {
         Tickets=new ArrayList<>();
         TickAdapter=new ArrayAdapter<>(this,R.layout.activity_listview,Tickets);
 
+
       //  new GetmovieResults().execute();
 
        Add.setOnClickListener(new View.OnClickListener() {
