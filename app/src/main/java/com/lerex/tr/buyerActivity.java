@@ -38,14 +38,9 @@ public class buyerActivity extends AppCompatActivity {
 
 
     private String TAG = buyerActivity.class.getSimpleName();
-    private ArrayList<String> Tickets;
     private ArrayList<String> Avail;
-    private ArrayAdapter<String> TickAdapter;
-    private ArrayAdapter<String> SearchAdapter;
     private ArrayAdapter<String> AvailAdapter;
-    private String mov;
     protected AutoCompleteTextView search;
-    private ListView available;
 
 
     private static class TicketDet{
@@ -64,19 +59,15 @@ public class buyerActivity extends AppCompatActivity {
         public String geteventName(){
             return eventName;
         }
-
         public String geteventDate(){
             return eventDate;
         }
-
         public String getcost(){
             return cost;
         }
-
         public int getNoOfTickets(){
             return noOfTickets;
         }
-
         public String getSellerId(){
             return sellerId;
         }
@@ -89,17 +80,16 @@ public class buyerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_buyer);
 
-        Tickets=new ArrayList<>();
-        TickAdapter=new ArrayAdapter<>(this,R.layout.activity_listview,Tickets);
-        new buyerActivity.GetmovieResults().execute();
-
+        TinyDB tinydb = new TinyDB(this);//Shared Preference To Get Localized Data
+        ArrayList<String> tickets = tinydb.getListString("Movies");
+        ArrayAdapter<String> tickAdapter = new ArrayAdapter<>(this, R.layout.activity_listview, tickets);
 
         search=findViewById(R.id.tvSearch);
-        available=findViewById(R.id.lvAvailable);
+        ListView available = findViewById(R.id.lvAvailable);
         Button search1=findViewById(R.id.btnSearch);
 
-        SearchAdapter=new ArrayAdapter<>(buyerActivity.this,android.R.layout.simple_dropdown_item_1line,Tickets);
-        search.setAdapter(SearchAdapter);
+        ArrayAdapter<String> searchAdapter = new ArrayAdapter<>(buyerActivity.this, android.R.layout.simple_dropdown_item_1line, tickets);
+        search.setAdapter(searchAdapter);
         search1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -118,10 +108,8 @@ public class buyerActivity extends AppCompatActivity {
 
     }
     protected void GetAvailable(){
-        mov=search.getEditableText().toString();
 
-
-
+        String mov = search.getEditableText().toString();
         FirebaseDatabase.getInstance().goOnline();
         DatabaseReference avdb = FirebaseDatabase.getInstance().getReference(mov);
 
@@ -155,62 +143,5 @@ public class buyerActivity extends AppCompatActivity {
         });
 
     }
-    private class GetmovieResults extends AsyncTask<Void, Void, Void> {
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            Toast.makeText(buyerActivity.this, "Json Data is downloading", Toast.LENGTH_LONG).show();
-        }
-        @Override
-        protected Void doInBackground(Void... arg0) {
-            HttpHandler sh = new HttpHandler();
-            // Making a request to url and getting response
-            String url = "https://api.themoviedb.org/3/movie/now_playing?region=IN&page=1&language=en-US&api_key=cdb6543f56d4ae849f71ed220c46a080";
-            String jsonStr = sh.makeServiceCall(url);
-            Log.e(TAG, "Response from url: " + jsonStr);
-            if (jsonStr != null) {
-                try {
-                    JSONObject jsonObj = new JSONObject(jsonStr);
-                    // Getting JSON Array node
-                    JSONArray movieResults = jsonObj.getJSONArray("results");
-                    // looping through All movieResults
-                    for (int i = 0; i < movieResults.length(); i++) {
-                        JSONObject c = movieResults.getJSONObject(i);
-                        String title = c.getString("title");
-                        // tmp hash map for single contact
-                        HashMap<String, String> moviesReleased = new HashMap<>();
-                        // adding each child node to HashMap key => value
-                        moviesReleased.put("title", title);
-                        Tickets.add(moviesReleased.get("title"));
-                        TickAdapter.notifyDataSetChanged();
-                    }
-                } catch (final JSONException e) {
-                    Log.e(TAG, "Json parsing error: " + e.getMessage());
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            Toast.makeText(getApplicationContext(), "Json parsing error: " + e.getMessage(),
-                                    Toast.LENGTH_LONG).show();
-                        }
-                    });
-                }
-            } else {
-                Log.e(TAG, "Couldn't get json from server.");
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast.makeText(getApplicationContext(),
-                                "Couldn't get json from server. Check LogCat for possible errors!",
-                                Toast.LENGTH_LONG).show();
-                    }
-                });
-            }
-            return null;
-        }
-        @Override
-        protected void onPostExecute(Void result) {
-            super.onPostExecute(result);
-            //To Add Modifications For Drop Down List Box
-        }
-    }
+
 }
