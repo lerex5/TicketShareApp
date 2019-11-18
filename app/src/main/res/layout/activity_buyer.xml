@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#7A88E6FF"
     tools:context=".buyerActivity">
 
     <AutoCompleteTextView
@@ -12,6 +13,10 @@
         android:layout_height="wrap_content"
         android:completionThreshold="1"
         android:hint="Select a movie"
+        android:textColor="#000000"
+        android:textColorHighlight="#19232D"
+        android:textColorLink="#19232D"
+        android:textCursorDrawable="@android:color/background_dark"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.229"
@@ -22,19 +27,23 @@
 
     <Button
         android:id="@+id/btnSearch"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/search"
+        android:backgroundTint="#19232D"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.581"
+        app:layout_constraintHorizontal_bias="0.63"
         app:layout_constraintStart_toEndOf="@+id/tvSearch"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.095" />
+        app:layout_constraintVertical_bias="0.101" />
 
     <ListView
         android:id="@+id/lvAvailable"
         android:layout_width="350dp"
         android:layout_height="550dp"
+        android:focusableInTouchMode="false"
+        android:isScrollContainer="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.491"
