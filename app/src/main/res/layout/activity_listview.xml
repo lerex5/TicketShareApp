@@ -1,12 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--  Single List Item Design -->
-
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/label"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/etborder1"
-    android:padding="20dp"
-    android:textColor="#19232D"
-    android:textSize="16sp"
-    android:textStyle="bold" />
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvDate"
+            android:layout_width="340dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="#19232D"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tvCost"
+            android:layout_width="340dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="#19232D"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tvNum"
+            android:layout_width="340dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="#19232D"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnZoom"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="17.5dp"
+        android:layout_weight="1"
+        android:background="@android:drawable/ic_input_add"
+        android:backgroundTint="#19232D"
+        android:padding="5dp" />
+
+
+</LinearLayout>

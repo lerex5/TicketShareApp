@@ -5,8 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.telecom.Call;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -38,9 +41,14 @@ public class buyerActivity extends AppCompatActivity {
 
 
     private String TAG = buyerActivity.class.getSimpleName();
-    private ArrayList<String> Avail;
-    private ArrayAdapter<String> AvailAdapter;
+    private ArrayList<TicketDetails> ticketDetails;
+    private ListView available;
+    private MyListView adapter;
     protected AutoCompleteTextView search;
+
+
+
+
 
 
     private static class TicketDet{
@@ -56,9 +64,7 @@ public class buyerActivity extends AppCompatActivity {
             this.sellerId=sellerId;
         }
 
-        public String geteventName(){
-            return eventName;
-        }
+        public String geteventName(){ return eventName; }
         public String geteventDate(){
             return eventDate;
         }
@@ -78,31 +84,42 @@ public class buyerActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);//FullScreening The Application
+
         setContentView(R.layout.activity_buyer);
+
+
 
         TinyDB tinydb = new TinyDB(this);//Shared Preference To Get Localized Data
         ArrayList<String> tickets = tinydb.getListString("Movies");
-        ArrayAdapter<String> tickAdapter = new ArrayAdapter<>(this, R.layout.activity_listview, tickets);
 
         search=findViewById(R.id.tvSearch);
-        ListView available = findViewById(R.id.lvAvailable);
+        available = findViewById(R.id.lvAvailable);
         Button search1=findViewById(R.id.btnSearch);
+        ticketDetails=new ArrayList<>();
+        adapter=new MyListView(this,R.layout.activity_listview,ticketDetails);
+        available.setAdapter(adapter);
 
         ArrayAdapter<String> searchAdapter = new ArrayAdapter<>(buyerActivity.this, android.R.layout.simple_dropdown_item_1line, tickets);
         search.setAdapter(searchAdapter);
+
+
+
         search1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Avail.clear();
+
+                ticketDetails.clear();
                 GetAvailable();
-                AvailAdapter.notifyDataSetChanged();
+                adapter.notifyDataSetChanged();
+
             }
         });
 
 
-        Avail=new ArrayList<>();
-        AvailAdapter=new ArrayAdapter<>(this,R.layout.activity_listview,R.id.label,Avail);
-        available.setAdapter(AvailAdapter);
 
 
 
@@ -124,7 +141,9 @@ public class buyerActivity extends AppCompatActivity {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             TicketDet tDet=dataSnapshot.getValue(TicketDet.class);
-                            Avail.add(Objects.requireNonNull(tDet).getSellerId());
+                            assert tDet != null;
+                            ticketDetails.add(new TicketDetails(tDet.getNoOfTickets(),tDet.geteventDate(),tDet.getcost()));
+
 
                         }
                         @Override
@@ -134,6 +153,8 @@ public class buyerActivity extends AppCompatActivity {
                     });
 
                 }
+
+
             }
 
             @Override

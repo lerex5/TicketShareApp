@@ -12,8 +12,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:windowSoftInputMode="adjustResize">
-        <activity android:name=".ViewManager"></activity>
+
+        android:windowSoftInputMode="stateVisible|adjustNothing">
+
+        <activity android:name=".ViewManager"/>
         <activity android:name=".buyerActivity" />
         <activity android:name=".addTickets" />
         <activity android:name=".SignupActivity" />
