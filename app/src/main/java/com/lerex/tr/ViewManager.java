@@ -36,6 +36,7 @@ public class ViewManager extends AppCompatActivity {
 
 
         tinydb = new TinyDB(this);
+        tinydb.deleteImage("Movies");
         new GetmovieResults().execute();
         Button sell=findViewById(R.id.btnSell);
         Button buy=findViewById(R.id.btnBuy);

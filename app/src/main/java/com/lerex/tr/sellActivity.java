@@ -54,7 +54,7 @@ public class sellActivity extends AppCompatActivity {
         Add=findViewById(R.id.btnAdd);
         lv=findViewById(R.id.lvTickets);
         Tickets=new ArrayList<>();
-        TickAdapter=new ArrayAdapter<>(this,R.layout.activity_listview,Tickets);
+        TickAdapter=new ArrayAdapter<>(this,R.layout.list_seller,Tickets);
         lv.setAdapter(TickAdapter);
 
        Add.setOnClickListener(new View.OnClickListener() {

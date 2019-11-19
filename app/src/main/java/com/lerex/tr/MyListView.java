@@ -45,7 +45,7 @@ public class MyListView extends ArrayAdapter<TicketDetails> {
 
         tvDate.setText("Date : "+td.getDate());
         tvCost.setText("Cost : "+td.getCost());
-        String n=String.valueOf(td.getNum());
+        String n=String.valueOf(td.getNumberOfTickets());
         tvNum.setText("Number of tickets : "+n);
 
         return view;
