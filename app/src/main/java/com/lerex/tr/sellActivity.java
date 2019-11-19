@@ -19,14 +19,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Objects;
 
@@ -55,7 +50,7 @@ public class sellActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_sell);
 
-        ref= database.getReference(mAuth.getCurrentUser().getUid());
+        ref= database.getReference(Objects.requireNonNull(mAuth.getCurrentUser()).getUid());
         Add=findViewById(R.id.btnAdd);
         lv=findViewById(R.id.lvTickets);
         Tickets=new ArrayList<>();
