@@ -40,18 +40,6 @@ public class addTickets extends AppCompatActivity {
     private DatabaseReference mydb = FirebaseDatabase.getInstance().getReference("Tickets");
     private DatabaseReference availabledb = FirebaseDatabase.getInstance().getReference("Available");
 
-    private class event {
-        public String eventName,cost,sellerId,buyerId,eventDate;
-        public int noOfTickets;
-
-        public  event(String eventName,String cost,String eventDate,int noOfTickets,String sellerId){
-            this.eventDate=eventDate;
-            this.eventName=eventName;
-            this.cost=cost;
-            this.noOfTickets=noOfTickets;
-            this.sellerId=sellerId;
-        }
-    }
 
     protected void addTicket(){
         String key = mydb.push().getKey();
@@ -60,7 +48,7 @@ public class addTickets extends AppCompatActivity {
         EditText eDate = findViewById(R.id.etDate);
         EditText eCost = findViewById(R.id.etCost);
         EditText eNo = findViewById(R.id.etNumber);
-        event newEvent = new event(eName.getText().toString(),eCost.getText().toString(),eDate.getText().toString(),Integer.valueOf(eNo.getText().toString()),curuser);
+        TicketDetails newEvent = new TicketDetails(eName.getText().toString(),eCost.getText().toString(),eDate.getText().toString(),Integer.valueOf(eNo.getText().toString()),curuser);
 
         DatabaseReference moviedb = FirebaseDatabase.getInstance().getReference(eName.getText().toString());
         DatabaseReference userdb = FirebaseDatabase.getInstance().getReference(mAuth.getCurrentUser().getUid());
@@ -77,8 +65,6 @@ public class addTickets extends AppCompatActivity {
 
         TinyDB tinydb = new TinyDB(this);//Shared Preference To Get Localized Data
         Tickets=tinydb.getListString("Movies");
-        TickAdapter=new ArrayAdapter<>(this,R.layout.activity_listview,Tickets);
-        TickAdapter.notifyDataSetChanged();
 
         Button add1 = findViewById(R.id.btnAdd1);
         add1.setOnClickListener(new View.OnClickListener() {
