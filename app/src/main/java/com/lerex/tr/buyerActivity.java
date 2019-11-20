@@ -3,6 +3,7 @@ package com.lerex.tr;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -29,7 +30,7 @@ public class buyerActivity extends AppCompatActivity {
     private String TAG = buyerActivity.class.getSimpleName();
     private ArrayList<TicketDetails> ticketDetails;
     private ListView available;
-    private MyListView adapter;
+    private BuyerListView adapter;
     protected AutoCompleteTextView search;
 
 
@@ -52,7 +53,7 @@ public class buyerActivity extends AppCompatActivity {
         available = findViewById(R.id.lvAvailable);
         Button search1=findViewById(R.id.btnSearch);
         ticketDetails= new ArrayList<>();
-        adapter=new MyListView(this,R.layout.activity_listview,ticketDetails);
+        adapter=new BuyerListView(this,R.layout.activity_listview,ticketDetails);
         available.setAdapter(adapter);
 
         ArrayAdapter<String> searchAdapter = new ArrayAdapter<>(buyerActivity.this, android.R.layout.simple_dropdown_item_1line, tickets);
@@ -70,11 +71,16 @@ public class buyerActivity extends AppCompatActivity {
             }
         });
     }
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(this,ViewManager.class));
+    }
+
 
     protected void GetAvailable(){
 
         String mov = search.getEditableText().toString();
-        //FirebaseDatabase.getInstance().goOnline();//InPersistentConnectionsOnly
+        FirebaseDatabase.getInstance().goOnline();//InPersistentConnectionsOnly
         DatabaseReference avdb = FirebaseDatabase.getInstance().getReference(mov);
         final DatabaseReference tick = FirebaseDatabase.getInstance().getReference("Tickets");
         avdb.addValueEventListener(new ValueEventListener() {
