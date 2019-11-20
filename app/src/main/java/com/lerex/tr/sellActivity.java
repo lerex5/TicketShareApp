@@ -1,5 +1,7 @@
 package com.lerex.tr;
 
+import androidx.activity.OnBackPressedCallback;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -30,8 +32,9 @@ public class sellActivity extends AppCompatActivity {
     //private event newEvent;
     private Button Add,Add1;
     private ListView lv;
+    private SellerListView SelAdapter;
     private ArrayList<String> Tickets;
-    private ArrayAdapter<String> TickAdapter;
+    private ArrayList<TicketDetails> selList;
     private String TAG = sellActivity.class.getSimpleName();
     //Auth
     private FirebaseAuth mAuth=FirebaseAuth.getInstance();
@@ -50,12 +53,13 @@ public class sellActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_sell);
 
-        ref= database.getReference(Objects.requireNonNull(mAuth.getCurrentUser()).getUid());
+
+    ref= database.getReference(Objects.requireNonNull(mAuth.getCurrentUser()).getUid());
         Add=findViewById(R.id.btnAdd);
         lv=findViewById(R.id.lvTickets);
-        Tickets=new ArrayList<>();
-        TickAdapter=new ArrayAdapter<>(this,R.layout.list_seller,Tickets);
-        lv.setAdapter(TickAdapter);
+        selList=new ArrayList<>();
+        SelAdapter=new SellerListView(this,R.layout.list_seller,selList);
+        lv.setAdapter(SelAdapter);
 
        Add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,30 +72,42 @@ public class sellActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onStart() {
+    public void onBackPressed() {
+        startActivity(new Intent(this,ViewManager.class));
+    }
+
+    @Override
+    public void onStart()
+    {
         super.onStart();
+
+
         // Add value event listener to the post
         // [START post_value_event_listener]
         ValueEventListener movielistListener = new ValueEventListener() {
+            final DatabaseReference tick = database.getReference("Tickets");
+
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                // Get Post object and use the values to update the UI
-                Object object = dataSnapshot.getValue(Object.class);
-                String json = new Gson().toJson(object);
-                try {
-                    TickAdapter.clear();
-                    JSONObject usrTicketList = new JSONObject(json);
-                    Iterator x = usrTicketList.keys();
-                    while (x.hasNext()){
-                        String key = (String) x.next();
-                        TickAdapter.add(key);
-                        System.out.println(key);
-                    }
-                    TickAdapter.notifyDataSetChanged();
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()){
+                    String a=postSnapshot.getKey();
+                    DatabaseReference keydb = tick.child(Objects.requireNonNull(a));
+                    selList.clear();
+                    keydb.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            TicketDetails sList=dataSnapshot.getValue(TicketDetails.class);
+                            if(sList != null) {
+                                selList.add(sList);
+                                SelAdapter.notifyDataSetChanged();
+                            }
+                        }
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                        }
+                    });
 
+                }
             }
 
             @Override
@@ -109,3 +125,19 @@ public class sellActivity extends AppCompatActivity {
     }
 
 }
+// Get Post object and use the values to update the UI
+                /*Object object = dataSnapshot.getValue(Object.class);
+                String json = new Gson().toJson(object);
+                try {
+                    TickAdapter.clear();
+                    JSONObject usrTicketList = new JSONObject(json);
+                    Iterator x = usrTicketList.keys();
+                    while (x.hasNext()){
+                        String key = (String) x.next();
+                        TickAdapter.add(key);
+                        System.out.println(key);
+                    }
+                    TickAdapter.notifyDataSetChanged();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }*/

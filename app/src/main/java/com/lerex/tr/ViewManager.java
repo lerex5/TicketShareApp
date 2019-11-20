@@ -57,6 +57,14 @@ public class ViewManager extends AppCompatActivity {
         });
 
     }
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
+
     private class GetmovieResults extends AsyncTask<Void, Void, Void> {
         @Override
         protected void onPreExecute() {

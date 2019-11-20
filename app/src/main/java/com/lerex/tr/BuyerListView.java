@@ -14,13 +14,13 @@ import androidx.annotation.Nullable;
 
 import java.util.List;
 
-public class MyListView extends ArrayAdapter<TicketDetails> {
+public class BuyerListView extends ArrayAdapter<TicketDetails> {
 
     private Context mctx;
     private int resource;
     private List<TicketDetails> tdlist;
 
-    protected MyListView(Context mctx,int resource,List<TicketDetails> tdlist){
+    protected BuyerListView(Context mctx,int resource,List<TicketDetails> tdlist){
         super(mctx,resource,tdlist);
 
         this.mctx=mctx;

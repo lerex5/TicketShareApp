@@ -11,7 +11,7 @@ public class TicketDetails {
         this.name = "-1";
         this.sellerId = "-1";
     }
-    public TicketDetails(String name, String date, String cost,int numberOfTickets, String sellerId) {
+    public TicketDetails(String name, String cost, String date,int numberOfTickets, String sellerId) {
         this.numberOfTickets = numberOfTickets;
         this.date = date;
         this.cost = cost;
