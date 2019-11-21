@@ -37,7 +37,7 @@ public class ViewManager extends AppCompatActivity {
 
         tinydb = new TinyDB(this);
         tinydb.deleteImage("Movies");
-
+        new GetmovieResults().execute();
         Button sell=findViewById(R.id.btnSell);
         Button buy=findViewById(R.id.btnBuy);
 
@@ -72,7 +72,7 @@ public class ViewManager extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            //Toast.makeText(ViewManager.this, "Json Data is downloading", Toast.LENGTH_LONG).show();
+            Toast.makeText(ViewManager.this, "Json Data is downloading", Toast.LENGTH_LONG).show();
 
         }
 
@@ -137,6 +137,7 @@ public class ViewManager extends AppCompatActivity {
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
             //To Add Modifications For Drop Down List Box
+            Toast.makeText(ViewManager.this, "Json Data downloaded", Toast.LENGTH_LONG).show();
         }
 
     }
