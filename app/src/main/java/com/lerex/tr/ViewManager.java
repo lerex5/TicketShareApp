@@ -37,7 +37,7 @@ public class ViewManager extends AppCompatActivity {
 
         tinydb = new TinyDB(this);
         tinydb.deleteImage("Movies");
-        new GetmovieResults().execute();
+
         Button sell=findViewById(R.id.btnSell);
         Button buy=findViewById(R.id.btnBuy);
 
@@ -59,17 +59,20 @@ public class ViewManager extends AppCompatActivity {
     }
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(Intent.ACTION_MAIN);
+        /*Intent intent = new Intent(Intent.ACTION_MAIN);
         intent.addCategory(Intent.CATEGORY_HOME);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
+        startActivity(intent);*/
+
+        finish();//I guess this does it.
     }
+
 
     private class GetmovieResults extends AsyncTask<Void, Void, Void> {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            Toast.makeText(ViewManager.this, "Json Data is downloading", Toast.LENGTH_LONG).show();
+            //Toast.makeText(ViewManager.this, "Json Data is downloading", Toast.LENGTH_LONG).show();
 
         }
 

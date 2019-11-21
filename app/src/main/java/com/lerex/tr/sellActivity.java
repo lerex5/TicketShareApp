@@ -54,7 +54,7 @@ public class sellActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sell);
 
 
-    ref= database.getReference(Objects.requireNonNull(mAuth.getCurrentUser()).getUid());
+        ref= database.getReference(Objects.requireNonNull(mAuth.getCurrentUser()).getUid());
         Add=findViewById(R.id.btnAdd);
         lv=findViewById(R.id.lvTickets);
         selList=new ArrayList<>();
@@ -71,16 +71,15 @@ public class sellActivity extends AppCompatActivity {
         });
     }
 
-    @Override
+   /* @Override
     public void onBackPressed() {
         startActivity(new Intent(this,ViewManager.class));
-    }
+    }*/
 
     @Override
     public void onStart()
     {
         super.onStart();
-
 
         // Add value event listener to the post
         // [START post_value_event_listener]
@@ -89,10 +88,11 @@ public class sellActivity extends AppCompatActivity {
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                selList.clear();
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()){
                     String a=postSnapshot.getKey();
+                    System.out.println(a+"HI");
                     DatabaseReference keydb = tick.child(Objects.requireNonNull(a));
-                    selList.clear();
                     keydb.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

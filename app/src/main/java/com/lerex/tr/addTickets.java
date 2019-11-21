@@ -77,8 +77,9 @@ public class addTickets extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 addTicket();
-                Intent intent=new Intent(addTickets.this,sellActivity.class);
-                startActivity(intent);
+                //Intent intent=new Intent(addTickets.this,sellActivity.class);
+                //startActivity(intent);
+                finish();
             }
         });
 
