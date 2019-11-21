@@ -71,10 +71,11 @@ public class buyerActivity extends AppCompatActivity {
             }
         });
     }
-    @Override
+
+    /*@Override
     public void onBackPressed() {
         startActivity(new Intent(this,ViewManager.class));
-    }
+    }*/
 
 
     protected void GetAvailable(){

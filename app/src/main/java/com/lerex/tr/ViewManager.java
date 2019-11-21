@@ -59,11 +59,14 @@ public class ViewManager extends AppCompatActivity {
     }
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(Intent.ACTION_MAIN);
+        /*Intent intent = new Intent(Intent.ACTION_MAIN);
         intent.addCategory(Intent.CATEGORY_HOME);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
+        startActivity(intent);*/
+
+        finish();//I guess this does it.
     }
+
 
     private class GetmovieResults extends AsyncTask<Void, Void, Void> {
         @Override
@@ -134,6 +137,7 @@ public class ViewManager extends AppCompatActivity {
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
             //To Add Modifications For Drop Down List Box
+            Toast.makeText(ViewManager.this, "Json Data downloaded", Toast.LENGTH_LONG).show();
         }
 
     }
