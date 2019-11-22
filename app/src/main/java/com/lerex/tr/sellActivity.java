@@ -3,6 +3,9 @@ package com.lerex.tr;
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -29,12 +32,17 @@ import java.util.Objects;
 
 public class sellActivity extends AppCompatActivity {
 
+    //RecyclerView
+    private RecyclerView recyclerView;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager layoutManager;
+    private ArrayList<TicketDetails> selList;
+
     //private event newEvent;
     private Button Add,Add1;
-    private ListView lv;
-    private SellerListView SelAdapter;
-    private ArrayList<String> Tickets;
-    private ArrayList<TicketDetails> selList;
+    //private ListView lv;
+    //private SellerListView SelAdapter;
+    //private ArrayList<String> Tickets;
     private String TAG = sellActivity.class.getSimpleName();
     //Auth
     private FirebaseAuth mAuth=FirebaseAuth.getInstance();
@@ -53,15 +61,27 @@ public class sellActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_sell);
 
+        /*lv=findViewById(R.id.lvTickets);
+        SelAdapter=new SellerListView(this,R.layout.list_seller,selList);
+        lv.setAdapter(SelAdapter);*/
+
 
         ref= database.getReference(Objects.requireNonNull(mAuth.getCurrentUser()).getUid());
         Add=findViewById(R.id.btnAdd);
-        lv=findViewById(R.id.lvTickets);
-        selList=new ArrayList<>();
-        SelAdapter=new SellerListView(this,R.layout.list_seller,selList);
-        lv.setAdapter(SelAdapter);
 
-       Add.setOnClickListener(new View.OnClickListener() {
+        recyclerView = findViewById(R.id.recyclerView);
+        recyclerView.setHasFixedSize(true);
+        // use a linear layout manager
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+
+        // specify an adapter (see also next example)
+        selList=new ArrayList<>();
+        mAdapter = new SellerListView(selList);
+        recyclerView.setAdapter(mAdapter);
+
+
+        Add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(sellActivity.this,addTickets.class);
@@ -91,7 +111,6 @@ public class sellActivity extends AppCompatActivity {
                 selList.clear();
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()){
                     String a=postSnapshot.getKey();
-                    System.out.println(a+"HI");
                     DatabaseReference keydb = tick.child(Objects.requireNonNull(a));
                     keydb.addValueEventListener(new ValueEventListener() {
                         @Override
@@ -99,7 +118,7 @@ public class sellActivity extends AppCompatActivity {
                             TicketDetails sList=dataSnapshot.getValue(TicketDetails.class);
                             if(sList != null) {
                                 selList.add(sList);
-                                SelAdapter.notifyDataSetChanged();
+                                mAdapter.notifyDataSetChanged();
                             }
                         }
                         @Override

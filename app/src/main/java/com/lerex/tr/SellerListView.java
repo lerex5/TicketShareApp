@@ -11,10 +11,11 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-public class SellerListView extends ArrayAdapter<TicketDetails> {
+/*public class SellerListView extends ArrayAdapter<TicketDetails> {
 
     private Context mctx;
     private int resource;
@@ -55,5 +56,47 @@ public class SellerListView extends ArrayAdapter<TicketDetails> {
 
     }
 
+
+}*/
+public class SellerListView extends RecyclerView.Adapter<SellerListView.MyViewHolder> {
+
+    private List<TicketDetails> tdlist;
+
+    static class MyViewHolder extends RecyclerView.ViewHolder {
+        TextView selMov,selDate,selCost,selNum;
+        MyViewHolder(View v) {
+            super(v);
+            selMov=v.findViewById(R.id.selMov);
+            selDate=v.findViewById(R.id.selDate);
+            selCost=v.findViewById(R.id.selCost);
+            selNum=v.findViewById(R.id.selNum);
+        }
+    }
+
+    SellerListView(List<TicketDetails> tdlist){
+        this.tdlist=tdlist;
+    }
+
+    @NonNull
+    @Override
+    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_seller, parent, false);
+        return new MyViewHolder(v);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+        TicketDetails td = tdlist.get(position);
+        holder.selMov.setText("Movie name : "+td.getName());
+        holder.selDate.setText("Date : "+td.getDate());
+        holder.selCost.setText("Cost : "+td.getCost());
+        String n="Number of tickets : "+ td.getNumberOfTickets();
+        holder.selNum.setText(n);
+    }
+
+    @Override
+    public int getItemCount() {
+        return tdlist.size();
+    }
 
 }
