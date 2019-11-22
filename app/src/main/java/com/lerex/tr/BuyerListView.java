@@ -2,55 +2,80 @@ package com.lerex.tr;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class BuyerListView extends ArrayAdapter<TicketDetails> {
+public class BuyerListView extends RecyclerView.Adapter<BuyerListView.ViewHolder> {
 
-    private Context mctx;
-    private int resource;
-    private List<TicketDetails> tdlist;
+    private static final String TAG="BuyerListView";
 
-    protected BuyerListView(Context mctx,int resource,List<TicketDetails> tdlist){
-        super(mctx,resource,tdlist);
+    private ArrayList<String> DateList;
+    private ArrayList<String> CostList;
+    private ArrayList<Integer> NumList;
+    private Context mContext;
 
-        this.mctx=mctx;
-        this.resource=resource;
-        this.tdlist=tdlist;
+    public BuyerListView(ArrayList<String> dateList, ArrayList<String> costList, ArrayList<Integer> numList, Context mContext) {
+        DateList = dateList;
+        CostList = costList;
+        NumList = numList;
+        this.mContext = mContext;
     }
 
-    @SuppressLint("SetTextI18n")
     @NonNull
     @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view1=LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_listview,parent,false);
+        ViewHolder holder=new ViewHolder(view1);
+        return holder;
+    }
 
-        LayoutInflater inflater=LayoutInflater.from(mctx);
+    @Override
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        View view=inflater.inflate(R.layout.activity_listview,null);
+        Log.d(TAG,"onBindViewHolder:called");
+        holder.tvDate.setText("Date : "+DateList.get(position));
+        holder.tvCost.setText("Cost : "+CostList.get(position));
+        String a=String.valueOf(NumList.get(position));
+        holder.tvNum.setText("Number of Tickets : "+a);
 
-        TextView tvDate=view.findViewById(R.id.tvDate);
-        TextView tvCost=view.findViewById(R.id.tvCost);
-        TextView tvNum=view.findViewById(R.id.tvNum);
-
-        TicketDetails td=tdlist.get(position);
-
-        tvDate.setText("Date : "+td.getDate());
-        tvCost.setText("Cost : "+td.getCost());
-        String n=String.valueOf(td.getNumberOfTickets());
-        tvNum.setText("Number of tickets : "+n);
-
-        return view;
 
     }
 
+    @Override
+    public int getItemCount() {
+        return DateList.size();
+    }
 
+
+
+    public class ViewHolder extends RecyclerView.ViewHolder{
+        TextView tvDate,tvCost,tvNum;
+        Button btn;
+        RelativeLayout parent;
+
+        public ViewHolder(View view){
+            super(view);
+
+            tvDate=view.findViewById(R.id.tvDate);
+            tvCost=view.findViewById(R.id.tvCost);
+            tvNum=view.findViewById(R.id.tvNum);
+            parent=view.findViewById(R.id.parent);
+
+        }
+    }
 }
