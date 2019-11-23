@@ -2,6 +2,9 @@ package com.lerex.tr;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -28,10 +31,9 @@ public class buyerActivity extends AppCompatActivity {
 
 
     private String TAG = buyerActivity.class.getSimpleName();
-    private ArrayList<TicketDetails> ticketDetails;
-    private ListView available;
-    private BuyerListView adapter;
     protected AutoCompleteTextView search;
+    private ArrayList<String> dateAl,costAl;
+    private ArrayList<Integer> numAl;
 
 
     @Override
@@ -50,24 +52,25 @@ public class buyerActivity extends AppCompatActivity {
         ArrayList<String> tickets = tinydb.getListString("Movies");
 
         search=findViewById(R.id.tvSearch);
-        available = findViewById(R.id.lvAvailable);
         Button search1=findViewById(R.id.btnSearch);
-        ticketDetails= new ArrayList<>();
-        adapter=new BuyerListView(this,R.layout.activity_listview,ticketDetails);
-        available.setAdapter(adapter);
+
+        dateAl=new ArrayList<>();
+        costAl=new ArrayList<>();
+        numAl=new ArrayList<>();
 
         ArrayAdapter<String> searchAdapter = new ArrayAdapter<>(buyerActivity.this, android.R.layout.simple_dropdown_item_1line, tickets);
         search.setAdapter(searchAdapter);
 
-
+        RecyclerView recyclerView=findViewById(R.id.rvAvailable);
+        BuyerListView adapter=new BuyerListView(dateAl,costAl,numAl,this);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(recyclerView);
 
         search1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ticketDetails.clear();
                 GetAvailable();
-                adapter.notifyDataSetChanged();
-
             }
         });
     }
@@ -84,19 +87,25 @@ public class buyerActivity extends AppCompatActivity {
         FirebaseDatabase.getInstance().goOnline();//InPersistentConnectionsOnly
         DatabaseReference avdb = FirebaseDatabase.getInstance().getReference(mov);
         final DatabaseReference tick = FirebaseDatabase.getInstance().getReference("Tickets");
+        dateAl.clear();
+        costAl.clear();
+        numAl.clear();
         avdb.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 for(DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                    String a=postSnapshot.getKey();
+                    final String a=postSnapshot.getKey();
                     DatabaseReference keydb = tick.child(Objects.requireNonNull(a));
                     keydb.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             TicketDetails tDet=dataSnapshot.getValue(TicketDetails.class);
                             if(tDet != null) {
-                                ticketDetails.add(tDet);
+
+                                dateAl.add(tDet.getDate());
+                                costAl.add(tDet.getCost());
+                                numAl.add(tDet.getNumberOfTickets());
                             }
                         }
                         @Override
@@ -114,5 +123,15 @@ public class buyerActivity extends AppCompatActivity {
         });
 
     }
+    ItemTouchHelper.SimpleCallback itemTouchHelperCallback=new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.RIGHT|ItemTouchHelper.LEFT) {
+        @Override
+        public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+            return false;
+        }
 
+        @Override
+        public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+
+        }
+    };
 }
