@@ -8,6 +8,23 @@
     tools:context="com.lerex.tr.MainActivity">
 
     <EditText
+        android:id="@+id/phoneNo"
+        android:layout_width="300dp"
+        android:layout_height="45dp"
+        android:background="@drawable/etborder"
+        android:ems="10"
+        android:hint="@string/enter_mobile_number"
+        android:inputType="phone"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.545"
+        android:autofillHints="@string/enter_email_id"
+        tools:targetApi="o" />
+
+    <!--<EditText
             android:id="@+id/email"
             android:layout_width="300dp"
             android:layout_height="45dp"
@@ -39,7 +56,7 @@
             app:layout_constraintTop_toBottomOf="@+id/email"
             app:layout_constraintVertical_bias="0.158"
             android:autofillHints="@string/enter_password"
-            tools:targetApi="o" />
+            tools:targetApi="o" />-->
 
     <Button
         android:id="@+id/login"
@@ -52,10 +69,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/password"
+        app:layout_constraintTop_toBottomOf="@+id/phoneNo"
         app:layout_constraintVertical_bias="0.29" />
 
-    <TextView
+   <!-- <TextView
         android:id="@+id/signup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -65,7 +82,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/login"
-        app:layout_constraintVertical_bias="0.276" />
+        app:layout_constraintVertical_bias="0.276" />-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
