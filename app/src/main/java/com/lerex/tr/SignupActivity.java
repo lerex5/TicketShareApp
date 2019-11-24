@@ -15,60 +15,60 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.PhoneAuthCredential;
+import com.google.firebase.auth.PhoneAuthProvider;
 
-public class SignupActivity extends AppCompatActivity {
+import java.util.Objects;
+import java.util.concurrent.TimeUnit;
+
+public class SignupActivity extends AppCompatActivity{
 
     private FirebaseAuth mAuth;
-    private EditText email,password,retypepassword;
+    private FirebaseUser curuser;
+    private EditText otp;
+    private Button verifybtn,resendbtn;
+    private PhoneAuthProvider.ForceResendingToken mResendToken;
+    private PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks;
+    private String VerificationId,phoneNumber;
 
-    protected void RegisterUser(){
-
-        String semail = email.getText().toString();
-        String spassword = password.getText().toString();
-        String srpassword = retypepassword.getText().toString();
-
-        if (TextUtils.isEmpty(semail)){
-            Toast.makeText(this, "A Field is Empty", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        if (TextUtils.isEmpty(spassword)){
-            Toast.makeText(this, "A Field is Empty", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        if (TextUtils.isEmpty(srpassword)){
-            Toast.makeText(this, "A Field is Empty", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        if (!spassword.equals(srpassword)){
-            Toast.makeText(this, "Password does not match", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        mAuth.createUserWithEmailAndPassword(semail, spassword)
+    protected void SignIn(@NonNull PhoneAuthCredential credential){
+        mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        try {
-                            //check if successful
-                            if (task.isSuccessful()) {
-                                //User is successfully registered and logged in
-                                //start Profile Activity here
-                                Toast.makeText(SignupActivity.this, "registration successful",
-                                        Toast.LENGTH_SHORT).show();
-                                finish();
-                                startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                            }else{
-
-                                Toast.makeText(SignupActivity.this, "Couldn't register, try again",
-                                        Toast.LENGTH_SHORT).show();
-                            }
-                        }catch (Exception e){
-                            e.printStackTrace();
+                        if (task.isSuccessful()) {
+                            curuser = Objects.requireNonNull(task.getResult()).getUser();
+                        }
+                        else if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
+                            Toast.makeText(SignupActivity.this, "Verification Failed, Invalid credentials", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
+
+        finish();
+        startActivity(new Intent(SignupActivity.this,ViewManager.class));
     }
+
+    protected void registerUser() {
+        String sotp = otp.getText().toString();
+        if (TextUtils.isEmpty(sotp)) {
+            Toast.makeText(this, "A Field is Empty", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        PhoneAuthCredential credential = PhoneAuthProvider.getCredential(VerificationId, sotp);
+        SignIn(credential);
+    }
+
+    protected void resendOtp(){
+        PhoneAuthProvider.getInstance().verifyPhoneNumber(phoneNumber,30,TimeUnit.SECONDS,this,
+                mCallbacks,mResendToken);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,16 +79,51 @@ public class SignupActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_signup);
         mAuth = FirebaseAuth.getInstance();
-        Button signupbtn = findViewById(R.id.btnSignup);
-        signupbtn.setOnClickListener(new View.OnClickListener() {
+        initFireBaseCallbacks();
+
+        phoneNumber = "+91"+getIntent().getStringExtra("PHONE_NUMBER").trim();
+        PhoneAuthProvider.getInstance().verifyPhoneNumber(phoneNumber,60,TimeUnit.SECONDS,this, mCallbacks);
+
+        verifybtn=findViewById(R.id.Verify);
+        resendbtn=findViewById(R.id.ResendOtp);
+
+        verifybtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                email = findViewById(R.id.etEmail);
-                password=findViewById(R.id.etPass);
-                retypepassword=findViewById(R.id.etRepass);
-                RegisterUser();
+                otp = findViewById(R.id.etOtp);
+                registerUser();
             }
         });
 
+        resendbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                resendOtp();
+            }
+        });
     }
+
+    void initFireBaseCallbacks() {
+        mCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+            @Override
+            public void onVerificationCompleted(@NonNull PhoneAuthCredential credential) {
+                SignIn(credential);
+                Toast.makeText(SignupActivity.this, "Verification Failed", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onVerificationFailed(@NonNull FirebaseException e) {
+                Toast.makeText(SignupActivity.this, "Verification Failed", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onCodeSent(@NonNull String verificationId,
+                                   @NonNull PhoneAuthProvider.ForceResendingToken token) {
+                Toast.makeText(SignupActivity.this, "Code Sent", Toast.LENGTH_SHORT).show();
+                VerificationId = verificationId;
+                mResendToken = token;
+            }
+        };
+    }
+
 }
