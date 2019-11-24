@@ -8,13 +8,13 @@
     tools:context=".SignupActivity">
 
     <EditText
-        android:id="@+id/etEmail"
+        android:id="@+id/etOtp"
         android:layout_width="250dp"
         android:layout_height="40dp"
         android:background="@drawable/etborder"
         android:ems="10"
-        android:hint="@string/enter_your_email_id"
-        android:inputType="textEmailAddress"
+        android:hint="@string/enter_otp"
+        android:inputType="number"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -24,51 +24,32 @@
         app:layout_constraintVertical_bias="0.584"
         tools:ignore="Autofill" />
 
-    <EditText
-        android:id="@+id/etPass"
-        android:layout_width="250dp"
-        android:layout_height="40dp"
-        android:background="@drawable/etborder"
-        android:ems="10"
-        android:hint="@string/type_your_password"
-        android:inputType="textPassword"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etEmail"
-        app:layout_constraintVertical_bias="0.086"
-        tools:ignore="Autofill" />
-
-    <EditText
-        android:id="@+id/etRepass"
-        android:layout_width="250dp"
-        android:layout_height="40dp"
-        android:background="@drawable/etborder"
-        android:ems="10"
-        android:hint="@string/retype_password"
-        android:inputType="textPassword"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etPass"
-        app:layout_constraintVertical_bias="0.087"
-        tools:ignore="Autofill" />
-
     <Button
-        android:id="@+id/btnSignup"
+        android:id="@+id/Verify"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="#19232D"
-        android:text="@string/sign_up"
+        android:text="@string/verify"
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etRepass"
+        app:layout_constraintTop_toBottomOf="@+id/etOtp"
         app:layout_constraintVertical_bias="0.154" />
+
+    <Button
+        android:id="@+id/ResendOtp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#19232D"
+        android:text="@string/resend"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Verify"
+        app:layout_constraintVertical_bias="0.154" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
