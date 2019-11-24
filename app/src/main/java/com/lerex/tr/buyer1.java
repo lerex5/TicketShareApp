@@ -8,14 +8,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.ListView;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -26,9 +27,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 
-public class buyerActivity extends AppCompatActivity {
-
-
+public class buyer1 extends AppCompatActivity {
 
     private String TAG = buyerActivity.class.getSimpleName();
     protected AutoCompleteTextView search;
@@ -44,24 +43,21 @@ public class buyerActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);//FullScreening The Application
 
-        setContentView(R.layout.activity_buyer);
-
-
-
+        setContentView(R.layout.activity_buyer1);
         TinyDB tinydb = new TinyDB(this);//Shared Preference To Get Localized Data
         ArrayList<String> tickets = tinydb.getListString("Movies");
 
-        search=findViewById(R.id.tvSearch);
-        Button search1=findViewById(R.id.btnSearch);
+        search=findViewById(R.id.tvSearch1);
+        Button search1=findViewById(R.id.btnSearch1);
 
         dateAl=new ArrayList<>();
         costAl=new ArrayList<>();
         numAl=new ArrayList<>();
 
-        ArrayAdapter<String> searchAdapter = new ArrayAdapter<>(buyerActivity.this, android.R.layout.simple_dropdown_item_1line, tickets);
+        ArrayAdapter<String> searchAdapter = new ArrayAdapter<>(buyer1.this, android.R.layout.simple_dropdown_item_1line, tickets);
         search.setAdapter(searchAdapter);
 
-        RecyclerView recyclerView=findViewById(R.id.rvAvailable);
+        RecyclerView recyclerView=findViewById(R.id.rvAvailable1);
         BuyerListView adapter=new BuyerListView(dateAl,costAl,numAl,this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -74,7 +70,23 @@ public class buyerActivity extends AppCompatActivity {
             }
         });
 
+        BottomNavigationView bottomNavigationView=findViewById(R.id.BtmViewBar1);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                switch (menuItem.getItemId()){
+                    case R.id.seller:
+                        startActivity(new Intent(buyer1.this,ViewManBar.class));
+                        return true;
+                    case R.id.buyer:
+                        return true;
+                }
 
+
+
+                return false;
+            }
+        });
     }
 
     /*@Override

@@ -40,6 +40,7 @@ public class ViewManager extends AppCompatActivity {
         new GetmovieResults().execute();
         Button sell=findViewById(R.id.btnSell);
         Button buy=findViewById(R.id.btnBuy);
+        Button bar=findViewById(R.id.btnVM);
 
 
         sell.setOnClickListener(new View.OnClickListener() {
@@ -53,6 +54,13 @@ public class ViewManager extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(ViewManager.this,buyerActivity.class));
+            }
+        });
+
+        bar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ViewManager.this,ViewManBar.class));
             }
         });
 
