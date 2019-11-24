@@ -108,7 +108,7 @@ public class SignupActivity extends AppCompatActivity{
             @Override
             public void onVerificationCompleted(@NonNull PhoneAuthCredential credential) {
                 SignIn(credential);
-                Toast.makeText(SignupActivity.this, "Verification Failed", Toast.LENGTH_SHORT).show();
+                Toast.makeText(SignupActivity.this, "Verification Success", Toast.LENGTH_SHORT).show();
             }
 
             @Override
