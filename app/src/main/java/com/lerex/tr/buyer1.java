@@ -71,6 +71,7 @@ public class buyer1 extends AppCompatActivity {
         });
 
         BottomNavigationView bottomNavigationView=findViewById(R.id.BtmViewBar1);
+        bottomNavigationView.setSelectedItemId(R.id.buyer);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -80,6 +81,8 @@ public class buyer1 extends AppCompatActivity {
                         return true;
                     case R.id.buyer:
                         return true;
+                    case R.id.acct:
+                        startActivity(new Intent(buyer1.this,accountActivity.class));
                 }
 
 
@@ -88,11 +91,22 @@ public class buyer1 extends AppCompatActivity {
             }
         });
     }
+    @Override
+    public void onResume() {
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+        super.onResume();
+    }
 
-    /*@Override
+    @Override
+    public void onStart() {
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+        super.onStart();
+    }
+
+    @Override
     public void onBackPressed() {
-        startActivity(new Intent(this,ViewManager.class));
-    }*/
+        finish();
+    }
 
 
     protected void GetAvailable(){

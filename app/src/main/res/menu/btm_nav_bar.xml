@@ -10,4 +10,9 @@
         android:icon="@drawable/ic_person"
         android:title="@string/buyer" />
 
+    <item
+        android:id="@+id/acct"
+        android:icon="@drawable/ic_person"
+        android:title="@string/account"/>
+
 </menu>

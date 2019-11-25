@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "297508623396-k2t0lbb1rtis2ogg6jhqsu5k8jlr37cu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.lerex.tr",
+            "certificate_hash": "9cbb215ede853a8c493f167cc134d876b8aa0fba"
+          }
+        },
+        {
           "client_id": "297508623396-om1v0uiqft20ue3kqh0lup57op77726v.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

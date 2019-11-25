@@ -82,6 +82,7 @@ public class ViewManBar extends AppCompatActivity {
         });
 
         BottomNavigationView bottomNavigationView=findViewById(R.id.BtmViewBar);
+        bottomNavigationView.setSelectedItemId(R.id.seller);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -91,6 +92,9 @@ public class ViewManBar extends AppCompatActivity {
                     case R.id.buyer:
                         startActivity(new Intent(ViewManBar.this,buyer1.class));
                         return true;
+                    case R.id.acct:
+                         startActivity(new Intent(ViewManBar.this,accountActivity.class));
+                         return true;
                 }
 
 
@@ -99,6 +103,12 @@ public class ViewManBar extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    public void onBackPressed() {
+        finish();
+    }
+
     @Override
     public void onStart()
     {
