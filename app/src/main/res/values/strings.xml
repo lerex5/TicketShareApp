@@ -22,6 +22,7 @@
     <string name="enter_otp">Enter OTP</string>
     <string name="verify">Verify</string>
     <string name="resend">Resend</string>
+    <string name="account">Account</string>
     <string-array name="MovieList">
         <item>1</item>
         <item>2</item>

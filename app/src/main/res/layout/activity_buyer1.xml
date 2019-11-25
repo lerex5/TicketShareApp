@@ -1,75 +1,70 @@
-<RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/buyerLa"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_height="match_parent"
     android:layout_width="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:layout_height="match_parent"
+    android:background="@drawable/bg3"
+    tools:context=".sellActivity">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/sellerLa"
+    <AutoCompleteTextView
+        android:id="@+id/tvSearch1"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:completionThreshold="1"
+        android:hint="Select a movie"
+        android:textColor="#000000"
+        android:textColorHighlight="#19232D"
+        android:textColorLink="#19232D"
+        android:textCursorDrawable="@android:color/background_dark"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.229"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.102"
+        tools:ignore="HardcodedText" />
+
+    <Button
+        android:id="@+id/btnSearch1"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/search"
+        android:backgroundTint="#19232D"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.63"
+        app:layout_constraintStart_toEndOf="@+id/tvSearch1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.101" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvAvailable1"
+        android:layout_width="350dp"
+        android:layout_height="498dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.606"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvSearch1"
+        app:layout_constraintVertical_bias="0.14" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/BtmViewBar1"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/bg3"
-        tools:context=".sellActivity">
+        android:layout_height="58dp"
+        android:layout_gravity="bottom"
+        android:background="#fff"
+        app:itemHorizontalTranslationEnabled="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rvAvailable1"
+        app:layout_constraintVertical_bias="1.0"
+        app:menu="@menu/btm_nav_bar"
 
-        <AutoCompleteTextView
-            android:id="@+id/tvSearch1"
-            android:layout_width="250dp"
-            android:layout_height="50dp"
-            android:completionThreshold="1"
-            android:hint="Select a movie"
-            android:textColor="#000000"
-            android:textColorHighlight="#19232D"
-            android:textColorLink="#19232D"
-            android:textCursorDrawable="@android:color/background_dark"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.229"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.102"
-            tools:ignore="HardcodedText" />
+        />
 
-        <Button
-            android:id="@+id/btnSearch1"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@drawable/search"
-            android:backgroundTint="#19232D"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.63"
-            app:layout_constraintStart_toEndOf="@+id/tvSearch1"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.101" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvAvailable1"
-            android:layout_width="350dp"
-            android:layout_height="498dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.606"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvSearch1"
-            app:layout_constraintVertical_bias="0.14" />
-
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/BtmViewBar1"
-            android:layout_width="match_parent"
-            android:layout_height="58dp"
-            android:layout_gravity="bottom"
-            android:background="#fff"
-            app:itemHorizontalTranslationEnabled="false"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/rvAvailable1"
-            app:layout_constraintVertical_bias="1.0"
-            app:menu="@menu/btm_nav_bar"
-
-            />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
