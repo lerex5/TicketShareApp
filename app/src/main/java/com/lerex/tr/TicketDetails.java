@@ -2,21 +2,29 @@ package com.lerex.tr;
 
 public class TicketDetails {
 
-    private String name,date,cost,sellerId,buyerId;
-    private int numberOfTickets;
+    private String name,date,cost,sellerId,buyerId,city,theatre;
+    private int numberOfTickets,transactionMode;
+
+    // 0 - Available , 1 - In Transaction , 2 - Sold , 3 - Inactive
     public TicketDetails(){
         this.numberOfTickets = -1;
         this.date = "00/00/00";
         this.cost = "-1";
         this.name = "-1";
+        this.city = "-1";
+        this.theatre = "-1";
         this.sellerId = "-1";
+        this.transactionMode=0;
     }
-    public TicketDetails(String name, String cost, String date,int numberOfTickets, String sellerId) {
+    public TicketDetails(String name, String cost, String date,int numberOfTickets, String sellerId,String city,String theatre) {
         this.numberOfTickets = numberOfTickets;
         this.date = date;
         this.cost = cost;
         this.name = name;
         this.sellerId = sellerId;
+        this.city=city;
+        this.theatre=theatre;
+        this.transactionMode=0;
     }
 
     public int getNumberOfTickets() {
@@ -54,4 +62,12 @@ public class TicketDetails {
     public void setBuyerId(String buyerId) {
         this.buyerId = buyerId;
     }
+
+    public String getCity() {   return city;   }
+
+    public void setCity(String city) {        this.city = city;    }
+
+    public String getTheatre() {        return theatre;    }
+
+    public void setTheatre(String theatre) {        this.theatre = theatre;    }
 }
