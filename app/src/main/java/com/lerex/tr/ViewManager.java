@@ -60,7 +60,7 @@ public class ViewManager extends AppCompatActivity {
         bar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(ViewManager.this,ViewManBar.class));
+                startActivity(new Intent(ViewManager.this,FragHome.class));
             }
         });
 

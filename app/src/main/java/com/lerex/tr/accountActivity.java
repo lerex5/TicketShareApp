@@ -1,12 +1,16 @@
 package com.lerex.tr;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -14,53 +18,33 @@ import android.widget.Button;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class accountActivity extends AppCompatActivity
-{
+public class accountActivity extends Fragment {
     private Button LogOut;
+
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
-        super.onCreate(savedInstanceState);
-
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
-
-        setContentView(R.layout.activity_account);
-
-        LogOut = findViewById(R.id.btnLogout);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.activity_account, null);
+        LogOut = view.findViewById(R.id.btnLogout);
         LogOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 FirebaseAuth.getInstance().signOut();
-                startActivity(new Intent(accountActivity.this,MainActivity.class));
+                startActivity(new Intent(getActivity(), MainActivity.class));
             }
         });
-
-        BottomNavigationView bottomNavigationView = findViewById(R.id.BtmViewBar2);
-        bottomNavigationView.setSelectedItemId(R.id.acct);
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                switch (menuItem.getItemId()) {
-                    case R.id.seller:
-                        startActivity(new Intent(accountActivity.this, ViewManBar.class));
-                        return true;
-                    case R.id.buyer:
-                        startActivity(new Intent(accountActivity.this, buyer1.class));
-                        return true;
-                    case R.id.acct:
-                        return true;
-                }
-                return false;
-            }
-        });
+        return view;
     }
 
     @Override
-    public void onBackPressed() {
-        finish();
+    public void onResume() {
+        super.onResume();
+
+        View view1=getActivity().findViewById(R.id.bottomNavigationView);
+        if(view1 instanceof BottomNavigationView){
+            BottomNavigationView bottomNavView=(BottomNavigationView)view1;
+            bottomNavView.setSelectedItemId(R.id.acct);
+        }
     }
 
 }

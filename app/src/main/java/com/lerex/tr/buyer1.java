@@ -1,15 +1,19 @@
 package com.lerex.tr;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
@@ -26,7 +30,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Objects;
 
-
+/*
 public class buyer1 extends AppCompatActivity {
 
     private String TAG = buyerActivity.class.getSimpleName();
@@ -152,6 +156,112 @@ public class buyer1 extends AppCompatActivity {
 
     }
     ItemTouchHelper.SimpleCallback itemTouchHelperCallback=new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.RIGHT|ItemTouchHelper.LEFT) {
+        @Override
+        public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+            return false;
+        }
+
+        @Override
+        public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+
+        }
+    };
+}
+*/
+public class buyer1 extends Fragment{
+
+    protected AutoCompleteTextView search;
+    private ArrayList<String> dateAl,costAl;
+    private ArrayList<Integer> numAl;
+
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+        View view = inflater.inflate(R.layout.activity_buyer1, null);
+        TinyDB tinydb = new TinyDB(getActivity());//Shared Preference To Get Localized Data
+        ArrayList<String> tickets = tinydb.getListString("Movies");
+
+        search = view.findViewById(R.id.tvSearch1);
+        Button search1 = view.findViewById(R.id.btnSearch1);
+
+        dateAl = new ArrayList<>();
+        costAl = new ArrayList<>();
+        numAl = new ArrayList<>();
+
+        ArrayAdapter<String> searchAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_dropdown_item_1line, tickets);
+        search.setAdapter(searchAdapter);
+
+        RecyclerView recyclerView = view.findViewById(R.id.rvAvailable1);
+        BuyerListView adapter = new BuyerListView(dateAl, costAl, numAl, getActivity());
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(recyclerView);
+
+        search1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                GetAvailable();
+            }
+        });
+        return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        View view1=getActivity().findViewById(R.id.bottomNavigationView);
+        if(view1 instanceof BottomNavigationView){
+            BottomNavigationView bottomNavView=(BottomNavigationView)view1;
+            bottomNavView.setSelectedItemId(R.id.buyer);
+        }
+    }
+
+    protected void GetAvailable(){
+
+        String mov = search.getEditableText().toString();
+        FirebaseDatabase.getInstance().goOnline();//InPersistentConnectionsOnly
+        DatabaseReference avdb = FirebaseDatabase.getInstance().getReference(mov);
+        final DatabaseReference tick = FirebaseDatabase.getInstance().getReference("Tickets");
+        dateAl.clear();
+        costAl.clear();
+        numAl.clear();
+        avdb.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                for(DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                    final String a=postSnapshot.getKey();
+                    DatabaseReference keydb = tick.child(Objects.requireNonNull(a));
+                    keydb.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            TicketDetails tDet=dataSnapshot.getValue(TicketDetails.class);
+                            if(tDet != null) {
+
+                                dateAl.add(tDet.getDate());
+                                costAl.add(tDet.getCost());
+                                numAl.add(tDet.getNumberOfTickets());
+                            }
+                        }
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+    }
+    private ItemTouchHelper.SimpleCallback itemTouchHelperCallback=new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.RIGHT|ItemTouchHelper.LEFT) {
         @Override
         public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
             return false;

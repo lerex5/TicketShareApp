@@ -1,7 +1,9 @@
 package com.lerex.tr;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -9,8 +11,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -26,7 +30,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Objects;
-
+/*
 public class ViewManBar extends AppCompatActivity {
 
 
@@ -81,27 +85,6 @@ public class ViewManBar extends AppCompatActivity {
             }
         });
 
-        BottomNavigationView bottomNavigationView=findViewById(R.id.BtmViewBar);
-        bottomNavigationView.setSelectedItemId(R.id.seller);
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                switch (menuItem.getItemId()){
-                    case R.id.seller:
-                        return true;
-                    case R.id.buyer:
-                        startActivity(new Intent(ViewManBar.this,buyer1.class));
-                        return true;
-                    case R.id.acct:
-                         startActivity(new Intent(ViewManBar.this,accountActivity.class));
-                         return true;
-                }
-
-
-
-                return false;
-            }
-        });
     }
 
     @Override
@@ -148,6 +131,115 @@ public class ViewManBar extends AppCompatActivity {
                 Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
                 // [START_EXCLUDE]
                 Toast.makeText(ViewManBar.this, "Failed to load post.",
+                        Toast.LENGTH_SHORT).show();
+                // [END_EXCLUDE]
+            }
+        };
+        ref.addValueEventListener(movielistListener);
+
+    }
+}
+*/
+public class ViewManBar extends Fragment{
+
+    private RecyclerView recyclerView;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager layoutManager;
+    private ArrayList<TicketDetails> selList;
+
+    private Button Add;
+    private String TAG = sellActivity.class.getSimpleName();
+    //Auth
+    private FirebaseAuth mAuth=FirebaseAuth.getInstance();
+
+    //RealTime Database Connection
+    private FirebaseDatabase database = FirebaseDatabase.getInstance();
+    private DatabaseReference ref;
+
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+
+        View view=inflater.inflate(R.layout.activity_view_man_bar,null);
+        ref= database.getReference(Objects.requireNonNull(mAuth.getCurrentUser()).getUid());
+        Add=view.findViewById(R.id.btnAdd1);
+
+        recyclerView = view.findViewById(R.id.recyclerView1);
+        recyclerView.setHasFixedSize(true);
+        // use a linear layout manager
+        layoutManager = new LinearLayoutManager(getActivity());
+        recyclerView.setLayoutManager(layoutManager);
+
+        // specify an adapter (see also next example)
+        selList=new ArrayList<>();
+        mAdapter = new SellerListView(selList);
+        recyclerView.setAdapter(mAdapter);
+
+        SwiperClass swipeController = new SwiperClass();
+        ItemTouchHelper itemTouchhelper = new ItemTouchHelper(swipeController);
+        itemTouchhelper.attachToRecyclerView(recyclerView);
+
+        Add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getActivity(),addTickets.class);
+                startActivity(intent);
+
+            }
+        });
+        return view;
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        View view1=getActivity().findViewById(R.id.bottomNavigationView);
+        if(view1 instanceof BottomNavigationView){
+            BottomNavigationView bottomNavView=(BottomNavigationView)view1;
+            bottomNavView.setSelectedItemId(R.id.seller);
+        }
+    }
+    @Override
+    public void onStart()
+    {
+        super.onStart();
+
+        // Add value event listener to the post
+        // [START post_value_event_listener]
+        ValueEventListener movielistListener = new ValueEventListener() {
+            final DatabaseReference tick = database.getReference("Tickets");
+
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                selList.clear();
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()){
+                    String a=postSnapshot.getKey();
+                    DatabaseReference keydb = tick.child(Objects.requireNonNull(a));
+                    keydb.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            TicketDetails sList=dataSnapshot.getValue(TicketDetails.class);
+                            if(sList != null) {
+                                selList.add(sList);
+                                mAdapter.notifyDataSetChanged();
+                            }
+                        }
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                        }
+                    });
+
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Getting Post failed, log a message
+                Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
+                // [START_EXCLUDE]
+                Toast.makeText(getActivity(), "Failed to load post.",
                         Toast.LENGTH_SHORT).show();
                 // [END_EXCLUDE]
             }
