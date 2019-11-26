@@ -40,24 +40,30 @@ public class addTickets extends AppCompatActivity {
 
     //RealTime Database Connection
     private DatabaseReference mydb = FirebaseDatabase.getInstance().getReference("Tickets");
-    private DatabaseReference availabledb = FirebaseDatabase.getInstance().getReference("Available");
+    //private DatabaseReference availabledb = FirebaseDatabase.getInstance().getReference("Available");
 
 
     protected void addTicket(){
         String key = mydb.push().getKey();
-        String curuser = Objects.requireNonNull(mAuth.getCurrentUser()).getEmail();
+        String curuser = Objects.requireNonNull(mAuth.getCurrentUser()).getPhoneNumber();
         AutoCompleteTextView eName = findViewById(R.id.etRef1);
         EditText eDate = findViewById(R.id.etDate);
         EditText eCost = findViewById(R.id.etCost);
         EditText eNo = findViewById(R.id.etNumber);
-        TicketDetails newEvent = new TicketDetails(eName.getText().toString(),eCost.getText().toString(),eDate.getText().toString(),Integer.valueOf(eNo.getText().toString()),curuser);
+        EditText eCity = findViewById(R.id.etCity);
+        EditText eTheatre = findViewById(R.id.etTheatre);
+        TicketDetails newEvent = new TicketDetails(eName.getText().toString(),eCost.getText().toString(),eDate.getText().toString(),Integer.valueOf(eNo.getText().toString()),curuser,eCity.getText().toString(),eTheatre.getText().toString());
 
-        DatabaseReference moviedb = FirebaseDatabase.getInstance().getReference(eName.getText().toString());
+        DatabaseReference moviedb = FirebaseDatabase.getInstance().getReference(eName.getText().toString()+"/"+"Tickets");
         DatabaseReference userdb = FirebaseDatabase.getInstance().getReference(mAuth.getCurrentUser().getUid());
+        DatabaseReference citydb = FirebaseDatabase.getInstance().getReference(eName.getText().toString()+"/"+eCity.getText().toString()+"/"+eTheatre.getText().toString());
+
         mydb.child(Objects.requireNonNull(key)).setValue(newEvent);
         moviedb.child(key).setValue("");
         userdb.child(key).setValue("");
-        availabledb.child(key).setValue("");
+        citydb.child(key).setValue("");
+
+       // availabledb.child(key).setValue("");
     }
 
     @Override

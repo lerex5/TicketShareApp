@@ -65,7 +65,10 @@ public class buyerActivity extends AppCompatActivity {
         BuyerListView adapter=new BuyerListView(dateAl,costAl,numAl,this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(recyclerView);
+
+        SwiperClass swipeController = new SwiperClass();
+        ItemTouchHelper itemTouchhelper = new ItemTouchHelper(swipeController);
+        itemTouchhelper.attachToRecyclerView(recyclerView);
 
         search1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,7 +90,7 @@ public class buyerActivity extends AppCompatActivity {
 
         String mov = search.getEditableText().toString();
         FirebaseDatabase.getInstance().goOnline();//InPersistentConnectionsOnly
-        DatabaseReference avdb = FirebaseDatabase.getInstance().getReference(mov);
+        DatabaseReference avdb = FirebaseDatabase.getInstance().getReference(mov+"/Tickets");
         final DatabaseReference tick = FirebaseDatabase.getInstance().getReference("Tickets");
         dateAl.clear();
         costAl.clear();
