@@ -15,6 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -32,8 +33,11 @@ public class buyerActivity extends AppCompatActivity {
 
     private String TAG = buyerActivity.class.getSimpleName();
     protected AutoCompleteTextView search;
-    private ArrayList<String> dateAl,costAl;
-    private ArrayList<Integer> numAl;
+    private RecyclerView.Adapter adapter;
+    private ArrayList<TicketDetails> buylist;
+    private RecyclerView.LayoutManager layoutManager;
+    private RecyclerView recyclerView;
+
 
 
     @Override
@@ -54,17 +58,19 @@ public class buyerActivity extends AppCompatActivity {
         search=findViewById(R.id.tvSearch);
         Button search1=findViewById(R.id.btnSearch);
 
-        dateAl=new ArrayList<>();
-        costAl=new ArrayList<>();
-        numAl=new ArrayList<>();
 
         ArrayAdapter<String> searchAdapter = new ArrayAdapter<>(buyerActivity.this, android.R.layout.simple_dropdown_item_1line, tickets);
         search.setAdapter(searchAdapter);
+        recyclerView = findViewById(R.id.rvAvailable);
+        recyclerView.setHasFixedSize(true);
 
-        RecyclerView recyclerView=findViewById(R.id.rvAvailable);
-        BuyerListView adapter=new BuyerListView(dateAl,costAl,numAl,this);
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+
+
+        buylist=new ArrayList<>();
+        adapter = new BuyerListView(buylist);
         recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         SwiperClass swipeController = new SwiperClass();
         ItemTouchHelper itemTouchhelper = new ItemTouchHelper(swipeController);
@@ -74,6 +80,7 @@ public class buyerActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 GetAvailable();
+
             }
         });
 
@@ -92,9 +99,7 @@ public class buyerActivity extends AppCompatActivity {
         FirebaseDatabase.getInstance().goOnline();//InPersistentConnectionsOnly
         DatabaseReference avdb = FirebaseDatabase.getInstance().getReference(mov+"/Tickets");
         final DatabaseReference tick = FirebaseDatabase.getInstance().getReference("Tickets");
-        dateAl.clear();
-        costAl.clear();
-        numAl.clear();
+        buylist.clear();
         avdb.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -105,12 +110,10 @@ public class buyerActivity extends AppCompatActivity {
                     keydb.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            TicketDetails tDet=dataSnapshot.getValue(TicketDetails.class);
-                            if(tDet != null) {
-
-                                dateAl.add(tDet.getDate());
-                                costAl.add(tDet.getCost());
-                                numAl.add(tDet.getNumberOfTickets());
+                            TicketDetails bList = dataSnapshot.getValue(TicketDetails.class);
+                            if (bList != null) {
+                                buylist.add(bList);
+                                adapter.notifyDataSetChanged();
                             }
                         }
                         @Override

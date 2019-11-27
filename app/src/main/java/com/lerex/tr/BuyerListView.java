@@ -24,16 +24,11 @@ public class BuyerListView extends RecyclerView.Adapter<BuyerListView.ViewHolder
 
     private static final String TAG="BuyerListView";
 
-    private ArrayList<String> DateList;
-    private ArrayList<String> CostList;
-    private ArrayList<Integer> NumList;
-    private Context mContext;
 
-    public BuyerListView(ArrayList<String> dateList, ArrayList<String> costList, ArrayList<Integer> numList, Context mContext) {
-        DateList = dateList;
-        CostList = costList;
-        NumList = numList;
-        this.mContext = mContext;
+    List<TicketDetails> list;
+
+    public BuyerListView(List<TicketDetails> list){
+        this.list=list;
     }
 
     @NonNull
@@ -47,35 +42,80 @@ public class BuyerListView extends RecyclerView.Adapter<BuyerListView.ViewHolder
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        Log.d(TAG,"onBindViewHolder:called");
-        holder.tvDate.setText("Date : "+DateList.get(position));
-        holder.tvCost.setText("Cost : "+CostList.get(position));
-        String a=String.valueOf(NumList.get(position));
-        holder.tvNum.setText("Number of Tickets : "+a);
+
+        TicketDetails ticketDetails=list.get(position);
+
+        holder.date.setText("Date : "+ticketDetails.getDate());
+        holder.cost.setText("Cost : "+ticketDetails.getCost());
+        String a=String.valueOf(ticketDetails.getNumberOfTickets());
+        holder.num.setText("Number of Tickets : "+a);
 
 
     }
 
     @Override
     public int getItemCount() {
-        return DateList.size();
+        return list.size();
     }
 
 
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-        TextView tvDate,tvCost,tvNum;
-        Button btn;
-        RelativeLayout parent;
 
+        TextView date,cost,num;
         public ViewHolder(View view){
+
             super(view);
 
-            tvDate=view.findViewById(R.id.tvDate);
-            tvCost=view.findViewById(R.id.tvCost);
-            tvNum=view.findViewById(R.id.tvNum);
-            parent=view.findViewById(R.id.parent);
+
+
+            date=view.findViewById(R.id.tvDate);
+            cost=view.findViewById(R.id.tvCost);
+            num=view.findViewById(R.id.tvNum);
+
 
         }
     }
 }
+/*
+public class BuyerListView extends RecyclerView.Adapter<BuyerListView.MyViewHolder> {
+
+    private List<TicketDetails> tdlist;
+
+    static class MyViewHolder extends RecyclerView.ViewHolder {
+        TextView buyDate,buyCost,buyNum;
+        MyViewHolder(View v) {
+            super(v);
+            buyDate=v.findViewById(R.id.tvDate);
+            buyCost=v.findViewById(R.id.tvCost);
+            buyNum=v.findViewById(R.id.tvNum);
+        }
+    }
+
+    BuyerListView(List<TicketDetails> tdlist){
+        this.tdlist=tdlist;
+    }
+
+    @NonNull
+    @Override
+    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_listview, parent, false);
+        return new MyViewHolder(v);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+        TicketDetails td = tdlist.get(position);
+        holder.buyDate.setText("Date : "+td.getDate());
+        holder.buyCost.setText("Cost : "+td.getCost());
+        String n="Number of tickets : "+ td.getNumberOfTickets();
+        holder.buyNum.setText(n);
+    }
+
+    @Override
+    public int getItemCount() {
+        return tdlist.size();
+    }
+
+}
+*/
