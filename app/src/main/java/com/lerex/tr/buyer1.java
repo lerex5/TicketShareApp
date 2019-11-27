@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,6 +20,8 @@ import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.database.DataSnapshot;
@@ -30,149 +33,15 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Objects;
 
-/*
-public class buyer1 extends AppCompatActivity {
-
-    private String TAG = buyerActivity.class.getSimpleName();
-    protected AutoCompleteTextView search;
-    private ArrayList<String> dateAl,costAl;
-    private ArrayList<Integer> numAl;
-
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);//FullScreening The Application
-
-        setContentView(R.layout.activity_buyer1);
-        TinyDB tinydb = new TinyDB(this);//Shared Preference To Get Localized Data
-        ArrayList<String> tickets = tinydb.getListString("Movies");
-
-        search=findViewById(R.id.tvSearch1);
-        Button search1=findViewById(R.id.btnSearch1);
-
-        dateAl=new ArrayList<>();
-        costAl=new ArrayList<>();
-        numAl=new ArrayList<>();
-
-        ArrayAdapter<String> searchAdapter = new ArrayAdapter<>(buyer1.this, android.R.layout.simple_dropdown_item_1line, tickets);
-        search.setAdapter(searchAdapter);
-
-        RecyclerView recyclerView=findViewById(R.id.rvAvailable1);
-        BuyerListView adapter=new BuyerListView(dateAl,costAl,numAl,this);
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(recyclerView);
-
-        search1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                GetAvailable();
-            }
-        });
-
-        BottomNavigationView bottomNavigationView=findViewById(R.id.BtmViewBar1);
-        bottomNavigationView.setSelectedItemId(R.id.buyer);
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                switch (menuItem.getItemId()){
-                    case R.id.seller:
-                        startActivity(new Intent(buyer1.this,ViewManBar.class));
-                        return true;
-                    case R.id.buyer:
-                        return true;
-                    case R.id.acct:
-                        startActivity(new Intent(buyer1.this,accountActivity.class));
-                }
-
-
-
-                return false;
-            }
-        });
-    }
-    @Override
-    public void onResume() {
-        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-        super.onResume();
-    }
-
-    @Override
-    public void onStart() {
-        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-        super.onStart();
-    }
-
-    @Override
-    public void onBackPressed() {
-        finish();
-    }
-
-
-    protected void GetAvailable(){
-
-        String mov = search.getEditableText().toString();
-        FirebaseDatabase.getInstance().goOnline();//InPersistentConnectionsOnly
-        DatabaseReference avdb = FirebaseDatabase.getInstance().getReference(mov);
-        final DatabaseReference tick = FirebaseDatabase.getInstance().getReference("Tickets");
-        dateAl.clear();
-        costAl.clear();
-        numAl.clear();
-        avdb.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                for(DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                    final String a=postSnapshot.getKey();
-                    DatabaseReference keydb = tick.child(Objects.requireNonNull(a));
-                    keydb.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            TicketDetails tDet=dataSnapshot.getValue(TicketDetails.class);
-                            if(tDet != null) {
-
-                                dateAl.add(tDet.getDate());
-                                costAl.add(tDet.getCost());
-                                numAl.add(tDet.getNumberOfTickets());
-                            }
-                        }
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                        }
-                    });
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-    }
-    ItemTouchHelper.SimpleCallback itemTouchHelperCallback=new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.RIGHT|ItemTouchHelper.LEFT) {
-        @Override
-        public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
-            return false;
-        }
-
-        @Override
-        public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-
-        }
-    };
-}
-*/
 public class buyer1 extends Fragment{
 
     protected AutoCompleteTextView search;
-    private ArrayList<String> dateAl,costAl;
-    private ArrayList<Integer> numAl;
+    private ArrayList<TicketDetails> buylist;
+    private RecyclerView.Adapter adapter;
+    private RecyclerView.LayoutManager layoutManager;
+    private RecyclerView recyclerView;
+    private TextView tv;
+    private Button search1;
 
 
     @Nullable
@@ -183,21 +52,26 @@ public class buyer1 extends Fragment{
         TinyDB tinydb = new TinyDB(getActivity());//Shared Preference To Get Localized Data
         ArrayList<String> tickets = tinydb.getListString("Movies");
 
-        search = view.findViewById(R.id.tvSearch1);
-        Button search1 = view.findViewById(R.id.btnSearch1);
+        search=view.findViewById(R.id.tvSearch1);
+        search1=view.findViewById(R.id.btnSearch1);
+        tv=view.findViewById(R.id.tv);
 
-        dateAl = new ArrayList<>();
-        costAl = new ArrayList<>();
-        numAl = new ArrayList<>();
 
         ArrayAdapter<String> searchAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_dropdown_item_1line, tickets);
         search.setAdapter(searchAdapter);
+        recyclerView = view.findViewById(R.id.rvAvailable1);
+        recyclerView.setHasFixedSize(true);
 
-        RecyclerView recyclerView = view.findViewById(R.id.rvAvailable1);
-        BuyerListView adapter = new BuyerListView(dateAl, costAl, numAl, getActivity());
+        layoutManager = new LinearLayoutManager(getActivity());
+        recyclerView.setLayoutManager(layoutManager);
+
+        buylist=new ArrayList<>();
+        adapter = new BuyerListView(buylist);
         recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(recyclerView);
+
+        SwiperClass swipeController = new SwiperClass();
+        ItemTouchHelper itemTouchhelper = new ItemTouchHelper(swipeController);
+        itemTouchhelper.attachToRecyclerView(recyclerView);
 
         search1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -205,29 +79,47 @@ public class buyer1 extends Fragment{
                 GetAvailable();
             }
         });
+
+
         return view;
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
+    public void onStart() {
+        super.onStart();
 
-        View view1=getActivity().findViewById(R.id.bottomNavigationView);
-        if(view1 instanceof BottomNavigationView){
-            BottomNavigationView bottomNavView=(BottomNavigationView)view1;
-            bottomNavView.setSelectedItemId(R.id.buyer);
-        }
+        View view = getView();
+        search1=view.findViewById(R.id.btnSearch1);
+        recyclerView = view.findViewById(R.id.rvAvailable1);
+        recyclerView.setHasFixedSize(true);
+
+        layoutManager = new LinearLayoutManager(getActivity());
+        recyclerView.setLayoutManager(layoutManager);
+
+        buylist=new ArrayList<>();
+        adapter = new BuyerListView(buylist);
+        recyclerView.setAdapter(adapter);
+
+        search1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                GetAvailable();
+                Toast.makeText(getActivity(),"HI",
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+
     }
 
     protected void GetAvailable(){
 
         String mov = search.getEditableText().toString();
         FirebaseDatabase.getInstance().goOnline();//InPersistentConnectionsOnly
-        DatabaseReference avdb = FirebaseDatabase.getInstance().getReference(mov);
+        DatabaseReference avdb = FirebaseDatabase.getInstance().getReference(mov+"/Tickets");
         final DatabaseReference tick = FirebaseDatabase.getInstance().getReference("Tickets");
-        dateAl.clear();
-        costAl.clear();
-        numAl.clear();
+        buylist.clear();
         avdb.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -238,12 +130,10 @@ public class buyer1 extends Fragment{
                     keydb.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            TicketDetails tDet=dataSnapshot.getValue(TicketDetails.class);
-                            if(tDet != null) {
-
-                                dateAl.add(tDet.getDate());
-                                costAl.add(tDet.getCost());
-                                numAl.add(tDet.getNumberOfTickets());
+                            TicketDetails bList = dataSnapshot.getValue(TicketDetails.class);
+                            if (bList != null) {
+                                buylist.add(bList);
+                                adapter.notifyDataSetChanged();
                             }
                         }
                         @Override
@@ -260,16 +150,19 @@ public class buyer1 extends Fragment{
             }
         });
 
+
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        ft.detach(buyer1.this).attach(buyer1.this).commit();
     }
-    private ItemTouchHelper.SimpleCallback itemTouchHelperCallback=new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.RIGHT|ItemTouchHelper.LEFT) {
-        @Override
-        public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
-            return false;
-        }
 
-        @Override
-        public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        View view1=getActivity().findViewById(R.id.bottomNavigationView);
+        if(view1 instanceof BottomNavigationView){
+            BottomNavigationView bottomNavView=(BottomNavigationView)view1;
+            bottomNavView.setSelectedItemId(R.id.buyer);
         }
-    };
+    }
 }
+
