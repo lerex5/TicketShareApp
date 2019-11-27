@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
             String userid = currentUser.getUid();
             finish();
             startActivity(new Intent(getApplicationContext(),
-                    ViewManager.class));
+                    FragHome.class));
             Toast.makeText(MainActivity.this, userid,
                     Toast.LENGTH_SHORT).show();
         }

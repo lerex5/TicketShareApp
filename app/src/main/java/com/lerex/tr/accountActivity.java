@@ -18,6 +18,8 @@ import android.widget.Button;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.Objects;
+
 public class accountActivity extends Fragment {
     private Button LogOut;
 
@@ -30,6 +32,7 @@ public class accountActivity extends Fragment {
             @Override
             public void onClick(View v) {
                 FirebaseAuth.getInstance().signOut();
+                Objects.requireNonNull(getActivity()).finish();
                 startActivity(new Intent(getActivity(), MainActivity.class));
             }
         });

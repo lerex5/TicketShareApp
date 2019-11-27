@@ -15,8 +15,6 @@
         android:windowSoftInputMode="stateVisible|adjustNothing">
         <activity android:name=".FragHome"></activity>
         <activity android:name=".accountActivity" />
-        <activity android:name=".buyer1" />
-        <activity android:name=".ViewManBar" />
         <activity android:name=".ViewManager" />
         <activity android:name=".buyerActivity" />
         <activity android:name=".addTickets" />
