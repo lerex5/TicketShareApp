@@ -52,7 +52,7 @@ public class SignupActivity extends AppCompatActivity{
                 });
 
         finish();
-        startActivity(new Intent(SignupActivity.this,ViewManager.class));
+        startActivity(new Intent(SignupActivity.this,FragHome.class));
     }
 
     protected void registerUser() {

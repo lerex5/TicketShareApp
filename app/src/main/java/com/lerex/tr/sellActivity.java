@@ -1,8 +1,9 @@
 package com.lerex.tr;
 
-import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -10,30 +11,27 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ListView;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.Toast;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.gson.Gson;
-import org.json.JSONException;
-import org.json.JSONObject;
+
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Objects;
+public class sellActivity extends Fragment{
 
-public class sellActivity extends AppCompatActivity {
-
-    //RecyclerView
     private RecyclerView recyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
@@ -48,23 +46,21 @@ public class sellActivity extends AppCompatActivity {
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
     private DatabaseReference ref;
 
+
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        setContentView(R.layout.activity_sell);
-
+        View view=inflater.inflate(R.layout.activity_sell,null);
+        while (mAuth.getCurrentUser()== null){}
         ref= database.getReference(Objects.requireNonNull(mAuth.getCurrentUser()).getUid());
-        Add=findViewById(R.id.btnAdd);
+        Add=view.findViewById(R.id.btnAdd);
 
-        recyclerView = findViewById(R.id.recyclerView);
+        recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
         // use a linear layout manager
-        layoutManager = new LinearLayoutManager(this);
+        layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
 
         // specify an adapter (see also next example)
@@ -79,18 +75,23 @@ public class sellActivity extends AppCompatActivity {
         Add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(sellActivity.this,addTickets.class);
+                Intent intent=new Intent(getActivity(),addTickets.class);
                 startActivity(intent);
 
             }
         });
+        return view;
     }
+    @Override
+    public void onResume() {
+        super.onResume();
 
-   /* @Override
-    public void onBackPressed() {
-        startActivity(new Intent(this,ViewManager.class));
-    }*/
-
+        View viewNavigation=getActivity().findViewById(R.id.bottomNavigationView);
+        if(viewNavigation instanceof BottomNavigationView){
+            BottomNavigationView bottomNavView=(BottomNavigationView)viewNavigation;
+            bottomNavView.setSelectedItemId(R.id.seller);
+        }
+    }
     @Override
     public void onStart()
     {
@@ -129,7 +130,7 @@ public class sellActivity extends AppCompatActivity {
                 // Getting Post failed, log a message
                 Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
                 // [START_EXCLUDE]
-                Toast.makeText(sellActivity.this, "Failed to load post.",
+                Toast.makeText(getActivity(), "Failed to load post.",
                         Toast.LENGTH_SHORT).show();
                 // [END_EXCLUDE]
             }
@@ -137,21 +138,4 @@ public class sellActivity extends AppCompatActivity {
         ref.addValueEventListener(movielistListener);
 
     }
-
 }
-// Get Post object and use the values to update the UI
-                /*Object object = dataSnapshot.getValue(Object.class);
-                String json = new Gson().toJson(object);
-                try {
-                    TickAdapter.clear();
-                    JSONObject usrTicketList = new JSONObject(json);
-                    Iterator x = usrTicketList.keys();
-                    while (x.hasNext()){
-                        String key = (String) x.next();
-                        TickAdapter.add(key);
-                        System.out.println(key);
-                    }
-                    TickAdapter.notifyDataSetChanged();
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }*/

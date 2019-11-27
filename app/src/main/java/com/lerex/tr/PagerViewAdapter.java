@@ -19,11 +19,11 @@ public class PagerViewAdapter extends FragmentPagerAdapter {
 
         switch (position){
             case 0:
-                fragment=new ViewManBar();
+                fragment=new sellActivity();
                 break;
 
             case 1:
-                fragment=new buyer1();
+                fragment=new buyerActivity();
                 break;
 
             case 2:
