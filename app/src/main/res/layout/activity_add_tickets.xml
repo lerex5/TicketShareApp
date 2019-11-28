@@ -20,14 +20,14 @@
         android:textSize="14sp"
         android:hint="Enter movie name"
         android:completionThreshold="1"
-        tools:ignore="HardcodedText,LabelFor" />
+        tools:ignore="HardcodedText,LabelFor"
+        android:layout_marginTop="60dp"/>
 
 
-
-    <EditText
+    <TextView
         android:id="@+id/etDate"
         android:layout_width="219dp"
-        android:layout_height="wrap_content"
+        android:layout_height="37dp"
         android:layout_below="@id/etRef1"
         android:layout_alignStart="@id/etRef1"
         android:layout_alignEnd="@id/etRef1"
@@ -35,7 +35,9 @@
         android:layout_marginEnd="1dp"
         android:ems="10"
         android:hint="Enter Event Date"
-        android:inputType="date"
+        android:background="?attr/editTextBackground"
+        android:textColor="?attr/editTextColor"
+        android:textAppearance="@style/TextAppearance.AppCompat.Button"
         android:textAlignment="center"
         android:textSize="14sp"
         tools:ignore="Autofill,HardcodedText" />

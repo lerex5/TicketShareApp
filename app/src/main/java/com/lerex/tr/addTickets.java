@@ -2,9 +2,14 @@ package com.lerex.tr;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -12,8 +17,10 @@ import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -25,6 +32,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Objects;
 
@@ -41,18 +50,22 @@ public class addTickets extends AppCompatActivity {
     //RealTime Database Connection
     private DatabaseReference mydb = FirebaseDatabase.getInstance().getReference("Tickets");
     //private DatabaseReference availabledb = FirebaseDatabase.getInstance().getReference("Available");
+    private DatePickerDialog.OnDateSetListener dateSetListener;
+    private String date;
+    private TextView eDate;
+    private EditText eNo;
 
 
     protected void addTicket(){
         String key = mydb.push().getKey();
         String curuser = Objects.requireNonNull(mAuth.getCurrentUser()).getPhoneNumber();
         AutoCompleteTextView eName = findViewById(R.id.etRef1);
-        EditText eDate = findViewById(R.id.etDate);
         EditText eCost = findViewById(R.id.etCost);
-        EditText eNo = findViewById(R.id.etNumber);
         EditText eCity = findViewById(R.id.etCity);
+        eNo = findViewById(R.id.etNumber);
         EditText eTheatre = findViewById(R.id.etTheatre);
-        TicketDetails newEvent = new TicketDetails(eName.getText().toString(),eCost.getText().toString(),eDate.getText().toString(),Integer.valueOf(eNo.getText().toString()),curuser,eCity.getText().toString(),eTheatre.getText().toString());
+
+        TicketDetails newEvent = new TicketDetails(eName.getText().toString(),eCost.getText().toString(),date,Integer.valueOf(eNo.getText().toString()),curuser,eCity.getText().toString(),eTheatre.getText().toString());
 
         DatabaseReference moviedb = FirebaseDatabase.getInstance().getReference(eName.getText().toString()+"/"+"Tickets");
         DatabaseReference userdb = FirebaseDatabase.getInstance().getReference(mAuth.getCurrentUser().getUid());
@@ -78,10 +91,40 @@ public class addTickets extends AppCompatActivity {
         TinyDB tinydb = new TinyDB(this);//Shared Preference To Get Localized Data
         Tickets=tinydb.getListString("Movies");
 
+        eDate = findViewById(R.id.etDate);
+
+        eDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Calendar calendar=Calendar.getInstance();
+                int day=calendar.get(Calendar.DAY_OF_MONTH);
+                int month=calendar.get(Calendar.MONTH);
+                int year=calendar.get(Calendar.YEAR);
+
+                DatePickerDialog datePickerDialog=new DatePickerDialog(
+                        addTickets.this,R.style.DialogTheme,dateSetListener,year,month,day);
+                datePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                datePickerDialog.show();
+            }
+        });
+
+
+        dateSetListener=new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int day) {
+                month=month+1;
+                date=day+"/"+month+"/"+year;
+                eDate.setText(date);
+
+            }
+        };
+
+
         Button add1 = findViewById(R.id.btnAdd1);
         add1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 addTicket();
                 //Intent intent=new Intent(addTickets.this,sellActivity.class);
                 //startActivity(intent);
