@@ -80,6 +80,8 @@ public class FragHome extends AppCompatActivity {
     };
 
     private class GetmovieResults extends AsyncTask<Void, Void, Void> {
+
+        int pages = 1;
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -91,57 +93,60 @@ public class FragHome extends AppCompatActivity {
         protected Void doInBackground(Void... arg0) {
             HttpHandler sh = new HttpHandler();
             // Making a request to url and getting response
-            String url = "https://api.themoviedb.org/3/movie/now_playing?region=IN&page=1&language=en-US&api_key=cdb6543f56d4ae849f71ed220c46a080";
-            String jsonStr = sh.makeServiceCall(url);
 
-            Log.e(TAG, "Response from url: " + jsonStr);
-            if (jsonStr != null) {
-                try {
-                    JSONObject jsonObj = new JSONObject(jsonStr);
+            for(int j=1;j<=pages;j++) {
+                String url = "https://api.themoviedb.org/3/movie/now_playing?region=IN&page=" + j + "&language=en-US&api_key=cdb6543f56d4ae849f71ed220c46a080";
+                String jsonStr = sh.makeServiceCall(url);
 
-                    // Getting JSON Array node
-                    JSONArray movieResults = jsonObj.getJSONArray("results");
+                Log.e(TAG, "Response from url: " + j);
 
-                    // looping through All movieResults
-                    for (int i = 0; i < movieResults.length(); i++) {
-                        JSONObject c = movieResults.getJSONObject(i);
-                        String title = c.getString("title");
+                if (jsonStr != null) {
+                    try {
+                        JSONObject jsonObj = new JSONObject(jsonStr);
 
-                        // tmp hash map for single contact
-                        HashMap<String, String> moviesReleased = new HashMap<>();
+                        // Getting JSON Array node
+                        JSONArray movieResults = jsonObj.getJSONArray("results");
+                        pages = jsonObj.getInt("total_pages");
+                        // looping through All movieResults
+                        for (int i = 0; i < movieResults.length(); i++) {
+                            JSONObject c = movieResults.getJSONObject(i);
+                            String title = c.getString("title");
 
-                        // adding each child node to HashMap key => value
-                        moviesReleased.put("title", title);
-                        movies.add(moviesReleased.get("title"));
+                            // tmp hash map for single contact
+                            HashMap<String, String> moviesReleased = new HashMap<>();
+
+                            // adding each child node to HashMap key => value
+                            moviesReleased.put("title", title);
+                            movies.add(moviesReleased.get("title"));
+
+                        }
+                        tinydb.putListString("Movies", movies);
+                        System.out.println(tinydb.getListString("Movies"));
+                    } catch (final JSONException e) {
+                        Log.e(TAG, "Json parsing error: " + e.getMessage());
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(getApplicationContext(), "Json parsing error: " + e.getMessage(),
+                                        Toast.LENGTH_LONG).show();
+                            }
+                        });
 
                     }
-                    tinydb.putListString("Movies",movies);
-                    System.out.println(tinydb.getListString("Movies"));
-                } catch (final JSONException e) {
-                    Log.e(TAG, "Json parsing error: " + e.getMessage());
+
+                } else {
+                    Log.e(TAG, "Couldn't get json from server.");
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(getApplicationContext(), "Json parsing error: " + e.getMessage(),
+                            Toast.makeText(getApplicationContext(),
+                                    "Couldn't get json from server. Check LogCat for possible errors!",
                                     Toast.LENGTH_LONG).show();
                         }
                     });
-
                 }
-
-            } else {
-                Log.e(TAG, "Couldn't get json from server.");
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast.makeText(getApplicationContext(),
-                                "Couldn't get json from server. Check LogCat for possible errors!",
-                                Toast.LENGTH_LONG).show();
-                    }
-                });
             }
-
-            return null;
+                return null;
         }
 
         @Override
