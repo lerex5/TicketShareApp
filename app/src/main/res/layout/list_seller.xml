@@ -41,5 +41,14 @@
         android:layout_weight="1"
         android:textColor="#19232D"
         android:textSize="16sp" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/Call"
+        android:textColor="#19232D"
+        android:textSize="16sp"
+        android:text="@string/c" />
+
 </LinearLayout>
 

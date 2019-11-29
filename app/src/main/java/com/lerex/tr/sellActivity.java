@@ -36,6 +36,7 @@ public class sellActivity extends Fragment{
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
     private ArrayList<TicketDetails> selList;
+    private ArrayList<String> keys;
 
     private Button Add;
     private String TAG = sellActivity.class.getSimpleName();
@@ -64,13 +65,14 @@ public class sellActivity extends Fragment{
         recyclerView.setLayoutManager(layoutManager);
 
         // specify an adapter (see also next example)
+        keys = new ArrayList<>();
         selList=new ArrayList<>();
-        mAdapter = new SellerListView(selList);
+        mAdapter = new SellerListView(selList,keys);
         recyclerView.setAdapter(mAdapter);
 
-        SwiperClass swipeController = new SwiperClass();
-        ItemTouchHelper itemTouchhelper = new ItemTouchHelper(swipeController);
-        itemTouchhelper.attachToRecyclerView(recyclerView);
+        //SwiperClass swipeController = new SwiperClass();
+        //ItemTouchHelper itemTouchhelper = new ItemTouchHelper(swipeController);
+        //itemTouchhelper.attachToRecyclerView(recyclerView);
 
         Add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,13 +108,15 @@ public class sellActivity extends Fragment{
             public void onDataChange(DataSnapshot dataSnapshot) {
                 selList.clear();
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()){
-                    String a=postSnapshot.getKey();
-                    DatabaseReference keydb = tick.child(Objects.requireNonNull(a));
+                    final String a=postSnapshot.getKey();
+                    final DatabaseReference keydb = tick.child(Objects.requireNonNull(a));
                     keydb.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             TicketDetails sList=dataSnapshot.getValue(TicketDetails.class);
-                            if(sList != null) {
+                            if(sList != null&&sList.getTransactionMode()==0
+                            ) {
+                                keys.add(a);
                                 selList.add(sList);
                                 mAdapter.notifyDataSetChanged();
                             }

@@ -27,5 +27,13 @@
         android:layout_below="@+id/tvCost"
         android:textColor="#19232D"
         android:textSize="16sp" />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Call"
+        android:layout_below="@+id/tvNum"
+        android:textColor="#19232D"
+        android:textSize="16sp"
+        android:text="@string/c" />
 
 </RelativeLayout>

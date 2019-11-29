@@ -67,10 +67,6 @@ public class buyerActivity extends Fragment{
         adapter = new BuyerListView(buylist);
         recyclerView.setAdapter(adapter);
 
-        SwiperClass swipeController = new SwiperClass();
-        ItemTouchHelper itemTouchhelper = new ItemTouchHelper(swipeController);
-        itemTouchhelper.attachToRecyclerView(recyclerView);
-
         searchbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
