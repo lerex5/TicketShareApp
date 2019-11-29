@@ -42,8 +42,6 @@ public class addTickets extends AppCompatActivity {
 
     private String TAG = addTickets.class.getSimpleName();
     private ArrayList<String> Tickets;
-    private ArrayAdapter<String> TickAdapter;
-
     //Auth
     private FirebaseAuth mAuth=FirebaseAuth.getInstance();
 

@@ -70,4 +70,12 @@ public class TicketDetails {
     public String getTheatre() {        return theatre;    }
 
     public void setTheatre(String theatre) {        this.theatre = theatre;    }
+
+    public int getTransactionMode() {
+        return transactionMode;
+    }
+
+    public void setTransactionMode(int transactionMode) {
+        this.transactionMode = transactionMode;
+    }
 }
