@@ -12,7 +12,10 @@ import static androidx.recyclerview.widget.ItemTouchHelper.*;
 
 class SwiperClass extends Callback {
 
+    private int curFun=0;
     private boolean swipeBack;
+
+
     @Override
     public int getMovementFlags(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
         return makeMovementFlags(0, LEFT | RIGHT);
@@ -56,5 +59,13 @@ class SwiperClass extends Callback {
             return 0;
         }
         return super.convertToAbsoluteDirection(flags, layoutDirection);
+    }
+
+    public int getCurFun() {
+        return curFun;
+    }
+
+    public void setCurFun(int curFun) {
+        this.curFun = curFun;
     }
 }
