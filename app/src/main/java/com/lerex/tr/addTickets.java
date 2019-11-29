@@ -9,17 +9,20 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.Layout;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,6 +38,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Objects;
 
 public class addTickets extends AppCompatActivity {
@@ -53,7 +57,8 @@ public class addTickets extends AppCompatActivity {
     private DatePickerDialog.OnDateSetListener dateSetListener;
     private String date;
     private TextView eDate;
-    private EditText eNo;
+    private Spinner eNo;
+    private int num;
 
 
     protected void addTicket(){
@@ -62,10 +67,9 @@ public class addTickets extends AppCompatActivity {
         AutoCompleteTextView eName = findViewById(R.id.etRef1);
         EditText eCost = findViewById(R.id.etCost);
         EditText eCity = findViewById(R.id.etCity);
-        eNo = findViewById(R.id.etNumber);
         EditText eTheatre = findViewById(R.id.etTheatre);
 
-        TicketDetails newEvent = new TicketDetails(eName.getText().toString(),eCost.getText().toString(),date,Integer.valueOf(eNo.getText().toString()),curuser,eCity.getText().toString(),eTheatre.getText().toString());
+        TicketDetails newEvent = new TicketDetails(eName.getText().toString(),eCost.getText().toString(),date,num,curuser,eCity.getText().toString(),eTheatre.getText().toString());
 
         DatabaseReference moviedb = FirebaseDatabase.getInstance().getReference(eName.getText().toString()+"/"+"Tickets");
         DatabaseReference userdb = FirebaseDatabase.getInstance().getReference(mAuth.getCurrentUser().getUid());
@@ -103,7 +107,6 @@ public class addTickets extends AppCompatActivity {
 
                 DatePickerDialog datePickerDialog=new DatePickerDialog(
                         addTickets.this,R.style.DialogTheme,dateSetListener,year,month,day);
-                datePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 datePickerDialog.show();
             }
         });
@@ -118,6 +121,32 @@ public class addTickets extends AppCompatActivity {
 
             }
         };
+
+        eNo = findViewById(R.id.etNumber);
+
+        final List<Integer> noOfTickets=new ArrayList<>();
+
+        noOfTickets.add(1);
+        noOfTickets.add(2);
+        noOfTickets.add(3);
+        noOfTickets.add(4);
+        noOfTickets.add(5);
+
+        ArrayAdapter<Integer> NumAdapter=new ArrayAdapter<>(this,R.layout.spinner_view,noOfTickets);
+        NumAdapter.setDropDownViewResource(R.layout.spinner_view);
+        eNo.setAdapter(NumAdapter);
+
+        eNo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                num=Integer.valueOf(noOfTickets.get(position).toString());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
 
         Button add1 = findViewById(R.id.btnAdd1);

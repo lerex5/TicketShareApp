@@ -57,19 +57,19 @@
         android:textSize="14sp"
         tools:ignore="Autofill,HardcodedText" />
 
-    <EditText
+    <Spinner
         android:id="@+id/etNumber"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="218dp"
+        android:layout_height="37dp"
         android:layout_below="@id/etCost"
         android:layout_alignStart="@id/etCost"
         android:layout_alignEnd="@id/etCost"
         android:layout_marginTop="40dp"
         android:ems="10"
-        android:hint="Enter the number of tickets"
-        android:inputType="number"
-        android:textAlignment="center"
+        android:spinnerMode="dropdown"
         android:textSize="14sp"
+        android:background="@drawable/line_bg"
+        android:theme="@style/CustomSpinnerTheme"
         tools:ignore="Autofill,HardcodedText" />
 
     <EditText
