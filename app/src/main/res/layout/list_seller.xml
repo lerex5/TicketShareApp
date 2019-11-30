@@ -1,54 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@drawable/common_google_signin_btn_text_light_normal_background"
-    android:orientation="vertical"
-    android:paddingBottom="@dimen/row_padding_vertical"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/row_padding_vertical">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:id="@+id/parent"
+android:layout_width="match_parent"
+android:layout_height="wrap_content">
 
+<RelativeLayout
+    android:layout_width="340dp"
+    android:layout_height="wrap_content"
+    android:layout_centerHorizontal="true"
+    android:background="@drawable/etborder2"
+    android:layout_marginTop="5dp">
 
     <TextView
         android:id="@+id/selMov"
-        android:layout_width="match_parent"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_marginLeft="20dp"
         android:textColor="#19232D"
-        android:textSize="10sp" />
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/selDate"
-        android:layout_width="match_parent"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_below="@+id/selMov"
+        android:layout_marginStart="20dp"
         android:textColor="#19232D"
         android:textSize="16sp" />
 
     <TextView
         android:id="@+id/selCost"
-        android:layout_width="match_parent"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_below="@+id/selDate"
+        android:layout_marginStart="20dp"
         android:textColor="#19232D"
         android:textSize="16sp" />
 
     <TextView
         android:id="@+id/selNum"
-        android:layout_width="match_parent"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_below="@+id/selCost"
+        android:layout_marginStart="20dp"
         android:textColor="#19232D"
         android:textSize="16sp" />
 
     <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:id="@+id/Call"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignEnd="@+id/selDate"
+        android:layout_marginTop="23dp"
+        android:layout_marginEnd="-99dp"
+        android:background="@android:drawable/ic_menu_delete"
         android:textColor="#19232D"
-        android:textSize="16sp"
-        android:text="@string/c" />
+        android:textSize="16sp" />
+</RelativeLayout>
 
-</LinearLayout>
-
+</RelativeLayout>

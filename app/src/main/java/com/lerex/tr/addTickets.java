@@ -3,15 +3,7 @@ package com.lerex.tr;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
-import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.Layout;
-import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -21,31 +13,21 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.lerex.tr.TinyDB;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
 public class addTickets extends AppCompatActivity {
 
 
-    private String TAG = addTickets.class.getSimpleName();
-    private ArrayList<String> Tickets;
+    //private String TAG = addTickets.class.getSimpleName();
     //Auth
     private FirebaseAuth mAuth=FirebaseAuth.getInstance();
 
@@ -55,7 +37,6 @@ public class addTickets extends AppCompatActivity {
     private DatePickerDialog.OnDateSetListener dateSetListener;
     private String date;
     private TextView eDate;
-    private Spinner eNo;
     private int num;
 
 
@@ -91,7 +72,7 @@ public class addTickets extends AppCompatActivity {
         setContentView(R.layout.activity_add_tickets);
 
         TinyDB tinydb = new TinyDB(this);//Shared Preference To Get Localized Data
-        Tickets=tinydb.getListString("Movies");
+        ArrayList<String> tickets = tinydb.getListString("Movies");
 
         eDate = findViewById(R.id.etDate);
 
@@ -120,7 +101,7 @@ public class addTickets extends AppCompatActivity {
             }
         };
 
-        eNo = findViewById(R.id.etNumber);
+        Spinner eNo = findViewById(R.id.etNumber);
 
         final List<Integer> noOfTickets=new ArrayList<>();
 
@@ -131,7 +112,7 @@ public class addTickets extends AppCompatActivity {
         noOfTickets.add(5);
 
         ArrayAdapter<Integer> NumAdapter=new ArrayAdapter<>(this,R.layout.spinner_view,noOfTickets);
-        NumAdapter.setDropDownViewResource(R.layout.spinner_view);
+        NumAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         eNo.setAdapter(NumAdapter);
 
         eNo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -160,7 +141,7 @@ public class addTickets extends AppCompatActivity {
         });
 
         AutoCompleteTextView act =findViewById(R.id.etRef1);
-        ArrayAdapter<String> adapter=new ArrayAdapter<>(addTickets.this,android.R.layout.simple_dropdown_item_1line,Tickets);
+        ArrayAdapter<String> adapter=new ArrayAdapter<>(addTickets.this,android.R.layout.simple_dropdown_item_1line, tickets);
         act.setAdapter(adapter);
     }
 

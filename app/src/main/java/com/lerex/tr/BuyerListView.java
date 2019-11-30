@@ -55,6 +55,7 @@ public class BuyerListView extends RecyclerView.Adapter<BuyerListView.ViewHolder
         holder.cost.setText("Cost : " + ticketDetails.getCost());
         String a = String.valueOf(ticketDetails.getNumberOfTickets());
         holder.num.setText("Number of Tickets : " + a);
+        holder.theatre.setText("Theatre : "+ ticketDetails.getTheatre());
         holder.callbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,7 +81,7 @@ public class BuyerListView extends RecyclerView.Adapter<BuyerListView.ViewHolder
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
-        TextView date,cost,num;
+        TextView date,cost,num,theatre;
         Button callbtn;
         public ViewHolder(View view){
 
@@ -90,6 +91,7 @@ public class BuyerListView extends RecyclerView.Adapter<BuyerListView.ViewHolder
             cost=view.findViewById(R.id.tvCost);
             num=view.findViewById(R.id.tvNum);
             callbtn=view.findViewById(R.id.Call);
+            theatre=view.findViewById(R.id.tvTheatre);
 
         }
     }

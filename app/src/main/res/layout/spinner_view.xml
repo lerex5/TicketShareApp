@@ -3,5 +3,7 @@
     style="?android:attr/spinnerItemStyle"
     android:layout_width="fill_parent"
     android:layout_height="match_parent"
+    android:gravity="center"
     android:padding="3dp"
-    android:gravity="center" />
+    android:textColor="#fff"
+    android:textColorHint="#FFFFFF" />
