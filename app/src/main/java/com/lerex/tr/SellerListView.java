@@ -23,7 +23,6 @@ import java.util.List;
 public class SellerListView extends RecyclerView.Adapter<SellerListView.MyViewHolder> {
 
     private List<TicketDetails> tdlist;
-    private List<String> Keys;
     final DatabaseReference tick = FirebaseDatabase.getInstance().getReference("Tickets");
     static class MyViewHolder extends RecyclerView.ViewHolder {
         TextView selMov,selDate,selCost,selNum;
@@ -38,9 +37,8 @@ public class SellerListView extends RecyclerView.Adapter<SellerListView.MyViewHo
         }
     }
 
-    SellerListView(List<TicketDetails> tdlist,List<String> Keys){
+    SellerListView(List<TicketDetails> tdlist){
         this.tdlist=tdlist;
-        this.Keys=Keys;
     }
 
     @NonNull
@@ -61,9 +59,8 @@ public class SellerListView extends RecyclerView.Adapter<SellerListView.MyViewHo
         holder.callbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                tick.child(Keys.get(position)).child("transactionMode").setValue(3);
+                tick.child(tdlist.get(position).getFirebaseId()).child("transactionMode").setValue(3);
                 tdlist.remove(position);
-                Keys.remove(position);
                 notifyItemRemoved(position);
                 notifyItemRangeChanged(position, tdlist.size());
             }

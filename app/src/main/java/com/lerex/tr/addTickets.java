@@ -15,12 +15,17 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -48,16 +53,30 @@ public class addTickets extends AppCompatActivity {
         EditText eCity = findViewById(R.id.etCity);
         EditText eTheatre = findViewById(R.id.etTheatre);
 
-        TicketDetails newEvent = new TicketDetails(eName.getText().toString(),eCost.getText().toString(),date,num,curuser,eCity.getText().toString(),eTheatre.getText().toString());
+        TicketDetails newEvent = new TicketDetails(eName.getText().toString(),eCost.getText().toString(),date,num,curuser,eCity.getText().toString(),eTheatre.getText().toString(),key);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            Date strDate = sdf.parse(date);
+            Date curDate = sdf.parse(sdf.format(new Date()));
 
-        DatabaseReference moviedb = FirebaseDatabase.getInstance().getReference(eName.getText().toString()+"/"+"Tickets");
-        DatabaseReference userdb = FirebaseDatabase.getInstance().getReference(mAuth.getCurrentUser().getUid());
-        DatabaseReference citydb = FirebaseDatabase.getInstance().getReference(eName.getText().toString()+"/"+eCity.getText().toString()+"/"+eTheatre.getText().toString());
+            if(Objects.requireNonNull(curDate).before(strDate)||curDate.equals(strDate)){
+                DatabaseReference moviedb = FirebaseDatabase.getInstance().getReference(eName.getText().toString()+"/"+"Tickets");
+                DatabaseReference userdb = FirebaseDatabase.getInstance().getReference(mAuth.getCurrentUser().getUid());
+                DatabaseReference citydb = FirebaseDatabase.getInstance().getReference(eName.getText().toString()+"/"+eCity.getText().toString()+"/"+eTheatre.getText().toString());
 
-        mydb.child(Objects.requireNonNull(key)).setValue(newEvent);
-        moviedb.child(key).setValue("");
-        userdb.child(key).setValue("");
-        citydb.child(key).setValue("");
+                mydb.child(Objects.requireNonNull(key)).setValue(newEvent);
+                moviedb.child(key).setValue("");
+                userdb.child(key).setValue("");
+                citydb.child(key).setValue("");
+                finish();
+            }
+            else {
+                Toast.makeText(this, "Date Invalid",
+                        Toast.LENGTH_SHORT).show();
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
        // availabledb.child(key).setValue("");
     }
@@ -75,7 +94,6 @@ public class addTickets extends AppCompatActivity {
         ArrayList<String> tickets = tinydb.getListString("Movies");
 
         eDate = findViewById(R.id.etDate);
-
         eDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -136,7 +154,6 @@ public class addTickets extends AppCompatActivity {
                 addTicket();
                 //Intent intent=new Intent(addTickets.this,sellActivity.class);
                 //startActivity(intent);
-                finish();
             }
         });
 

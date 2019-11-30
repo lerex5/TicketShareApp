@@ -2,7 +2,7 @@ package com.lerex.tr;
 
 public class TicketDetails {
 
-    private String name,date,cost,sellerId,buyerId,city,theatre;
+    private String name,date,cost,sellerId,buyerId,city,theatre,firebaseId;
     private int numberOfTickets,transactionMode;
 
     // 0 - Available , 1 - In Transaction , 2 - Sold , 3 - Inactive
@@ -15,8 +15,9 @@ public class TicketDetails {
         this.theatre = "-1";
         this.sellerId = "-1";
         this.transactionMode=0;
+        this.firebaseId="-1";
     }
-    public TicketDetails(String name, String cost, String date,int numberOfTickets, String sellerId,String city,String theatre) {
+    public TicketDetails(String name, String cost, String date,int numberOfTickets, String sellerId,String city,String theatre,String firebaseId) {
         this.numberOfTickets = numberOfTickets;
         this.date = date;
         this.cost = cost;
@@ -25,6 +26,7 @@ public class TicketDetails {
         this.city=city;
         this.theatre=theatre;
         this.transactionMode=0;
+        this.firebaseId=firebaseId;
     }
 
     public int getNumberOfTickets() {
@@ -77,5 +79,13 @@ public class TicketDetails {
 
     public void setTransactionMode(int transactionMode) {
         this.transactionMode = transactionMode;
+    }
+
+    public String getFirebaseId() {
+        return firebaseId;
+    }
+
+    public void setFirebaseId(String firebaseId) {
+        this.firebaseId = firebaseId;
     }
 }
