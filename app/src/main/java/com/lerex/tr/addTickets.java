@@ -40,7 +40,7 @@ public class addTickets extends AppCompatActivity {
     private DatabaseReference mydb = FirebaseDatabase.getInstance().getReference("Tickets");
     //private DatabaseReference availabledb = FirebaseDatabase.getInstance().getReference("Available");
     private DatePickerDialog.OnDateSetListener dateSetListener;
-    private String date;
+    private String date=null;
     private TextView eDate;
     private int num;
 
@@ -55,27 +55,37 @@ public class addTickets extends AppCompatActivity {
 
         TicketDetails newEvent = new TicketDetails(eName.getText().toString(),eCost.getText().toString(),date,num,curuser,eCity.getText().toString(),eTheatre.getText().toString(),key);
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        try {
-            Date strDate = sdf.parse(date);
-            Date curDate = sdf.parse(sdf.format(new Date()));
+        String cost=eCost.getText().toString();
+        String theatre=eTheatre.getText().toString();
+        String mov=eName.getText().toString();
+        String city=eCity.getText().toString();
 
-            if(Objects.requireNonNull(curDate).before(strDate)||curDate.equals(strDate)){
-                DatabaseReference moviedb = FirebaseDatabase.getInstance().getReference(eName.getText().toString()+"/"+"Tickets");
-                DatabaseReference userdb = FirebaseDatabase.getInstance().getReference(mAuth.getCurrentUser().getUid());
-                DatabaseReference citydb = FirebaseDatabase.getInstance().getReference(eName.getText().toString()+"/"+eCity.getText().toString()+"/"+eTheatre.getText().toString());
+        if((date == null) || (theatre.trim().equals("") || theatre.isEmpty()) || (cost.trim().equals("") || cost.isEmpty()) || (mov.isEmpty()) || (city.isEmpty() || city.trim().equals("")))
+        {
+            Toast.makeText(this, "Fill all the fields.",
+                    Toast.LENGTH_SHORT).show();
+        }
+        else {
+            try {
+                Date strDate = sdf.parse(date);
+                Date curDate = sdf.parse(sdf.format(new Date()));
+                if ((Objects.requireNonNull(curDate).before(strDate) || curDate.equals(strDate))) {
+                    DatabaseReference moviedb = FirebaseDatabase.getInstance().getReference(eName.getText().toString() + "/" + "Tickets");
+                    DatabaseReference userdb = FirebaseDatabase.getInstance().getReference(mAuth.getCurrentUser().getUid());
+                    DatabaseReference citydb = FirebaseDatabase.getInstance().getReference(eName.getText().toString() + "/" + eCity.getText().toString() + "/" + eTheatre.getText().toString());
 
-                mydb.child(Objects.requireNonNull(key)).setValue(newEvent);
-                moviedb.child(key).setValue("");
-                userdb.child(key).setValue("");
-                citydb.child(key).setValue("");
-                finish();
+                    mydb.child(Objects.requireNonNull(key)).setValue(newEvent);
+                    moviedb.child(key).setValue("");
+                    userdb.child(key).setValue("");
+                    citydb.child(key).setValue("");
+                    finish();
+                } else {
+                    Toast.makeText(this, "Date Invalid",
+                            Toast.LENGTH_SHORT).show();
+                }
+            } catch (ParseException e) {
+                e.printStackTrace();
             }
-            else {
-                Toast.makeText(this, "Date Invalid",
-                        Toast.LENGTH_SHORT).show();
-            }
-        } catch (ParseException e) {
-            e.printStackTrace();
         }
 
        // availabledb.child(key).setValue("");
