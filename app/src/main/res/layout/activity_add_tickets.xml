@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg5">
+    android:background="@color/common_google_signin_btn_text_dark_focused">
 
     <TextView
         android:id="@+id/mypopup"
@@ -124,9 +124,9 @@
         android:layout_below="@id/etTheatre"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="100dp"
-        android:backgroundTint="#fff"
+        android:backgroundTint="#63B7AA"
         android:text="Add"
-        android:textColor="#0080FF"
+        android:textColor="#fff"
         tools:ignore="HardcodedText,UnknownId" />
 
 </RelativeLayout>

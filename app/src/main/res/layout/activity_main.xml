@@ -4,24 +4,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg1"
+    android:background="@drawable/bg6"
     tools:context="com.lerex.tr.MainActivity">
 
     <EditText
         android:id="@+id/phoneNo"
         android:layout_width="300dp"
         android:layout_height="45dp"
-        android:background="@drawable/etborder"
+        android:autofillHints="@string/enter_email_id"
+        android:background="@drawable/etborder1"
         android:ems="10"
         android:hint="@string/enter_mobile_number"
         android:inputType="phone"
         android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.545"
-        android:autofillHints="@string/enter_email_id"
         tools:targetApi="o" />
 
     <!--<EditText
@@ -62,7 +64,7 @@
         android:id="@+id/login"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
-        android:backgroundTint="#19232D"
+        android:backgroundTint="#63B7AA"
         android:text="@string/login"
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -72,7 +74,7 @@
         app:layout_constraintTop_toBottomOf="@+id/phoneNo"
         app:layout_constraintVertical_bias="0.29" />
 
-   <!-- <TextView
+    <!-- <TextView
         android:id="@+id/signup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
