@@ -23,7 +23,7 @@
     <string name="verify">Verify</string>
     <string name="resend">Resend</string>
     <string name="account">Account</string>
-    <string name="c">C</string>
+    <string name="c">Call</string>
     <string-array name="MovieList">
         <item>1</item>
         <item>2</item>
