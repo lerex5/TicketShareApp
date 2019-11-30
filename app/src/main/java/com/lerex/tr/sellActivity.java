@@ -36,7 +36,6 @@ public class sellActivity extends Fragment{
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
     private ArrayList<TicketDetails> selList;
-    private ArrayList<String> keys;
 
     private Button Add;
     private String TAG = sellActivity.class.getSimpleName();
@@ -65,9 +64,8 @@ public class sellActivity extends Fragment{
         recyclerView.setLayoutManager(layoutManager);
 
         // specify an adapter (see also next example)
-        keys = new ArrayList<>();
         selList=new ArrayList<>();
-        mAdapter = new SellerListView(selList,keys);
+        mAdapter = new SellerListView(selList);
         recyclerView.setAdapter(mAdapter);
 
         //SwiperClass swipeController = new SwiperClass();
@@ -116,7 +114,6 @@ public class sellActivity extends Fragment{
                             TicketDetails sList=dataSnapshot.getValue(TicketDetails.class);
                             if(sList != null&&sList.getTransactionMode()==0
                             ) {
-                                keys.add(a);
                                 selList.add(sList);
                                 mAdapter.notifyDataSetChanged();
                             }
