@@ -17,7 +17,7 @@
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:textColor="#19232D"
+            android:textColor="#fff"
             android:textSize="16sp" />
 
         <TextView
@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/tvDate"
             android:layout_marginStart="20dp"
-            android:textColor="#19232D"
+            android:textColor="#fff"
             android:textSize="16sp" />
 
         <TextView
@@ -35,7 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/tvCost"
             android:layout_marginStart="20dp"
-            android:textColor="#19232D"
+            android:textColor="#fff"
             android:textSize="16sp" />
 
         <TextView
@@ -44,7 +44,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/tvNum"
             android:layout_marginStart="20dp"
-            android:textColor="#19232D"
+            android:textColor="#fff"
             android:textSize="16sp" />
 
         <Button
@@ -53,7 +53,7 @@
             android:layout_height="30dp"
             android:layout_alignEnd="@+id/tvTheatre"
             android:layout_marginTop="23dp"
-            android:layout_marginEnd="-100dp"
+            android:layout_marginEnd="-166dp"
             android:background="@android:drawable/sym_call_outgoing"
             android:backgroundTint="#F7FFFFFF"
             android:textColor="#19232D"
