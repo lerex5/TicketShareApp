@@ -24,6 +24,7 @@
     <string name="resend">Resend</string>
     <string name="account">Account</string>
     <string name="c">Call</string>
+    <string name="log_out">Log Out</string>
     <string-array name="MovieList">
         <item>1</item>
         <item>2</item>
