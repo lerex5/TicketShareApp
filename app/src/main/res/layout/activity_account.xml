@@ -10,16 +10,17 @@
     tools:context=".accountActivity">
 
     <TextView
+        android:id="@+id/tealView"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:id="@+id/tealView"
-        android:background="#63B7AA"
-        />
+        android:background="#63B7AA" />
 
     <Button
         android:id="@+id/Tickets"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/tealView"
+        android:layout_marginTop="478dp"
         android:backgroundTint="#63B7AA"
         android:text="@string/your_tickets"
         android:textColor="#FFFFFF"
@@ -29,15 +30,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.92" />
-  
+
     <Button
         android:id="@+id/btnLogout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/Tickets"
+        android:layout_marginTop="5dp"
         android:backgroundTint="#63B7AA"
         android:text="@string/log_out"
-        android:layout_below="@+id/tealView"
-        android:layout_centerHorizontal="true"
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
