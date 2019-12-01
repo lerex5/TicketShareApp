@@ -81,7 +81,8 @@
         android:theme="@style/CustomSpinnerTheme"
         tools:ignore="Autofill,HardcodedText" />
 
-    <EditText
+
+    <AutoCompleteTextView
         android:id="@+id/etCity"
         android:layout_width="wrap_content"
         android:layout_height="37dp"

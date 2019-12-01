@@ -26,6 +26,7 @@
     <string name="c">Call</string>
     <string name="log_out">Log Out</string>
     <string name="your_tickets">Your Tickets</string>
+    <string name="your_account">Account</string>
     <string-array name="MovieList">
         <item>1</item>
         <item>2</item>
