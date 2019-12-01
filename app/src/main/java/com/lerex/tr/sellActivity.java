@@ -68,10 +68,6 @@ public class sellActivity extends Fragment{
         mAdapter = new SellerListView(selList);
         recyclerView.setAdapter(mAdapter);
 
-        //SwiperClass swipeController = new SwiperClass();
-        //ItemTouchHelper itemTouchhelper = new ItemTouchHelper(swipeController);
-        //itemTouchhelper.attachToRecyclerView(recyclerView);
-
         Add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
