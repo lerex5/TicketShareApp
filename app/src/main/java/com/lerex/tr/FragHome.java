@@ -26,7 +26,7 @@ import java.util.HashMap;
 public class FragHome extends AppCompatActivity {
 
     private ViewPager viewPager;
-    private String TAG = ViewManager.class.getSimpleName();
+    private String TAG = FragHome.class.getSimpleName();
     private ArrayList<String> movies=new ArrayList<>();
     private TinyDB tinydb;
 
