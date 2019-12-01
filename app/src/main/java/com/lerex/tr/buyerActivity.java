@@ -55,7 +55,7 @@ public class buyerActivity extends Fragment{
         search=view.findViewById(R.id.tvSearch);
         searchbtn=view.findViewById(R.id.btnSearch);
 
-        ArrayAdapter<String> searchAdapter = new ArrayAdapter<>(Objects.requireNonNull(getActivity()), android.R.layout.simple_dropdown_item_1line, tickets);
+        AutoCompList searchAdapter = new AutoCompList(Objects.requireNonNull(getActivity()), android.R.layout.simple_dropdown_item_1line, tickets);
         search.setAdapter(searchAdapter);
         recyclerView = view.findViewById(R.id.rvAvailable);
         recyclerView.setHasFixedSize(true);
@@ -70,7 +70,12 @@ public class buyerActivity extends Fragment{
         searchbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                GetAvailable();
+                if(search.getEditableText().toString().isEmpty()){
+                    Toast.makeText(getActivity(), "Enter A Movie Name",Toast.LENGTH_LONG).show();
+                }
+                else {
+                    GetAvailable();
+                }
             }
         });
 

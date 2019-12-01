@@ -1,8 +1,10 @@
 package com.lerex.tr;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -102,6 +104,7 @@ public class addTickets extends AppCompatActivity {
 
         TinyDB tinydb = new TinyDB(this);//Shared Preference To Get Localized Data
         ArrayList<String> tickets = tinydb.getListString("Movies");
+        ArrayList<String> Cities = tinydb.getListString("Cities");
 
         eDate = findViewById(R.id.etDate);
         eDate.setOnClickListener(new View.OnClickListener() {
@@ -162,14 +165,16 @@ public class addTickets extends AppCompatActivity {
             public void onClick(View v) {
 
                 addTicket();
-                //Intent intent=new Intent(addTickets.this,sellActivity.class);
-                //startActivity(intent);
             }
         });
 
-        AutoCompleteTextView act =findViewById(R.id.etRef1);
-        ArrayAdapter<String> adapter=new ArrayAdapter<>(addTickets.this,android.R.layout.simple_dropdown_item_1line, tickets);
+        final AutoCompleteTextView act =findViewById(R.id.etRef1);
+        final AutoCompList adapter=new AutoCompList(addTickets.this,android.R.layout.simple_dropdown_item_1line, tickets);
         act.setAdapter(adapter);
+
+        final AutoCompleteTextView CityDropDown =findViewById(R.id.etCity);
+        final AutoCompList CityAdapter=new AutoCompList(addTickets.this,android.R.layout.simple_dropdown_item_1line, Cities);
+        CityDropDown.setAdapter(CityAdapter);
     }
 
 }

@@ -28,6 +28,7 @@ public class FragHome extends AppCompatActivity {
     private ViewPager viewPager;
     private String TAG = FragHome.class.getSimpleName();
     private ArrayList<String> movies=new ArrayList<>();
+    private ArrayList<String> cities=new ArrayList<>();
     private TinyDB tinydb;
 
     @Override
@@ -42,6 +43,23 @@ public class FragHome extends AppCompatActivity {
         tinydb.deleteImage("Movies");
         new GetmovieResults().execute();
 
+        if(tinydb.getListString("Cities").isEmpty()) {
+            CitiesJSON CityList = new CitiesJSON(getResources(), R.raw.cities);
+            String JsonCityList = CityList.getJsonString();
+            try {
+                //JSONObject jsonObj = new JSONObject(JsonCityList);
+                JSONArray citiesJSON = new JSONArray(JsonCityList);
+                for (int i = 0; i < citiesJSON.length(); i++) {
+                    JSONObject c = citiesJSON.getJSONObject(i);
+                    String title = c.getString("City");
+                    cities.add(title);
+                }
+                tinydb.putListString("Cities", cities);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
         setContentView(R.layout.activity_frag_home);
         viewPager=findViewById(R.id.viewPager);
         PagerViewAdapter pagerViewAdapter=new PagerViewAdapter(getSupportFragmentManager(),PagerViewAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
@@ -50,7 +68,7 @@ public class FragHome extends AppCompatActivity {
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(nav);
 
-
+        viewPager.setCurrentItem(1);
     }
 
 
@@ -58,7 +76,7 @@ public class FragHome extends AppCompatActivity {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
 
-            int pos=0;
+            int pos=1;
 
             switch (menuItem.getItemId()){
                 case R.id.seller:

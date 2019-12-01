@@ -30,12 +30,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);//FullScreening The Application
-
-        setContentView(R.layout.activity_main);
-
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
         phoneNumber= findViewById(R.id.phoneNo);
@@ -44,17 +38,22 @@ public class MainActivity extends AppCompatActivity {
             finish();
             startActivity(new Intent(getApplicationContext(),
                     FragHome.class));
-            Toast.makeText(MainActivity.this, userid,
-                    Toast.LENGTH_SHORT).show();
         }
+        else {
+            requestWindowFeature(Window.FEATURE_NO_TITLE);
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                    WindowManager.LayoutParams.FLAG_FULLSCREEN);//FullScreening The Application
 
-        Button logIn=findViewById(R.id.login);
-        logIn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                verfiyNumber();
-            }
-        });
+            setContentView(R.layout.activity_main);
+
+            Button logIn = findViewById(R.id.login);
+            logIn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    verfiyNumber();
+                }
+            });
+        }
 
     }
 
