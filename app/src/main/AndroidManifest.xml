@@ -17,9 +17,9 @@
         android:theme="@style/AppTheme"
         android:windowSoftInputMode="stateVisible|adjustNothing">
 
-        <activity android:name=".FragHome"></activity>
+        <activity android:name=".FragHome" android:windowSoftInputMode="stateHidden"/>
         <activity android:name=".accountActivity" />
-        <activity android:name=".buyerActivity" />
+        <activity android:name=".buyerActivity" android:windowSoftInputMode="stateHidden" />
         <activity android:name=".addTickets" />
         <activity android:name=".SignupActivity" />
         <activity android:name=".sellActivity" />

@@ -2,6 +2,8 @@ package com.lerex.tr;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,7 +51,7 @@ public class SellerListView extends RecyclerView.Adapter<SellerListView.MyViewHo
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final MyViewHolder holder, final int position) {
         TicketDetails td = tdlist.get(position);
         holder.selMov.setText("Movie name : "+td.getName());
         holder.selDate.setText("Date : "+td.getDate());

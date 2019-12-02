@@ -51,9 +51,21 @@ android:layout_height="wrap_content">
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_alignEnd="@+id/selDate"
-        android:layout_marginTop="23dp"
+        android:layout_marginTop="5dp"
         android:layout_marginEnd="-142dp"
         android:background="@android:drawable/ic_menu_delete"
+        android:textColor="#19232D"
+        android:textSize="16sp" />
+
+    <Button
+        android:id="@+id/Sold"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignEnd="@+id/selDate"
+        android:layout_marginTop="45dp"
+        android:layout_marginEnd="-142dp"
+        android:background="@drawable/sold"
+        android:backgroundTint="#889B9A"
         android:textColor="#19232D"
         android:textSize="16sp" />
 </RelativeLayout>
