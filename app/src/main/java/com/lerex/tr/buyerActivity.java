@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -17,6 +18,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -32,6 +35,8 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Objects;
+
+import static androidx.core.content.ContextCompat.getSystemService;
 
 public class buyerActivity extends Fragment{
 
@@ -55,8 +60,9 @@ public class buyerActivity extends Fragment{
         search=view.findViewById(R.id.tvSearch);
         searchbtn=view.findViewById(R.id.btnSearch);
 
-        AutoCompList searchAdapter = new AutoCompList(Objects.requireNonNull(getActivity()), android.R.layout.simple_dropdown_item_1line, tickets);
+        final AutoCompList searchAdapter = new AutoCompList(Objects.requireNonNull(getActivity()), android.R.layout.simple_dropdown_item_1line, tickets);
         search.setAdapter(searchAdapter);
+
         recyclerView = view.findViewById(R.id.rvAvailable);
         recyclerView.setHasFixedSize(true);
 
@@ -67,9 +73,11 @@ public class buyerActivity extends Fragment{
         adapter = new BuyerListView(buylist);
         recyclerView.setAdapter(adapter);
 
+
         searchbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ((InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(search.getWindowToken(),0);
                 if(search.getEditableText().toString().isEmpty()){
                     Toast.makeText(getActivity(), "Enter A Movie Name",Toast.LENGTH_LONG).show();
                 }
