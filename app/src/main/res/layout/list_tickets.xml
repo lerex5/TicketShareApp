@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/parent"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/etborder2"
+        android:layout_marginTop="5dp">
+
+        <TextView
+            android:id="@+id/selMov"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:textColor="#fff"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/selDate"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/selMov"
+            android:layout_marginStart="20dp"
+            android:textColor="#fff"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/selCost"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/selDate"
+            android:layout_marginStart="20dp"
+            android:textColor="#fff"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/selNum"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/selCost"
+            android:layout_marginStart="20dp"
+            android:textColor="#fff"
+            android:textSize="16sp" />
+
+
+    </RelativeLayout>
+
+</RelativeLayout>
