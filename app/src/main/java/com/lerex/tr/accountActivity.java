@@ -37,6 +37,12 @@ public class accountActivity extends Fragment {
                 startActivity(new Intent(getActivity(), MainActivity.class));
             }
         });
+        YourTicketsBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), YourTickets.class));
+            }
+        });
         return view;
     }
 
