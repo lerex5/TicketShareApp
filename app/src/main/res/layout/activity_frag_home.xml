@@ -25,4 +25,6 @@
         app:menu="@menu/btm_nav_bar"
         tools:layout_editor_absoluteX="0dp" />
 
+
+
 </RelativeLayout>

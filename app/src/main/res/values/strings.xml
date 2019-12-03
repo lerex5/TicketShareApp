@@ -15,8 +15,8 @@
     <string name="enter_your_email_id">Enter your email id</string>
     <string name="type_your_password">Type your password</string>
     <string name="retype_password">Retype Password</string>
-    <string name="seller">Seller</string>
-    <string name="buyer">Buyer</string>
+    <string name="seller">Sell</string>
+    <string name="buyer">Buy</string>
     <string name="VMBar" />
     <string name="enter_mobile_number">Enter Mobile Number</string>
     <string name="enter_otp">Enter OTP</string>
