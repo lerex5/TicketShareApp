@@ -11,6 +11,9 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -33,6 +36,7 @@ public class StartActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);//FullScreening The Application
         setContentView(R.layout.activity_start);
+
 
         tinydb = new TinyDB(this);
         tinydb.deleteImage("Movies");
@@ -129,6 +133,13 @@ public class StartActivity extends AppCompatActivity {
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
 
+            FirebaseAuth mAuth = FirebaseAuth.getInstance();
+            FirebaseUser currentUser = mAuth.getCurrentUser();
+            if(currentUser !=null){
+                startActivity(new Intent(getApplicationContext(),
+                        FragHome.class));
+                finish();
+            }
             startActivity(new Intent(StartActivity.this,MainActivity.class));
             finish();
             //To Add Modifications For Drop Down List Box

@@ -18,8 +18,6 @@ import com.google.firebase.auth.FirebaseUser;
 public class MainActivity extends AppCompatActivity {
 
     private EditText phoneNumber;
-    private FirebaseAuth mAuth;
-    private FirebaseUser currentUser;
 
     protected void verifyNumber(){
         String ph=phoneNumber.getText().toString().trim();
@@ -33,9 +31,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
 
-        mAuth = FirebaseAuth.getInstance();
-        currentUser = mAuth.getCurrentUser();
-        if(currentUser!=null){
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if(currentUser !=null){
             String userid = currentUser.getUid();
             finish();
             startActivity(new Intent(getApplicationContext(),
