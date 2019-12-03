@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/sellerLa"
@@ -11,31 +11,51 @@
         android:id="@+id/tealView"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:background="#5BE2EA" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="554dp"
-        android:layout_below="@+id/tealView"
-        android:scrollbars="vertical" />
-
-    <Button
-        android:id="@+id/btnAdd"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
-        android:layout_below="@+id/recyclerView"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/add1"
-        android:backgroundTint="#5BE2EA"
-        android:textColor="#FFFFFF" />
+        android:background="#5BE2EA"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="115dp"
         android:layout_height="62dp"
         android:src="@drawable/ticklogowhite"
-        android:layout_centerHorizontal="true"/>
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</RelativeLayout>
+    <TextView
+        android:id="@+id/textCurrentLocation"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/recyclerView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tealView"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="554dp"
+        android:scrollbars="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textCurrentLocation" />
+
+    <Button
+        android:id="@+id/btnAdd"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/add1"
+        android:backgroundTint="#5BE2EA"
+        android:textColor="#FFFFFF"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
