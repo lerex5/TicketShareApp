@@ -37,6 +37,7 @@ public class addTickets extends AppCompatActivity {
     //private String TAG = addTickets.class.getSimpleName();
     //Auth
     private FirebaseAuth mAuth=FirebaseAuth.getInstance();
+    private TinyDB tinydb;
 
     //RealTime Database Connection
     private DatabaseReference mydb = FirebaseDatabase.getInstance().getReference("Tickets");
@@ -52,15 +53,14 @@ public class addTickets extends AppCompatActivity {
         String curuser = Objects.requireNonNull(mAuth.getCurrentUser()).getPhoneNumber();
         AutoCompleteTextView eName = findViewById(R.id.etRef1);
         EditText eCost = findViewById(R.id.etCost);
-        EditText eCity = findViewById(R.id.etCity);
+        String city=tinydb.getString("CurCity");//eCity.getText().toString();
         EditText eTheatre = findViewById(R.id.etTheatre);
 
-        TicketDetails newEvent = new TicketDetails(eName.getText().toString(),eCost.getText().toString(),date,num,curuser,eCity.getText().toString(),eTheatre.getText().toString(),key);
+        TicketDetails newEvent = new TicketDetails(eName.getText().toString(),eCost.getText().toString(),date,num,curuser,city,eTheatre.getText().toString(),key);
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         String cost=eCost.getText().toString();
         String theatre=eTheatre.getText().toString();
         String mov=eName.getText().toString();
-        String city=eCity.getText().toString();
 
         if((date == null) || (theatre.trim().equals("") || theatre.isEmpty()) || (cost.trim().equals("") || cost.isEmpty()) || (mov.isEmpty()) || (city.isEmpty() || city.trim().equals("")))
         {
@@ -74,7 +74,7 @@ public class addTickets extends AppCompatActivity {
                 if ((Objects.requireNonNull(curDate).before(strDate) || curDate.equals(strDate))) {
                     DatabaseReference moviedb = FirebaseDatabase.getInstance().getReference(eName.getText().toString() + "/" + "Tickets");
                     DatabaseReference userdb = FirebaseDatabase.getInstance().getReference(mAuth.getCurrentUser().getUid());
-                    DatabaseReference citydb = FirebaseDatabase.getInstance().getReference(eName.getText().toString() + "/" + eCity.getText().toString() + "/" + eTheatre.getText().toString());
+                    DatabaseReference citydb = FirebaseDatabase.getInstance().getReference(eName.getText().toString() + "/" + city + "/" + eTheatre.getText().toString());
 
                     mydb.child(Objects.requireNonNull(key)).setValue(newEvent);
                     moviedb.child(key).setValue("");
@@ -102,7 +102,7 @@ public class addTickets extends AppCompatActivity {
 
         setContentView(R.layout.activity_add_tickets);
 
-        TinyDB tinydb = new TinyDB(this);//Shared Preference To Get Localized Data
+        tinydb = new TinyDB(this);//Shared Preference To Get Localized Data
         ArrayList<String> tickets = tinydb.getListString("Movies");
         ArrayList<String> Cities = tinydb.getListString("Cities");
 
@@ -172,9 +172,6 @@ public class addTickets extends AppCompatActivity {
         final AutoCompList adapter=new AutoCompList(addTickets.this,android.R.layout.simple_dropdown_item_1line, tickets);
         act.setAdapter(adapter);
 
-        final AutoCompleteTextView CityDropDown =findViewById(R.id.etCity);
-        final AutoCompList CityAdapter=new AutoCompList(addTickets.this,android.R.layout.simple_dropdown_item_1line, Cities);
-        CityDropDown.setAdapter(CityAdapter);
     }
 
 }

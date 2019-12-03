@@ -36,6 +36,7 @@ public class SignupActivity extends AppCompatActivity{
     private PhoneAuthProvider.ForceResendingToken mResendToken;
     private PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks;
     private String VerificationId,phoneNumber;
+    private TinyDB tinydb;
 
     protected void SignIn(@NonNull PhoneAuthCredential credential){
         mAuth.signInWithCredential(credential)
@@ -52,7 +53,12 @@ public class SignupActivity extends AppCompatActivity{
                 });
 
         finish();
+        if(!tinydb.getString("CurCity").isEmpty()){
         startActivity(new Intent(SignupActivity.this,FragHome.class));
+        }
+        else {
+            startActivity(new Intent(SignupActivity.this,LocationActivity.class));
+        }
     }
 
     protected void registerUser() {
@@ -74,6 +80,7 @@ public class SignupActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        tinydb=new TinyDB(this);//Shared Preference To Get Localized Data
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);//FullScreening The Application

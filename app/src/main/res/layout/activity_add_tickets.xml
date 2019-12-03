@@ -82,31 +82,14 @@
         tools:ignore="Autofill,HardcodedText" />
 
 
-    <AutoCompleteTextView
-        android:id="@+id/etCity"
-        android:layout_width="wrap_content"
-        android:layout_height="37dp"
-        android:layout_below="@id/etNumber"
-        android:layout_alignStart="@id/etNumber"
-        android:layout_alignEnd="@id/etNumber"
-        android:layout_marginTop="40dp"
-        android:background="@drawable/etborder1"
-        android:ems="10"
-        android:hint="Select City"
-        android:inputType="textPostalAddress"
-        android:textAlignment="center"
-        android:textColor="#000"
-        android:textColorHint="#aab8c2"
-        android:textSize="14sp"
-        tools:ignore="Autofill,HardcodedText" />
 
     <EditText
         android:id="@+id/etTheatre"
         android:layout_width="wrap_content"
         android:layout_height="37dp"
-        android:layout_below="@id/etCity"
-        android:layout_alignStart="@id/etCity"
-        android:layout_alignEnd="@id/etCity"
+        android:layout_below="@id/etNumber"
+        android:layout_alignStart="@id/etNumber"
+        android:layout_alignEnd="@id/etNumber"
         android:layout_marginTop="40dp"
         android:background="@drawable/etborder1"
         android:ems="10"

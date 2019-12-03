@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -37,6 +38,9 @@ public class sellActivity extends Fragment{
     private RecyclerView.LayoutManager layoutManager;
     private ArrayList<TicketDetails> selList;
 
+    private TextView curCity;
+    private TinyDB tinydb;
+
     private Button Add;
     private String TAG = sellActivity.class.getSimpleName();
     //Auth
@@ -53,10 +57,12 @@ public class sellActivity extends Fragment{
 
 
         View view=inflater.inflate(R.layout.activity_sell,null);
+        tinydb = new TinyDB(getActivity());
         while (mAuth.getCurrentUser()== null){}
         ref= database.getReference(Objects.requireNonNull(mAuth.getCurrentUser()).getUid());
         Add=view.findViewById(R.id.btnAdd);
 
+        curCity=view.findViewById(R.id.textCurrentLocation);
         recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
 
@@ -77,12 +83,20 @@ public class sellActivity extends Fragment{
 
             }
         });
+
+        curCity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(),LocationActivity.class));
+            }
+        });
+
         return view;
     }
     @Override
     public void onResume() {
         super.onResume();
-
+        curCity.setText("Currently Selected City is "+tinydb.getString("CurCity")+"  Click Here To Change");
         View viewNavigation=getActivity().findViewById(R.id.bottomNavigationView);
         if(viewNavigation instanceof BottomNavigationView){
             BottomNavigationView bottomNavView=(BottomNavigationView)viewNavigation;

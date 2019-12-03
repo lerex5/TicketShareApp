@@ -135,12 +135,15 @@ public class StartActivity extends AppCompatActivity {
 
             FirebaseAuth mAuth = FirebaseAuth.getInstance();
             FirebaseUser currentUser = mAuth.getCurrentUser();
-            if(currentUser !=null){
-                startActivity(new Intent(getApplicationContext(),
-                        FragHome.class));
-                finish();
+            if(currentUser !=null&&!tinydb.getString("CurCity").isEmpty()){
+                startActivity(new Intent(getApplicationContext(),FragHome.class));
             }
-            startActivity(new Intent(StartActivity.this,MainActivity.class));
+            else if (currentUser !=null&&!tinydb.getString("CurCity").isEmpty()){
+                startActivity(new Intent(StartActivity.this, LocationActivity.class));
+            }
+            else {
+                startActivity(new Intent(StartActivity.this, MainActivity.class));
+            }
             finish();
             //To Add Modifications For Drop Down List Box
             // Toast.makeText(FragHome.this, "Json Data downloaded", Toast.LENGTH_LONG).show();
