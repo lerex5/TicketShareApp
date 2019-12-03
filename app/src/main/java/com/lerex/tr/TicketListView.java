@@ -22,32 +22,29 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.List;
 
 
-public class SellerListView extends RecyclerView.Adapter<SellerListView.MyViewHolder> {
+public class TicketListView extends RecyclerView.Adapter<TicketListView.MyViewHolder> {
 
     private List<TicketDetails> tdlist;
     final DatabaseReference tick = FirebaseDatabase.getInstance().getReference("Tickets");
     static class MyViewHolder extends RecyclerView.ViewHolder {
         TextView selMov,selDate,selCost,selNum;
-        Button callbtn,soldBtn;
         MyViewHolder(View v) {
             super(v);
             selMov=v.findViewById(R.id.selMov);
             selDate=v.findViewById(R.id.selDate);
             selCost=v.findViewById(R.id.selCost);
             selNum=v.findViewById(R.id.selNum);
-            callbtn=v.findViewById(R.id.Call);
-            soldBtn=v.findViewById(R.id.Sold);
         }
     }
 
-    SellerListView(List<TicketDetails> tdlist){
+    TicketListView(List<TicketDetails> tdlist){
         this.tdlist=tdlist;
     }
 
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_seller, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_tickets, parent, false);
         return new MyViewHolder(v);
     }
 
@@ -59,24 +56,6 @@ public class SellerListView extends RecyclerView.Adapter<SellerListView.MyViewHo
         holder.selCost.setText("Cost : "+td.getCost());
         String n="Number of tickets : "+ td.getNumberOfTickets();
         holder.selNum.setText(n);
-        holder.callbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                tick.child(tdlist.get(position).getFirebaseId()).child("transactionMode").setValue(3);
-                tdlist.remove(position);
-                notifyItemRemoved(position);
-                notifyItemRangeChanged(position, tdlist.size());
-            }
-        });
-        holder.soldBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                tick.child(tdlist.get(position).getFirebaseId()).child("transactionMode").setValue(2);
-                tdlist.remove(position);
-                notifyItemRemoved(position);
-                notifyItemRangeChanged(position, tdlist.size());
-            }
-        });
     }
 
     @Override

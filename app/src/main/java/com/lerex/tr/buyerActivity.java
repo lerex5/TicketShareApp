@@ -108,7 +108,7 @@ public class buyerActivity extends Fragment{
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             TicketDetails bList = dataSnapshot.getValue(TicketDetails.class);
-                            if (bList != null) {
+                            if (bList != null&&bList.getTransactionMode()==0) {
                                 buylist.add(bList);
                                 adapter.notifyDataSetChanged();
                             }

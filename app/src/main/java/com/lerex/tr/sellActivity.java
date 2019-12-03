@@ -59,6 +59,7 @@ public class sellActivity extends Fragment{
 
         recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
+
         // use a linear layout manager
         layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
@@ -102,8 +103,8 @@ public class sellActivity extends Fragment{
             public void onDataChange(DataSnapshot dataSnapshot) {
                 selList.clear();
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()){
-                    final String a=postSnapshot.getKey();
-                    final DatabaseReference keydb = tick.child(Objects.requireNonNull(a));
+                    final String unikey=postSnapshot.getKey();
+                    final DatabaseReference keydb = tick.child(Objects.requireNonNull(unikey));
                     keydb.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

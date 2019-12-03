@@ -21,19 +21,26 @@ import com.google.firebase.auth.FirebaseAuth;
 import java.util.Objects;
 
 public class accountActivity extends Fragment {
-    private Button LogOut;
+    private Button LogOut,YourTicketsBtn;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_account, null);
         LogOut = view.findViewById(R.id.btnLogout);
+        YourTicketsBtn = view.findViewById(R.id.Tickets);
         LogOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 FirebaseAuth.getInstance().signOut();
                 Objects.requireNonNull(getActivity()).finish();
                 startActivity(new Intent(getActivity(), MainActivity.class));
+            }
+        });
+        YourTicketsBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), YourTickets.class));
             }
         });
         return view;
