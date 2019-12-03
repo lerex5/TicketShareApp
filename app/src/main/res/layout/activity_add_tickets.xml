@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/common_google_signin_btn_text_dark_focused">
+    android:background="#FFFFFF">
 
     <TextView
         android:id="@+id/mypopup"
@@ -20,8 +20,8 @@
         android:completionThreshold="1"
         android:hint="Enter movie name"
         android:textAlignment="center"
-        android:textColor="#FFFFFF"
-        android:textColorHint="#FFFFFF"
+        android:textColor="#000000"
+        android:textColorHint="#aab8c2"
         android:textSize="14sp"
         tools:ignore="HardcodedText,LabelFor" />
 
@@ -41,8 +41,8 @@
         android:hint="Enter Event Date"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Button"
-        android:textColor="#FFFFFF"
-        android:textColorHint="#FFFFFF"
+        android:textColor="#000"
+        android:textColorHint="#aab8c2"
         android:textSize="14sp"
         tools:ignore="Autofill,HardcodedText" />
 
@@ -59,8 +59,8 @@
         android:hint="Enter the cost of one ticket"
         android:inputType="numberDecimal"
         android:textAlignment="center"
-        android:textColor="#FFFFFF"
-        android:textColorHint="#FFFFFF"
+        android:textColor="#000"
+        android:textColorHint="#aab8c2"
         android:textSize="14sp"
         tools:ignore="Autofill,HardcodedText" />
 
@@ -75,8 +75,8 @@
         android:background="@drawable/etborder1"
         android:ems="10"
         android:spinnerMode="dropdown"
-        android:textColor="#FFFFFF"
-        android:textColorHint="#FFFFFF"
+        android:textColor="#000"
+        android:textColorHint="#000"
         android:textSize="14sp"
         android:theme="@style/CustomSpinnerTheme"
         tools:ignore="Autofill,HardcodedText" />
@@ -95,8 +95,8 @@
         android:hint="Select City"
         android:inputType="textPostalAddress"
         android:textAlignment="center"
-        android:textColor="#FFFFFF"
-        android:textColorHint="#FFFFFF"
+        android:textColor="#000"
+        android:textColorHint="#aab8c2"
         android:textSize="14sp"
         tools:ignore="Autofill,HardcodedText" />
 
@@ -113,8 +113,8 @@
         android:hint="Select Theatre"
         android:inputType="textPostalAddress"
         android:textAlignment="center"
-        android:textColor="#FFFFFF"
-        android:textColorHint="#FFFFFF"
+        android:textColor="#000"
+        android:textColorHint="#aab8c2"
         android:textSize="14sp"
         tools:ignore="Autofill,HardcodedText" />
 
@@ -125,7 +125,7 @@
         android:layout_below="@id/etTheatre"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="100dp"
-        android:backgroundTint="#63B7AA"
+        android:backgroundTint="#5CE1E6"
         android:text="Add"
         android:textColor="#fff"
         tools:ignore="HardcodedText,UnknownId" />

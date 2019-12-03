@@ -16,7 +16,7 @@
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:textColor="#fff"
+            android:textColor="#000000"
             android:textSize="16sp" />
 
         <TextView
@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/tvDate"
             android:layout_marginStart="20dp"
-            android:textColor="#fff"
+            android:textColor="#000000"
             android:textSize="16sp" />
 
         <TextView
@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/tvCost"
             android:layout_marginStart="20dp"
-            android:textColor="#fff"
+            android:textColor="#000000"
             android:textSize="16sp" />
 
         <TextView
@@ -43,7 +43,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/tvNum"
             android:layout_marginStart="20dp"
-            android:textColor="#fff"
+            android:textColor="#000000"
             android:textSize="16sp" />
 
         <Button
@@ -54,7 +54,7 @@
             android:layout_marginTop="30dp"
             android:layout_marginEnd="-166dp"
             android:background="@android:drawable/sym_call_outgoing"
-            android:backgroundTint="#F7FFFFFF"
+            android:backgroundTint="#5BE2EA"
             android:textColor="#19232D"
             android:textSize="16sp" />
     </RelativeLayout>

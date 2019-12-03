@@ -16,7 +16,7 @@ android:layout_height="wrap_content">
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:textColor="#fff"
+        android:textColor="#000000"
         android:textSize="16sp" />
 
     <TextView
@@ -25,7 +25,7 @@ android:layout_height="wrap_content">
         android:layout_height="wrap_content"
         android:layout_below="@+id/selMov"
         android:layout_marginStart="20dp"
-        android:textColor="#fff"
+        android:textColor="#000000"
         android:textSize="16sp" />
 
     <TextView
@@ -34,7 +34,7 @@ android:layout_height="wrap_content">
         android:layout_height="wrap_content"
         android:layout_below="@+id/selDate"
         android:layout_marginStart="20dp"
-        android:textColor="#fff"
+        android:textColor="#000000"
         android:textSize="16sp" />
 
     <TextView
@@ -43,7 +43,7 @@ android:layout_height="wrap_content">
         android:layout_height="wrap_content"
         android:layout_below="@+id/selCost"
         android:layout_marginStart="20dp"
-        android:textColor="#fff"
+        android:textColor="#000000"
         android:textSize="16sp" />
 
     <Button
@@ -54,7 +54,7 @@ android:layout_height="wrap_content">
         android:layout_marginTop="5dp"
         android:layout_marginEnd="-142dp"
         android:background="@android:drawable/ic_menu_delete"
-        android:textColor="#19232D"
+        android:backgroundTint="#5BE2EA"
         android:textSize="16sp" />
 
     <Button
@@ -65,7 +65,7 @@ android:layout_height="wrap_content">
         android:layout_marginTop="45dp"
         android:layout_marginEnd="-142dp"
         android:background="@drawable/sold"
-        android:backgroundTint="#889B9A"
+        android:backgroundTint="#5BE2EA"
         android:textColor="#19232D"
         android:textSize="16sp" />
 </RelativeLayout>
