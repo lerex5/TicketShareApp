@@ -7,10 +7,10 @@
     tools:context=".buyerActivity">
 
     <RelativeLayout
+        android:id="@+id/relPar"
         android:layout_width="match_parent"
         android:layout_height="189dp"
-        android:id="@+id/relPar"
-        android:background="#64B7AA"
+        android:background="#5CE1E6"
         app:layout_constraintBottom_toTopOf="@+id/rvAvailable"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -24,16 +24,16 @@
             android:layout_height="50dp"
             android:layout_centerVertical="true"
             android:layout_marginStart="40dp"
-            android:backgroundTint="#030000"
+            android:backgroundTint="#ffffff"
             android:completionThreshold="1"
             android:hint="Select a movie"
-            android:textColor="#000000"
-            android:textColorHighlight="#000000"
-            android:textColorHint="#000000"
-            android:textColorLink="#000000"
-            android:textCursorDrawable="@android:color/background_dark"
+            android:textColor="#ffffff"
+            android:textColorHighlight="#ffffff"
+            android:textColorHint="#ffffff"
+            android:textColorLink="#ffffff"
+            android:textCursorDrawable="@android:color/background_light"
             tools:ignore="HardcodedText"
-            tools:textColorHint="#000000" />
+            tools:textColorHint="#ffffff" />
 
         <Button
             android:id="@+id/btnSearch"
@@ -43,7 +43,7 @@
             android:layout_marginStart="35dp"
             android:layout_toEndOf="@+id/tvSearch"
             android:background="@drawable/search"
-            android:backgroundTint="#000000" />
+            android:backgroundTint="#FFFFFF" />
 
     </RelativeLayout>
 

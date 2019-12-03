@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">tr</string>
+    <string name="app_name">Ticket Share</string>
     <string name="e_u">Enter Username </string>
     <string name="e_ph">Enter Mobile Number </string>
     <string name="e_ad">Enter Email Address </string>

@@ -13,39 +13,27 @@
         android:id="@+id/tealView"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:background="#63B7AA" />
+        android:background="#5CE1E6" />
 
     <Button
         android:id="@+id/Tickets"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tealView"
-        android:layout_marginTop="478dp"
-        android:backgroundTint="#63B7AA"
+        android:layout_above="@+id/btnLogout"
+        android:backgroundTint="#5CE1E6"
         android:text="@string/your_tickets"
-        android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="@id/btnLogout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.92" />
+        android:layout_marginBottom="10dp"
+        android:textColor="#fff" />
 
     <Button
         android:id="@+id/btnLogout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/Tickets"
-        android:layout_marginTop="5dp"
-        android:backgroundTint="#63B7AA"
+        android:layout_alignParentBottom="true"
+        android:background="#FFFFFF"
+        android:backgroundTint="#FFFFFF"
         android:text="@string/log_out"
-        android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.90" />
+        android:textColor="#000" />
 
 
 </RelativeLayout>

@@ -16,11 +16,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:windowSoftInputMode="stateVisible|adjustNothing">
-        <activity
-            android:name=".YourTickets"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/title_activity_your_tickets"
-            android:theme="@style/FullscreenTheme"></activity>
+        <activity android:name=".StartActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".FragHome"
             android:windowSoftInputMode="stateHidden" />
@@ -31,14 +33,7 @@
         <activity android:name=".addTickets" />
         <activity android:name=".SignupActivity" />
         <activity android:name=".sellActivity" />
-        <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".MainActivity"/>
     </application>
 
 </manifest>

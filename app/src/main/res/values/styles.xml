@@ -9,7 +9,7 @@
     </style>
 
     <style name="DialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
-        <item name="colorAccent">#63B7AA</item>
+        <item name="colorAccent">#5CE1E6</item>
     </style>
 
     <style name="CustomSpinnerTheme">

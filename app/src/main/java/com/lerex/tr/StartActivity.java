@@ -2,23 +2,14 @@ package com.lerex.tr;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
-import android.view.MenuItem;
-import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
-
-import androidx.annotation.NonNull;
-import androidx.viewpager.widget.ViewPager;
-
-
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -27,15 +18,11 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class FragHome extends AppCompatActivity {
+public class StartActivity extends AppCompatActivity {
 
-    private ViewPager viewPager;
-    private String TAG = FragHome.class.getSimpleName();
+    private String TAG = StartActivity.class.getSimpleName();
     private ArrayList<String> movies=new ArrayList<>();
-    private ArrayList<String> cities=new ArrayList<>();
     private TinyDB tinydb;
-    private TextView bg;
-    private BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,74 +31,19 @@ public class FragHome extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);//FullScreening The Application
+        setContentView(R.layout.activity_start);
 
         tinydb = new TinyDB(this);
         tinydb.deleteImage("Movies");
-        //new GetmovieResults().execute();
+        new GetmovieResults().execute();
 
-
-        if(tinydb.getListString("Cities").isEmpty()) {
-            CitiesJSON CityList = new CitiesJSON(getResources(), R.raw.cities);
-            String JsonCityList = CityList.getJsonString();
-            try {
-                //JSONObject jsonObj = new JSONObject(JsonCityList);
-                JSONArray citiesJSON = new JSONArray(JsonCityList);
-                for (int i = 0; i < citiesJSON.length(); i++) {
-                    JSONObject c = citiesJSON.getJSONObject(i);
-                    String title = c.getString("City");
-                    cities.add(title);
-                }
-                tinydb.putListString("Cities", cities);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-
-        setContentView(R.layout.activity_frag_home);
-
-
-        viewPager=findViewById(R.id.viewPager);
-        PagerViewAdapter pagerViewAdapter=new PagerViewAdapter(getSupportFragmentManager(),PagerViewAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
-        viewPager.setAdapter(pagerViewAdapter);
-
-        bottomNavigationView = findViewById(R.id.bottomNavigationView);
-        bottomNavigationView.setOnNavigationItemSelectedListener(nav);
-
-        viewPager.setCurrentItem(1);
     }
-
-
-    private BottomNavigationView.OnNavigationItemSelectedListener nav=new BottomNavigationView.OnNavigationItemSelectedListener() {
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-
-            int pos=1;
-
-            switch (menuItem.getItemId()){
-                case R.id.seller:
-                    pos=0;
-                    break;
-
-                case R.id.buyer:
-                    pos=1;
-                    break;
-
-                case R.id.acct:
-                    pos=2;
-                    break;
-
-            }
-            viewPager.setCurrentItem(pos);
-            return true;
-        }
-    };
-
     private class GetmovieResults extends AsyncTask<Void, Void, Void> {
         int pages = 1;
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-           // Toast.makeText(FragHome.this, "Json Data is downloading", Toast.LENGTH_LONG).show();
+            // Toast.makeText(FragHome.this, "Json Data is downloading", Toast.LENGTH_LONG).show();
         }
 
         @Override
@@ -171,17 +103,18 @@ public class FragHome extends AppCompatActivity {
                     });
                 }
             }
-                return null;
+            return null;
         }
 
         @Override
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
 
+            startActivity(new Intent(StartActivity.this,MainActivity.class));
+            finish();
             //To Add Modifications For Drop Down List Box
-           // Toast.makeText(FragHome.this, "Json Data downloaded", Toast.LENGTH_LONG).show();
+            // Toast.makeText(FragHome.this, "Json Data downloaded", Toast.LENGTH_LONG).show();
         }
 
     }
 }
-

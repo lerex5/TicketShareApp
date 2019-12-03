@@ -5,5 +5,5 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:padding="3dp"
-    android:textColor="#fff"
-    android:textColorHint="#FFFFFF" />
+    android:textColor="#000"
+    android:textColorHint="#000" />
