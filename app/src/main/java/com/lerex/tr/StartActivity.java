@@ -22,6 +22,7 @@ public class StartActivity extends AppCompatActivity {
 
     private String TAG = StartActivity.class.getSimpleName();
     private ArrayList<String> movies=new ArrayList<>();
+    private ArrayList<String> cities=new ArrayList<>();
     private TinyDB tinydb;
 
     @Override
@@ -35,6 +36,24 @@ public class StartActivity extends AppCompatActivity {
 
         tinydb = new TinyDB(this);
         tinydb.deleteImage("Movies");
+
+        if(tinydb.getListString("Cities").isEmpty()) {
+            CitiesJSON CityList = new CitiesJSON(getResources(), R.raw.cities);
+            String JsonCityList = CityList.getJsonString();
+            try {
+                //JSONObject jsonObj = new JSONObject(JsonCityList);
+                JSONArray citiesJSON = new JSONArray(JsonCityList);
+                for (int i = 0; i < citiesJSON.length(); i++) {
+                    JSONObject c = citiesJSON.getJSONObject(i);
+                    String title = c.getString("City");
+                    cities.add(title);
+                }
+                tinydb.putListString("Cities", cities);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
         new GetmovieResults().execute();
 
     }
