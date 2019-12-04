@@ -12,6 +12,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -32,7 +33,8 @@ public class SignupActivity extends AppCompatActivity{
     private FirebaseAuth mAuth;
     private FirebaseUser curuser;
     private EditText otp;
-    private Button verifybtn,resendbtn;
+    private Button verifybtn;
+    private TextView resendbtn;
     private PhoneAuthProvider.ForceResendingToken mResendToken;
     private PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks;
     private String VerificationId,phoneNumber;

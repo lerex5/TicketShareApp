@@ -108,7 +108,7 @@
         android:layout_below="@id/etTheatre"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="100dp"
-        android:backgroundTint="#5CE1E6"
+        android:backgroundTint="#AAB8C1"
         android:text="Add"
         android:textColor="#fff"
         tools:ignore="HardcodedText,UnknownId" />

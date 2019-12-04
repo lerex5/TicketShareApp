@@ -20,9 +20,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/btnLogout"
-        android:backgroundTint="#5CE1E6"
-        android:text="@string/your_tickets"
         android:layout_marginBottom="10dp"
+        android:backgroundTint="   #335F5F5F"
+        android:text="@string/your_tickets"
         android:textColor="#fff" />
 
     <Button

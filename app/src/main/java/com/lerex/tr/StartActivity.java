@@ -2,13 +2,19 @@ package com.lerex.tr;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.transition.Fade;
+import android.transition.TransitionInflater;
 import android.util.Log;
+import android.util.Pair;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -38,6 +44,7 @@ public class StartActivity extends AppCompatActivity {
         setContentView(R.layout.activity_start);
 
 
+
         tinydb = new TinyDB(this);
         tinydb.deleteImage("Movies");
 
@@ -61,6 +68,7 @@ public class StartActivity extends AppCompatActivity {
         new GetmovieResults().execute();
 
     }
+
     private class GetmovieResults extends AsyncTask<Void, Void, Void> {
         int pages = 1;
         @Override
@@ -137,12 +145,15 @@ public class StartActivity extends AppCompatActivity {
             FirebaseUser currentUser = mAuth.getCurrentUser();
             if(currentUser !=null&&!tinydb.getString("CurCity").isEmpty()){
                 startActivity(new Intent(getApplicationContext(),FragHome.class));
+                overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
             }
             else if (currentUser !=null&&!tinydb.getString("CurCity").isEmpty()){
                 startActivity(new Intent(StartActivity.this, LocationActivity.class));
+                overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
             }
             else {
                 startActivity(new Intent(StartActivity.this, MainActivity.class));
+                overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
             }
             finish();
             //To Add Modifications For Drop Down List Box

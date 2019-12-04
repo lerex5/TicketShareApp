@@ -7,90 +7,123 @@
     android:layout_height="match_parent"
     tools:context=".buyerActivity">
 
-    <RelativeLayout
-        android:id="@+id/relPar"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="0dp"
-        android:background="#5CE1E6"
-        app:layout_constraintBottom_toTopOf="@+id/textCurrentLocation"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <AutoCompleteTextView
-            android:id="@+id/tvSearch"
-            android:layout_width="250dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="100dp"
-            android:backgroundTint="#ffffff"
-            android:completionThreshold="1"
-            android:hint="Select a movie"
-            android:textColor="#ffffff"
-            android:textColorHighlight="#ffffff"
-            android:textColorHint="#ffffff"
-            android:textColorLink="#ffffff"
-            android:textCursorDrawable="@android:color/background_light"
-            tools:ignore="HardcodedText"
-            tools:textColorHint="#ffffff" />
-
-        <Button
-            android:id="@+id/btnSearch"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="35dp"
-            android:layout_marginTop="107dp"
-            android:layout_toEndOf="@+id/tvSearch"
-            android:background="@drawable/search"
-            android:backgroundTint="#FFFFFF" />
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp">
-
-            <ImageView
-                android:id="@+id/imageView2"
-                android:layout_width="80dp"
-                android:layout_height="62dp"
-                android:src="@drawable/ticklogowhite" />
-
-            <ImageView
-                android:id="@+id/imageView3"
-                android:layout_width="115dp"
-                android:layout_height="62dp"
-                android:layout_toEndOf="@+id/imageView2"
-                android:src="@drawable/ticksharetext" />
-
-        </RelativeLayout>
-
-    </RelativeLayout>
 
     <TextView
-        android:id="@+id/textCurrentLocation"
+        android:id="@+id/relPar"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:textColor="#000000"
-        android:textSize="16sp"
-        android:textAlignment="center"
+        android:layout_height="180dp"
+        android:background="#5CE1E6"
         app:layout_constraintBottom_toTopOf="@+id/rvAvailable"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/relPar"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
+
+    <AutoCompleteTextView
+        android:id="@+id/tvSearch"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:backgroundTint="#ffffff"
+        android:completionThreshold="1"
+        android:hint="Select a movie"
+        android:textColor="#ffffff"
+        android:textColorHighlight="#ffffff"
+        android:textColorHint="#ffffff"
+        android:textColorLink="#ffffff"
+        android:textCursorDrawable="@android:color/background_light"
+        app:layout_constraintBottom_toBottomOf="@+id/relPar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.21"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.77"
+        tools:ignore="HardcodedText"
+        tools:textColorHint="#ffffff" />
+
+    <Button
+        android:id="@+id/btnSearch"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="111dp"
+        android:layout_toEndOf="@+id/tvSearch"
+        android:background="@drawable/search"
+        android:backgroundTint="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.69"
+        app:layout_constraintStart_toEndOf="@+id/tvSearch"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="80dp"
+        android:layout_height="62dp"
+        android:src="@drawable/ticklogowhite"
+        android:transitionName="imgTrans"
+        app:layout_constraintBottom_toTopOf="@+id/tvSearch"
+        app:layout_constraintEnd_toStartOf="@+id/imageView3"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="115dp"
+        android:layout_height="62dp"
+        android:layout_toEndOf="@+id/imageView2"
+        android:src="@drawable/ticksharetext"
+        app:layout_constraintBottom_toTopOf="@+id/tvSearch"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.604"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/textCurrentLocation"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="3dp"
+        android:background="@drawable/location"
+        android:backgroundTint="#000000"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.011"
+        app:layout_constraintStart_toEndOf="@+id/currentCity"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.28" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvAvailable"
         android:layout_width="match_parent"
-        android:layout_height="490dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_height="499dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textCurrentLocation" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/currentCity"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:gravity="center"
+        android:textColor="#000000"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.099"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.275" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

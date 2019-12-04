@@ -14,8 +14,10 @@
         android:background="@drawable/bg13"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <EditText
         android:id="@+id/phoneNo"
@@ -74,7 +76,7 @@
         android:id="@+id/login"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
-        android:backgroundTint="#5CE1E7"
+        android:backgroundTint="#AAB8C1"
         android:text="@string/login"
         android:textColor="#ffffff"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -83,6 +85,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/phoneNo"
         app:layout_constraintVertical_bias="0.29" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="174dp"
+        android:layout_height="142dp"
+        android:background="#FFFFFF"
+        android:transitionName="imgTrans"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/bg"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="@+id/bg"
+        app:layout_constraintTop_toTopOf="@+id/bg"
+        app:layout_constraintVertical_bias="0.219"
+        app:srcCompat="@drawable/ticklogo" />
 
     <!-- <TextView
         android:id="@+id/signup"
