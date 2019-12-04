@@ -45,7 +45,7 @@ public class buyerActivity extends Fragment{
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     private RecyclerView recyclerView;
-    private TextView curCity;
+    private TextView chngCurCity,curCity;
     private Button searchbtn;
     private TinyDB tinydb;
 
@@ -55,12 +55,14 @@ public class buyerActivity extends Fragment{
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.activity_buyer, null);
+
         tinydb = new TinyDB(getActivity());//Shared Preference To Get Localized Data
         ArrayList<String> tickets = tinydb.getListString("Movies");
 
         search=view.findViewById(R.id.tvSearch);
         searchbtn=view.findViewById(R.id.btnSearch);
-        curCity=view.findViewById(R.id.textCurrentLocation);
+        chngCurCity=view.findViewById(R.id.textCurrentLocation);
+        curCity=view.findViewById(R.id.currentCity);
 
         final AutoCompList searchAdapter = new AutoCompList(Objects.requireNonNull(getActivity()), android.R.layout.simple_dropdown_item_1line, tickets);
         search.setAdapter(searchAdapter);
@@ -89,7 +91,7 @@ public class buyerActivity extends Fragment{
             }
         });
 
-        curCity.setOnClickListener(new View.OnClickListener() {
+        chngCurCity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getActivity(),LocationActivity.class));
@@ -146,7 +148,9 @@ public class buyerActivity extends Fragment{
     @Override
     public void onResume() {
         super.onResume();
-        curCity.setText("You Are Viewing Tickets For "+tinydb.getString("CurCity")+"  Click Here To Change");
+        //chngCurCity.setText("You Are Viewing Tickets For "+tinydb.getString("curCity")+"  Click Here To Change");
+        curCity.setText(tinydb.getString("CurCity").toUpperCase());
+
         View viewNavigation= Objects.requireNonNull(getActivity()).findViewById(R.id.bottomNavigationView);
         if(viewNavigation instanceof BottomNavigationView){
             BottomNavigationView bottomNavView=(BottomNavigationView)viewNavigation;

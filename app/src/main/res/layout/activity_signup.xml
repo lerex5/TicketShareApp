@@ -30,7 +30,7 @@
         android:id="@+id/Verify"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="#5CE1E6"
+        android:backgroundTint="#AAB8C1"
         android:text="@string/verify"
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -40,13 +40,13 @@
         app:layout_constraintTop_toBottomOf="@+id/etOtp"
         app:layout_constraintVertical_bias="0.154" />
 
-    <Button
+    <TextView
         android:id="@+id/ResendOtp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="#5CE1E6"
+        android:backgroundTint="#AAB8C1"
         android:text="@string/resend"
-        android:textColor="#FFFFFF"
+        android:textColor="#000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"

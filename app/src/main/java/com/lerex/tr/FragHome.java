@@ -32,7 +32,6 @@ public class FragHome extends AppCompatActivity {
     private ViewPager viewPager;
     private String TAG = FragHome.class.getSimpleName();
     private TextView bg;
-    private BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,13 +42,14 @@ public class FragHome extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);//FullScreening The Application
 
         setContentView(R.layout.activity_frag_home);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
 
         viewPager=findViewById(R.id.viewPager);
         PagerViewAdapter pagerViewAdapter=new PagerViewAdapter(getSupportFragmentManager(),PagerViewAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         viewPager.setAdapter(pagerViewAdapter);
 
-        bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(nav);
 
         viewPager.setCurrentItem(1);

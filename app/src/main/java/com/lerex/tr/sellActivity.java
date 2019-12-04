@@ -62,7 +62,7 @@ public class sellActivity extends Fragment{
         ref= database.getReference(Objects.requireNonNull(mAuth.getCurrentUser()).getUid());
         Add=view.findViewById(R.id.btnAdd);
 
-        curCity=view.findViewById(R.id.textCurrentLocation);
+        //curCity=view.findViewById(R.id.textCurrentLocation);
         recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
 
@@ -84,19 +84,19 @@ public class sellActivity extends Fragment{
             }
         });
 
-        curCity.setOnClickListener(new View.OnClickListener() {
+        /*curCity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getActivity(),LocationActivity.class));
             }
-        });
+        });*/
 
         return view;
     }
     @Override
     public void onResume() {
         super.onResume();
-        curCity.setText("Currently Selected City is "+tinydb.getString("CurCity")+"  Click Here To Change");
+        //curCity.setText("Currently Selected City is "+tinydb.getString("CurCity")+"  Click Here To Change");
         View viewNavigation=getActivity().findViewById(R.id.bottomNavigationView);
         if(viewNavigation instanceof BottomNavigationView){
             BottomNavigationView bottomNavView=(BottomNavigationView)viewNavigation;
@@ -151,3 +151,10 @@ public class sellActivity extends Fragment{
 
     }
 }
+/* <TextView
+        android:id="@+id/tealView"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="#5BE2EA"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />*/
