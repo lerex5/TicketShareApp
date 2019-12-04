@@ -91,7 +91,7 @@ public class buyerActivity extends Fragment{
             }
         });
 
-        chngCurCity.setOnClickListener(new View.OnClickListener() {
+        curCity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getActivity(),LocationActivity.class));
