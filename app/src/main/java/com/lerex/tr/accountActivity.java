@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,8 +24,8 @@ import java.util.Objects;
 
 public class accountActivity extends Fragment {
 
-    private Button LogOut,YourTicketsBtn;
-    private TextView chngCurCity,curCity;
+    private Button LogOut,chngLocation,YourTickets;
+    private TextView curCity;
     private TinyDB tinydb;
 
     @Nullable
@@ -33,11 +34,11 @@ public class accountActivity extends Fragment {
         View view = inflater.inflate(R.layout.activity_account, null);
 
         tinydb = new TinyDB(getActivity());
-        chngCurCity=view.findViewById(R.id.textCurrentLocation);
-        curCity=view.findViewById(R.id.currentCity);
+        chngLocation=view.findViewById(R.id.chngLocation);
+        curCity=view.findViewById(R.id.tvLocation);
 
         LogOut = view.findViewById(R.id.btnLogout);
-        YourTicketsBtn = view.findViewById(R.id.Tickets);
+        YourTickets = view.findViewById(R.id.viewTickets);
 
         LogOut.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,14 +49,14 @@ public class accountActivity extends Fragment {
             }
         });
 
-        YourTicketsBtn.setOnClickListener(new View.OnClickListener() {
+        YourTickets.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getActivity(), YourTickets.class));
             }
         });
 
-        curCity.setOnClickListener(new View.OnClickListener() {
+        chngLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getActivity(),LocationActivity.class));
@@ -67,8 +68,8 @@ public class accountActivity extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        curCity.setText(tinydb.getString("CurCity"));
 
-        curCity.setText(tinydb.getString("CurCity").toUpperCase());
 
         View view1=getActivity().findViewById(R.id.bottomNavigationView);
         if(view1 instanceof BottomNavigationView){

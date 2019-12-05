@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -51,11 +52,12 @@ public class BuyerListView extends RecyclerView.Adapter<BuyerListView.ViewHolder
 
         TicketDetails ticketDetails = list.get(position);
         final String phoneNum = ticketDetails.getSellerId();
-        holder.date.setText("Date : " + ticketDetails.getDate());
-        holder.cost.setText("Cost : " + ticketDetails.getCost());
+
+        holder.date.setText(Html.fromHtml("<b>"+"Date : "+"</b>") + ticketDetails.getDate());
+        holder.cost.setText(Html.fromHtml("<b>"+"Cost : "+"</b>") + ticketDetails.getCost());
         String a = String.valueOf(ticketDetails.getNumberOfTickets());
-        holder.num.setText("Number of Tickets : " + a);
-        holder.theatre.setText("Theatre : "+ ticketDetails.getTheatre());
+        holder.num.setText(Html.fromHtml("<b>"+"Number Of Tickets : "+"</b>") + a);
+        holder.theatre.setText(Html.fromHtml("<b>"+"Theatre : "+"</b>")+ ticketDetails.getTheatre());
         holder.callbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

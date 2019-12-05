@@ -147,7 +147,7 @@ public class StartActivity extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(),FragHome.class));
                 overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
             }
-            else if (currentUser !=null&&!tinydb.getString("CurCity").isEmpty()){
+            else if (currentUser !=null&&tinydb.getString("CurCity").isEmpty()){
                 startActivity(new Intent(StartActivity.this, LocationActivity.class));
                 overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
             }
