@@ -39,6 +39,8 @@ public class accountActivity extends Fragment {
         LogOut = view.findViewById(R.id.btnLogout);
         YourTicketsBtn = view.findViewById(R.id.Tickets);
 
+        curCity.setText(tinydb.getString("CurCity").toUpperCase());
+
         LogOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
