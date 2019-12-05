@@ -54,13 +54,13 @@ public class SignupActivity extends AppCompatActivity{
                     }
                 });
 
-        finish();
         if(!tinydb.getString("CurCity").isEmpty()){
         startActivity(new Intent(SignupActivity.this,FragHome.class));
         }
         else {
             startActivity(new Intent(SignupActivity.this,LocationActivity.class));
         }
+        finish();
     }
 
     protected void registerUser() {
@@ -118,7 +118,7 @@ public class SignupActivity extends AppCompatActivity{
             @Override
             public void onVerificationCompleted(@NonNull PhoneAuthCredential credential) {
                 SignIn(credential);
-                Toast.makeText(SignupActivity.this, "Verification Success", Toast.LENGTH_SHORT).show();
+                finish();
             }
 
             @Override
