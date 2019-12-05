@@ -1,9 +1,13 @@
 package com.lerex.tr;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
+import android.app.Activity;
 import android.app.ActivityOptions;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -43,7 +47,13 @@ public class StartActivity extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);//FullScreening The Application
         setContentView(R.layout.activity_start);
 
-
+        //Permissions
+        if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+        }
+        if (checkSelfPermission(Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions((Activity)this,new String[]{Manifest.permission.CALL_PHONE}, 1);
+        }
 
         tinydb = new TinyDB(this);
         tinydb.deleteImage("Movies");
@@ -147,7 +157,7 @@ public class StartActivity extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(),FragHome.class));
                 overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
             }
-            else if (currentUser !=null&&!tinydb.getString("CurCity").isEmpty()){
+            else if (currentUser !=null&&tinydb.getString("CurCity").isEmpty()){
                 startActivity(new Intent(StartActivity.this, LocationActivity.class));
                 overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
             }

@@ -1,9 +1,19 @@
 package com.lerex.tr;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
+import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -15,8 +25,11 @@ import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 
 public class LocationActivity extends AppCompatActivity {
@@ -39,8 +52,8 @@ public class LocationActivity extends AppCompatActivity {
         tinydb = new TinyDB(this);//Shared Preference To Get Localized Data
 
         final ArrayList<String> Cities = tinydb.getListString("Cities");
-        final AutoCompleteTextView CityDropDown =findViewById(R.id.etCity);
-        final AutoCompList CityAdapter=new AutoCompList(LocationActivity.this,android.R.layout.simple_dropdown_item_1line, Cities);
+        final AutoCompleteTextView CityDropDown = findViewById(R.id.etCity);
+        final AutoCompList CityAdapter = new AutoCompList(LocationActivity.this, android.R.layout.simple_dropdown_item_1line, Cities);
         CityDropDown.setAdapter(CityAdapter);
 
         final Button continueBtn = findViewById(R.id.btnLocation);
@@ -48,27 +61,28 @@ public class LocationActivity extends AppCompatActivity {
         continueBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(CityDropDown.getEditableText().toString().isEmpty()){
+                if (CityDropDown.getEditableText().toString().isEmpty()) {
                     Toast.makeText(v.getContext(), "Select A City",
                             Toast.LENGTH_SHORT).show();
-                }
-                else if (!Cities.contains(CityDropDown.getEditableText().toString())){
+                } else if (!Cities.contains(CityDropDown.getEditableText().toString())) {
                     Toast.makeText(v.getContext(), "Enter A Valid City Name",
                             Toast.LENGTH_SHORT).show();
-                }
-                else {
-                    tinydb.putString("CurCity",CityDropDown.getEditableText().toString());
+                } else {
+                    tinydb.putString("CurCity", CityDropDown.getEditableText().toString());
                     startActivity(new Intent(LocationActivity.this, FragHome.class));
                 }
             }
         });
 
     }
+
     @Override
     public void onResume() {
         super.onResume();
+
         if(!tinydb.getString("CurCity").isEmpty()){
             curCity.setText("You Are Currently In "+tinydb.getString("CurCity"));
         }
     }
+
 }
