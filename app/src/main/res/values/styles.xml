@@ -10,7 +10,8 @@
     </style>
 
     <style name="DialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
-        <item name="colorAccent">#5CE1E6</item>
+        <item name="colorAccent">#AAB8C1</item>
+        <item name="android:fontFamily">@font/montserrat</item>
     </style>
 
     <style name="CustomSpinnerTheme">

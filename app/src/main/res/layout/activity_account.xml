@@ -6,6 +6,7 @@
     android:id="@+id/acctLa"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#335F5F5F"
     tools:context=".accountActivity">
 
     <TextView
@@ -26,48 +27,6 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/currentCity"
-        android:layout_width="wrap_content"
-        android:layout_height="35dp"
-        android:layout_marginBottom="250dp"
-        android:gravity="center"
-        android:textColor="#000000"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/Tickets"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintHorizontal_bias="0.099"
-        app:layout_constraintTop_toBottomOf="@+id/tealView"
-        app:layout_constraintVertical_bias="0.275" />
-
-
-    <TextView
-        android:id="@+id/textCurrentLocation"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_marginBottom="250dp"
-        android:background="@drawable/location"
-        android:backgroundTint="#000000"
-        android:gravity="center"
-        app:layout_constraintBottom_toTopOf="@+id/Tickets"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/currentCity"
-        app:layout_constraintHorizontal_bias="0.011"
-        app:layout_constraintTop_toBottomOf="@+id/tealView"
-        app:layout_constraintVertical_bias="0.28" />
-
-    <Button
-        android:id="@+id/Tickets"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="9dp"
-        android:backgroundTint="   #335F5F5F"
-        android:text="@string/your_tickets"
-        android:textColor="#fff"
-        app:layout_constraintBottom_toTopOf="@+id/btnLogout"
-        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/btnLogout"
@@ -75,11 +34,104 @@
         android:layout_height="wrap_content"
         android:background="#FFFFFF"
         android:backgroundTint="#FFFFFF"
+        android:fontFamily="sans-serif-condensed-medium"
         android:text="@string/log_out"
         android:textColor="#000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/tv"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="#fff"
+        android:textColor="#000000"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.108"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <TextView
+        android:id="@+id/tv1"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="1dp"
+        android:background="#fff"
+        android:gravity="center_vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv"
+        app:layout_constraintVertical_bias="0.0"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montserrat"
+        android:text="@string/your_location"
+        android:textColor="#555454"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv"
+        app:layout_constraintEnd_toEndOf="@+id/tv"
+        app:layout_constraintHorizontal_bias="0.09"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv"
+        app:layout_constraintVertical_bias="0.138" />
+
+    <TextView
+        android:id="@+id/tvLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/montserrat"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv"
+        app:layout_constraintEnd_toEndOf="@+id/tv"
+        app:layout_constraintHorizontal_bias="0.09"
+        app:layout_constraintStart_toStartOf="@+id/tv"
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/viewTickets"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:background="@drawable/arrow"
+        android:backgroundTint="#646464"
+        app:layout_constraintBottom_toBottomOf="@+id/tv1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.97"
+        app:layout_constraintStart_toStartOf="@+id/tv1"
+        app:layout_constraintTop_toBottomOf="@+id/tv" />
+
+    <Button
+        android:id="@+id/chngLocation"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:background="@drawable/arrow"
+        android:backgroundTint="#646464"
+        app:layout_constraintBottom_toBottomOf="@+id/tv"
+        app:layout_constraintEnd_toEndOf="@+id/tv"
+        app:layout_constraintHorizontal_bias="0.97"
+        app:layout_constraintStart_toStartOf="@+id/tv"
+        app:layout_constraintTop_toTopOf="@+id/tv" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montserrat"
+        android:text="@string/your_tickets"
+        android:textColor="#555454"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.086"
+        app:layout_constraintStart_toStartOf="@+id/tv1"
+        app:layout_constraintTop_toBottomOf="@+id/tv"
+        app:layout_constraintVertical_bias="0.526" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

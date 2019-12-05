@@ -149,7 +149,7 @@ public class buyerActivity extends Fragment{
     public void onResume() {
         super.onResume();
         //chngCurCity.setText("You Are Viewing Tickets For "+tinydb.getString("curCity")+"  Click Here To Change");
-        curCity.setText(tinydb.getString("CurCity").toUpperCase());
+        curCity.setText(tinydb.getString("CurCity"));
 
         View viewNavigation= Objects.requireNonNull(getActivity()).findViewById(R.id.bottomNavigationView);
         if(viewNavigation instanceof BottomNavigationView){
