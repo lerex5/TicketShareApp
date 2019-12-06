@@ -32,13 +32,10 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 
-public class LocationActivity extends AppCompatActivity implements LocationListener {
+public class LocationActivity extends AppCompatActivity{
 
     private TextView curCity;
     private TinyDB tinydb;
-    private String CityName;
-    protected LocationManager locationManager;
-    protected LocationListener locationListener;
     protected Context context;
 
     @Override
@@ -50,8 +47,6 @@ public class LocationActivity extends AppCompatActivity implements LocationListe
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);//FullScreening The Application
 
         setContentView(R.layout.activity_location);
-
-        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
         curCity = findViewById(R.id.textCurrentLocation);
         tinydb = new TinyDB(this);//Shared Preference To Get Localized Data
@@ -85,55 +80,10 @@ public class LocationActivity extends AppCompatActivity implements LocationListe
     public void onResume() {
         super.onResume();
 
-        if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
-        }
-        else {
-            try {
-                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, this);
-            }
-            catch (Exception e){
-                e.printStackTrace();
-            }
-        }
 
         if(!tinydb.getString("CurCity").isEmpty()){
             curCity.setText("You Are Currently In "+tinydb.getString("CurCity"));
         }
     }
 
-    @Override
-    public void onLocationChanged(Location location) {
-
-        Geocoder gcd = new Geocoder(getBaseContext(), Locale.getDefault());
-        List<Address> addresses;
-        try {
-            addresses = gcd.getFromLocation(location.getLatitude(),
-                    location.getLongitude(), 1);
-            if (addresses.size() > 0) {
-                CityName = addresses.get(0).getLocality();
-                Toast.makeText(this,CityName,
-                        Toast.LENGTH_SHORT).show();
-
-            }
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Override
-    public void onStatusChanged(String provider, int status, Bundle extras) {
-
-    }
-
-    @Override
-    public void onProviderEnabled(String provider) {
-
-    }
-
-    @Override
-    public void onProviderDisabled(String provider) {
-
-    }
 }
