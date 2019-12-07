@@ -24,7 +24,7 @@
         android:scrollbars="vertical" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/TicLogo"
         android:layout_width="115dp"
         android:layout_height="62dp"
         android:src="@drawable/ticklogowhite"

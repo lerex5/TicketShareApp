@@ -2,18 +2,13 @@ package com.lerex.tr;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Html;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -35,9 +30,9 @@ public class accountActivity extends Fragment {
 
         tinydb = new TinyDB(getActivity());
         chngLocation=view.findViewById(R.id.chngLocation);
-        curCity=view.findViewById(R.id.tvLocation);
-        LocSpace=view.findViewById(R.id.tv);
-        TicSpace=view.findViewById(R.id.tv1);
+        curCity=view.findViewById(R.id.curCity);
+        LocSpace=view.findViewById(R.id.LocSpace);
+        TicSpace=view.findViewById(R.id.TicSpace);
 
         LogOut = view.findViewById(R.id.btnLogout);
         YourTickets = view.findViewById(R.id.viewTickets);

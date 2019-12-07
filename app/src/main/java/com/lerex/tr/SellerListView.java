@@ -55,9 +55,9 @@ public class SellerListView extends RecyclerView.Adapter<SellerListView.MyViewHo
     public void onBindViewHolder(@NonNull final MyViewHolder holder, final int position) {
         TicketDetails td = tdlist.get(position);
         holder.selMov.setText(td.getName());
-        holder.selDate.setText("Date : "+td.getDate());
-        holder.selCost.setText("Cost : "+td.getCost());
-        String n="Number of tickets : "+ td.getNumberOfTickets();
+        holder.selDate.setText(" "+td.getDate());
+        holder.selCost.setText(" "+td.getCost());
+        String n=" "+ td.getNumberOfTickets();
         holder.selNum.setText(n);
         holder.callbtn.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -19,7 +19,7 @@
 
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/TicLogo"
         android:layout_width="115dp"
         android:layout_height="62dp"
         android:src="@drawable/ticklogowhite"
@@ -34,7 +34,7 @@
         android:layout_height="wrap_content"
         android:background="#FFFFFF"
         android:backgroundTint="#FFFFFF"
-        android:fontFamily="sans-serif-condensed-medium"
+        android:fontFamily="@font/montserrat"
         android:text="@string/log_out"
         android:textColor="#000"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -42,7 +42,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/tv"
+        android:id="@+id/LocSpace"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:background="#fff"
@@ -54,44 +54,44 @@
         tools:layout_editor_absoluteX="0dp" />
 
     <TextView
-        android:id="@+id/tv1"
+        android:id="@+id/TicSpace"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginTop="1dp"
         android:background="#fff"
         android:gravity="center_vertical"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv"
+        app:layout_constraintTop_toBottomOf="@+id/LocSpace"
         app:layout_constraintVertical_bias="0.0"
         tools:layout_editor_absoluteX="0dp" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/tvMyLoc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/montserrat"
         android:text="@string/your_location"
         android:textColor="#555454"
         android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/tv"
-        app:layout_constraintEnd_toEndOf="@+id/tv"
+        app:layout_constraintBottom_toBottomOf="@+id/LocSpace"
+        app:layout_constraintEnd_toEndOf="@+id/LocSpace"
         app:layout_constraintHorizontal_bias="0.09"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tv"
+        app:layout_constraintTop_toTopOf="@+id/LocSpace"
         app:layout_constraintVertical_bias="0.138" />
 
     <TextView
-        android:id="@+id/tvLocation"
+        android:id="@+id/curCity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:fontFamily="@font/montserrat"
         android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="@+id/tv"
-        app:layout_constraintEnd_toEndOf="@+id/tv"
+        app:layout_constraintBottom_toBottomOf="@+id/LocSpace"
+        app:layout_constraintEnd_toEndOf="@+id/LocSpace"
         app:layout_constraintHorizontal_bias="0.09"
-        app:layout_constraintStart_toStartOf="@+id/tv"
-        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:layout_constraintStart_toStartOf="@+id/LocSpace"
+        app:layout_constraintTop_toBottomOf="@+id/tvMyLoc"
         app:layout_constraintVertical_bias="0.0" />
 
     <Button
@@ -100,11 +100,11 @@
         android:layout_height="20dp"
         android:background="@drawable/arrow"
         android:backgroundTint="#646464"
-        app:layout_constraintBottom_toBottomOf="@+id/tv1"
+        app:layout_constraintBottom_toBottomOf="@+id/TicSpace"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.97"
-        app:layout_constraintStart_toStartOf="@+id/tv1"
-        app:layout_constraintTop_toBottomOf="@+id/tv" />
+        app:layout_constraintStart_toStartOf="@+id/TicSpace"
+        app:layout_constraintTop_toBottomOf="@+id/LocSpace" />
 
     <Button
         android:id="@+id/chngLocation"
@@ -112,25 +112,25 @@
         android:layout_height="20dp"
         android:background="@drawable/arrow"
         android:backgroundTint="#646464"
-        app:layout_constraintBottom_toBottomOf="@+id/tv"
-        app:layout_constraintEnd_toEndOf="@+id/tv"
+        app:layout_constraintBottom_toBottomOf="@+id/LocSpace"
+        app:layout_constraintEnd_toEndOf="@+id/LocSpace"
         app:layout_constraintHorizontal_bias="0.97"
-        app:layout_constraintStart_toStartOf="@+id/tv"
-        app:layout_constraintTop_toTopOf="@+id/tv" />
+        app:layout_constraintStart_toStartOf="@+id/LocSpace"
+        app:layout_constraintTop_toTopOf="@+id/LocSpace" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/tvMyTic"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/montserrat"
         android:text="@string/your_tickets"
         android:textColor="#555454"
         android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/tv1"
+        app:layout_constraintBottom_toBottomOf="@+id/TicSpace"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.086"
-        app:layout_constraintStart_toStartOf="@+id/tv1"
-        app:layout_constraintTop_toBottomOf="@+id/tv"
+        app:layout_constraintStart_toStartOf="@+id/TicSpace"
+        app:layout_constraintTop_toBottomOf="@+id/LocSpace"
         app:layout_constraintVertical_bias="0.526" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
