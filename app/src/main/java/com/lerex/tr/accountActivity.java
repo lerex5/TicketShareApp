@@ -25,7 +25,7 @@ import java.util.Objects;
 public class accountActivity extends Fragment {
 
     private Button LogOut,chngLocation,YourTickets;
-    private TextView curCity;
+    private TextView curCity,LocSpace,TicSpace;
     private TinyDB tinydb;
 
     @Nullable
@@ -36,11 +36,13 @@ public class accountActivity extends Fragment {
         tinydb = new TinyDB(getActivity());
         chngLocation=view.findViewById(R.id.chngLocation);
         curCity=view.findViewById(R.id.tvLocation);
+        LocSpace=view.findViewById(R.id.tv);
+        TicSpace=view.findViewById(R.id.tv1);
 
         LogOut = view.findViewById(R.id.btnLogout);
         YourTickets = view.findViewById(R.id.viewTickets);
 
-        curCity.setText(tinydb.getString("CurCity").toUpperCase());
+        curCity.setText(tinydb.getString("CurCity"));
 
         LogOut.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,6 +53,12 @@ public class accountActivity extends Fragment {
             }
         });
 
+        TicSpace.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), YourTickets.class));
+            }
+        });
         YourTickets.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -58,12 +66,20 @@ public class accountActivity extends Fragment {
             }
         });
 
+        LocSpace.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(),LocationActivity.class));
+            }
+        });
         chngLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getActivity(),LocationActivity.class));
             }
         });
+
+
         return view;
     }
 
