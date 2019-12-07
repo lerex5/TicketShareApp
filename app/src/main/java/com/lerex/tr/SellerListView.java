@@ -54,7 +54,7 @@ public class SellerListView extends RecyclerView.Adapter<SellerListView.MyViewHo
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder holder, final int position) {
         TicketDetails td = tdlist.get(position);
-        holder.selMov.setText("Movie name : "+td.getName());
+        holder.selMov.setText(td.getName());
         holder.selDate.setText("Date : "+td.getDate());
         holder.selCost.setText("Cost : "+td.getCost());
         String n="Number of tickets : "+ td.getNumberOfTickets();
