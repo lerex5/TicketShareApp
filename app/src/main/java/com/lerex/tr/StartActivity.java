@@ -1,33 +1,19 @@
 package com.lerex.tr;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-
-import android.Manifest;
-import android.app.Activity;
-import android.app.ActivityOptions;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.CountDownTimer;
-import android.transition.Fade;
-import android.transition.TransitionInflater;
 import android.util.Log;
-import android.util.Pair;
-import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -36,6 +22,7 @@ public class StartActivity extends AppCompatActivity {
     private String TAG = StartActivity.class.getSimpleName();
     private ArrayList<String> movies=new ArrayList<>();
     private ArrayList<String> cities=new ArrayList<>();
+    private TextView ErrorText;
     private TinyDB tinydb;
 
     @Override
@@ -47,16 +34,10 @@ public class StartActivity extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);//FullScreening The Application
         setContentView(R.layout.activity_start);
 
-        //Permissions
-        if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
-        }
-        if (checkSelfPermission(Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions((Activity)this,new String[]{Manifest.permission.CALL_PHONE}, 1);
-        }
-
         tinydb = new TinyDB(this);
         tinydb.deleteImage("Movies");
+
+        ErrorText=findViewById(R.id.ErrorHandler);
 
         if(tinydb.getListString("Cities").isEmpty()) {
             CitiesJSON CityList = new CitiesJSON(getResources(), R.raw.cities);
@@ -72,6 +53,7 @@ public class StartActivity extends AppCompatActivity {
                 tinydb.putListString("Cities", cities);
             } catch (JSONException e) {
                 e.printStackTrace();
+                ErrorText.setText(e.getMessage());
             }
         }
 
@@ -84,7 +66,6 @@ public class StartActivity extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            // Toast.makeText(FragHome.this, "Json Data is downloading", Toast.LENGTH_LONG).show();
         }
 
         @Override
@@ -93,10 +74,9 @@ public class StartActivity extends AppCompatActivity {
             // Making a request to url and getting response
 
             for(int j=1;j<=pages;j++) {
+
                 String url = "https://api.themoviedb.org/3/movie/now_playing?region=IN&page=" + j + "&language=en-US&api_key=cdb6543f56d4ae849f71ed220c46a080";
                 String jsonStr = sh.makeServiceCall(url);
-
-                Log.e(TAG, "Response from url: " + j);
 
                 if (jsonStr != null) {
                     try {
@@ -127,6 +107,8 @@ public class StartActivity extends AppCompatActivity {
                             public void run() {
                                 Toast.makeText(getApplicationContext(), "Json parsing error: " + e.getMessage(),
                                         Toast.LENGTH_LONG).show();
+                                ErrorText.setText("Json parsing error: " + e.getMessage());
+
                             }
                         });
 
@@ -140,6 +122,7 @@ public class StartActivity extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(),
                                     "Couldn't get json from server. Check LogCat for possible errors!",
                                     Toast.LENGTH_LONG).show();
+                            ErrorText.setText("Check Your Connection,\nCouldn't retrieve data from servers");
                         }
                     });
                 }
@@ -151,23 +134,21 @@ public class StartActivity extends AppCompatActivity {
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
 
-            FirebaseAuth mAuth = FirebaseAuth.getInstance();
-            FirebaseUser currentUser = mAuth.getCurrentUser();
-            if(currentUser !=null&&!tinydb.getString("CurCity").isEmpty()){
-                startActivity(new Intent(getApplicationContext(),FragHome.class));
-                overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
+            if(ErrorText.getText().toString().isEmpty()) {
+                FirebaseAuth mAuth = FirebaseAuth.getInstance();
+                FirebaseUser currentUser = mAuth.getCurrentUser();
+                if (currentUser != null && !tinydb.getString("CurCity").isEmpty()) {
+                    startActivity(new Intent(getApplicationContext(), FragHome.class));
+                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                } else if (currentUser != null && tinydb.getString("CurCity").isEmpty()) {
+                    startActivity(new Intent(StartActivity.this, LocationActivity.class));
+                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                } else {
+                    startActivity(new Intent(StartActivity.this, MainActivity.class));
+                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                }
+                finish();
             }
-            else if (currentUser !=null&&tinydb.getString("CurCity").isEmpty()){
-                startActivity(new Intent(StartActivity.this, LocationActivity.class));
-                overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
-            }
-            else {
-                startActivity(new Intent(StartActivity.this, MainActivity.class));
-                overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
-            }
-            finish();
-            //To Add Modifications For Drop Down List Box
-            // Toast.makeText(FragHome.this, "Json Data downloaded", Toast.LENGTH_LONG).show();
         }
 
     }
