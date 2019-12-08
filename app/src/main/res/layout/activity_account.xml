@@ -28,6 +28,47 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
+    <TextView
+        android:id="@+id/UserAccount"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:background="#fff"
+        android:textColor="#000000"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.175"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <TextView
+        android:id="@+id/AccountTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montserrat"
+        android:text="My Account"
+        android:textColor="#555454"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/UserAccount"
+        app:layout_constraintEnd_toEndOf="@+id/UserAccount"
+        app:layout_constraintHorizontal_bias="0.09"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/UserAccount"
+        app:layout_constraintVertical_bias="0.1" />
+
+    <TextView
+        android:id="@+id/UserId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/montserrat"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/UserAccount"
+        app:layout_constraintEnd_toEndOf="@+id/UserAccount"
+        app:layout_constraintHorizontal_bias="0.09"
+        app:layout_constraintStart_toStartOf="@+id/UserAccount"
+        app:layout_constraintTop_toBottomOf="@+id/AccountTitle"
+        app:layout_constraintVertical_bias="0.0" />
+
     <Button
         android:id="@+id/btnLogout"
         android:layout_width="match_parent"
@@ -45,12 +86,13 @@
         android:id="@+id/LocSpace"
         android:layout_width="match_parent"
         android:layout_height="60dp"
+        android:layout_marginTop="34dp"
         android:background="#fff"
         android:textColor="#000000"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.108"
+        app:layout_constraintTop_toBottomOf="@+id/UserAccount"
+        app:layout_constraintVertical_bias="0.0"
         tools:layout_editor_absoluteX="0dp" />
 
     <TextView

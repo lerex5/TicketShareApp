@@ -14,13 +14,14 @@ import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.Objects;
 
 public class accountActivity extends Fragment {
 
     private Button LogOut,chngLocation,YourTickets;
-    private TextView curCity,LocSpace,TicSpace;
+    private TextView curCity,LocSpace,TicSpace,UserId;
     private TinyDB tinydb;
 
     @Nullable
@@ -28,16 +29,21 @@ public class accountActivity extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_account, null);
 
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+
         tinydb = new TinyDB(getActivity());
         chngLocation=view.findViewById(R.id.chngLocation);
         curCity=view.findViewById(R.id.curCity);
         LocSpace=view.findViewById(R.id.LocSpace);
         TicSpace=view.findViewById(R.id.TicSpace);
+        UserId=view.findViewById(R.id.UserId);
 
         LogOut = view.findViewById(R.id.btnLogout);
         YourTickets = view.findViewById(R.id.viewTickets);
 
         curCity.setText(tinydb.getString("CurCity"));
+        UserId.setText(currentUser.getPhoneNumber());
 
         LogOut.setOnClickListener(new View.OnClickListener() {
             @Override
