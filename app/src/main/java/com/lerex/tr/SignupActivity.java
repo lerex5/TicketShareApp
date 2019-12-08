@@ -47,20 +47,19 @@ public class SignupActivity extends AppCompatActivity{
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             curuser = Objects.requireNonNull(task.getResult()).getUser();
+                            if(!tinydb.getString("CurCity").isEmpty()){
+                                startActivity(new Intent(SignupActivity.this,FragHome.class));
+                            }
+                            else {
+                                startActivity(new Intent(SignupActivity.this,LocationActivity.class));
+                            }
+                            finish();
                         }
                         else if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
                             Toast.makeText(SignupActivity.this, "Verification Failed, Invalid credentials", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
-
-        if(!tinydb.getString("CurCity").isEmpty()){
-        startActivity(new Intent(SignupActivity.this,FragHome.class));
-        }
-        else {
-            startActivity(new Intent(SignupActivity.this,LocationActivity.class));
-        }
-        finish();
     }
 
     protected void registerUser() {
