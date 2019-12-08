@@ -23,7 +23,7 @@
         android:layout_width="133dp"
         android:layout_height="71dp"
         android:layout_marginTop="28dp"
-        android:layout_toEndOf="@+id/imageView2"
+        android:layout_toEndOf="@+id/TicLogo"
         android:src="@drawable/ticksharetext"
         app:layout_constraintBottom_toBottomOf="@+id/tealView"
         app:layout_constraintEnd_toEndOf="parent"
@@ -33,7 +33,7 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/TicLogo"
         android:layout_width="95dp"
         android:layout_height="74dp"
         android:layout_marginTop="28dp"
