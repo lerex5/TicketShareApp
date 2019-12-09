@@ -140,11 +140,16 @@
         app:layout_constraintVertical_bias="0.0"
         tools:ignore="Autofill,HardcodedText" />
 
-    <TimePicker
+    <TextView
         android:id="@+id/eventtime"
         android:layout_width="219dp"
         android:layout_height="37dp"
         android:layout_marginBottom="3dp"
+        android:text="@string/intial_time"
+        android:onClick="onClickTimePicker"
+        android:gravity="center"
+        android:textAlignment="center"
+        android:background="@drawable/etborder1"
         app:layout_constraintBottom_toTopOf="@+id/btnAdd1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

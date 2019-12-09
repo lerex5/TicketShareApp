@@ -2,10 +2,14 @@ package com.lerex.tr;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 
 import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.text.format.DateFormat;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -17,6 +21,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -43,10 +48,10 @@ public class addTickets extends AppCompatActivity {
     private DatabaseReference mydb = FirebaseDatabase.getInstance().getReference("Tickets");
     //private DatabaseReference availabledb = FirebaseDatabase.getInstance().getReference("Available");
     private DatePickerDialog.OnDateSetListener dateSetListener;
+    private TimePickerDialog.OnTimeSetListener timesetlistener;
     private String date=null;
-    private TextView eDate;
+    private TextView eDate,eTime;
     private int num;
-
 
     protected void addTicket(){
         String key = mydb.push().getKey();
@@ -107,6 +112,28 @@ public class addTickets extends AppCompatActivity {
         ArrayList<String> Cities = tinydb.getListString("Cities");
 
         eDate = findViewById(R.id.etDate);
+        eTime= findViewById(R.id.eventtime);
+
+        eTime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Calendar c = Calendar.getInstance();
+                int hour = c.get(Calendar.HOUR_OF_DAY);
+                int minute = c.get(Calendar.MINUTE);
+
+                // Create a new instance of TimePickerDialog and return it
+                TimePickerDialog timePickerDialog = new TimePickerDialog(addTickets.this, timesetlistener, hour, minute,false);
+                timePickerDialog.show();
+            }
+        });
+
+        timesetlistener = new TimePickerDialog.OnTimeSetListener(){
+            @Override
+            public void onTimeSet(TimePicker view,int hour,int minute){
+                eTime.setText(Integer.toString(hour)+":"+Integer.toString(minute));
+            }
+
+        };
         eDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
