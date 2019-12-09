@@ -6,6 +6,23 @@
     android:layout_height="match_parent"
     android:background="#FFFFFF">
 
+    <TextView
+        android:id="@+id/tealView"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="#5BE2EA"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/TicLogo"
+        android:layout_width="115dp"
+        android:layout_height="62dp"
+        android:src="@drawable/ticklogowhite"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
     <AutoCompleteTextView
         android:id="@+id/etRef1"
@@ -32,7 +49,6 @@
         android:id="@+id/etDate"
         android:layout_width="219dp"
         android:layout_height="37dp"
-        android:textCursorDrawable="@null"
         android:layout_below="@id/etRef1"
         android:layout_alignStart="@id/etRef1"
         android:layout_alignEnd="@id/etRef1"
@@ -45,6 +61,7 @@
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Button"
         android:textColorHint="#aab8c2"
+        android:textCursorDrawable="@null"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -53,11 +70,11 @@
         app:layout_constraintVertical_bias="0.0"
         tools:ignore="Autofill,HardcodedText" />
 
+
     <EditText
         android:id="@+id/etCost"
         android:layout_width="219dp"
         android:layout_height="37dp"
-        android:textCursorDrawable="@null"
         android:layout_below="@id/etDate"
         android:layout_alignStart="@id/etDate"
         android:layout_alignEnd="@id/etDate"
@@ -69,6 +86,7 @@
         android:inputType="numberDecimal"
         android:textAlignment="center"
         android:textColorHint="#aab8c2"
+        android:textCursorDrawable="@null"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -121,6 +139,16 @@
         app:layout_constraintTop_toBottomOf="@+id/etNumber"
         app:layout_constraintVertical_bias="0.0"
         tools:ignore="Autofill,HardcodedText" />
+
+    <TimePicker
+        android:id="@+id/eventtime"
+        android:layout_width="219dp"
+        android:layout_height="37dp"
+        android:layout_marginBottom="3dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnAdd1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etTheatre" />
 
     <Button
         android:id="@+id/btnAdd1"
