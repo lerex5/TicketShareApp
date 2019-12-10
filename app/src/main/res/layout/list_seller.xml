@@ -36,7 +36,7 @@
 
         <TextView
             android:id="@+id/selDate"
-            android:layout_width="200dp"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/selMov"
             android:layout_marginStart="30dp"
@@ -49,6 +49,24 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/selMov"
             app:layout_constraintVertical_bias="0.0" />
+
+
+        <TextView
+            android:id="@+id/selTime"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/selMov"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="2dp"
+            android:fontFamily="@font/montserrat"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toEndOf="@+id/selDate"
+            app:layout_constraintTop_toBottomOf="@+id/selMov"
+            app:layout_constraintVertical_bias="0.0" />
+
 
         <TextView
             android:id="@+id/selCost"

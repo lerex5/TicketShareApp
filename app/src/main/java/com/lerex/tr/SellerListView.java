@@ -27,7 +27,7 @@ public class SellerListView extends RecyclerView.Adapter<SellerListView.MyViewHo
     private List<TicketDetails> tdlist;
     final DatabaseReference tick = FirebaseDatabase.getInstance().getReference("Tickets");
     static class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView selMov,selDate,selCost,selNum;
+        TextView selMov,selDate,selCost,selNum,eventTime;
         Button callbtn,soldBtn;
         MyViewHolder(View v) {
             super(v);
@@ -35,6 +35,7 @@ public class SellerListView extends RecyclerView.Adapter<SellerListView.MyViewHo
             selDate=v.findViewById(R.id.selDate);
             selCost=v.findViewById(R.id.selCost);
             selNum=v.findViewById(R.id.selNum);
+            eventTime=v.findViewById(R.id.selTime);
             callbtn=v.findViewById(R.id.Call);
             soldBtn=v.findViewById(R.id.Sold);
         }
@@ -57,6 +58,7 @@ public class SellerListView extends RecyclerView.Adapter<SellerListView.MyViewHo
         holder.selMov.setText(td.getName());
         holder.selDate.setText(" "+td.getDate());
         holder.selCost.setText(" "+td.getCost());
+        holder.eventTime.setText(td.getTime());
         String n=" "+ td.getNumberOfTickets();
         holder.selNum.setText(n);
         holder.callbtn.setOnClickListener(new View.OnClickListener() {

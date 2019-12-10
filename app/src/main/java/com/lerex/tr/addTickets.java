@@ -49,7 +49,7 @@ public class addTickets extends AppCompatActivity {
     //private DatabaseReference availabledb = FirebaseDatabase.getInstance().getReference("Available");
     private DatePickerDialog.OnDateSetListener dateSetListener;
     private TimePickerDialog.OnTimeSetListener timesetlistener;
-    private String date=null;
+    private String date=null,time = null;
     private TextView eDate,eTime;
     private int num;
 
@@ -61,7 +61,7 @@ public class addTickets extends AppCompatActivity {
         String city=tinydb.getString("CurCity");//eCity.getText().toString();
         EditText eTheatre = findViewById(R.id.etTheatre);
 
-        TicketDetails newEvent = new TicketDetails(eName.getText().toString(),eCost.getText().toString(),date,num,curuser,city,eTheatre.getText().toString(),key);
+        TicketDetails newEvent = new TicketDetails(eName.getText().toString(),eCost.getText().toString(),date,num,curuser,city,eTheatre.getText().toString(),key,time);
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         String cost=eCost.getText().toString();
         String theatre=eTheatre.getText().toString();
@@ -109,7 +109,6 @@ public class addTickets extends AppCompatActivity {
 
         tinydb = new TinyDB(this);//Shared Preference To Get Localized Data
         ArrayList<String> tickets = tinydb.getListString("Movies");
-        ArrayList<String> Cities = tinydb.getListString("Cities");
 
         eDate = findViewById(R.id.etDate);
         eTime= findViewById(R.id.eventtime);
@@ -139,7 +138,8 @@ public class addTickets extends AppCompatActivity {
                 if(minute<10){
                     minutes="0"+minutes;
                 }
-                eTime.setText(hours+":"+minutes);
+                time=hours+":"+minutes;
+                eTime.setText(time);
             }
 
         };

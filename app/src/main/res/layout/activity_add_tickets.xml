@@ -146,7 +146,6 @@
         android:layout_height="37dp"
         android:layout_marginBottom="3dp"
         android:text="@string/intial_time"
-        android:onClick="onClickTimePicker"
         android:gravity="center"
         android:textAlignment="center"
         android:background="@drawable/etborder1"
