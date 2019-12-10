@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="1dp"
         android:layout_marginBottom="10dp"
-        android:background="@drawable/etborder2"
+        android:background="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,12 +22,14 @@
             android:id="@+id/selMov"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
             android:fontFamily="@font/montserrat"
             android:textAllCaps="true"
             android:textSize="15sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.099"
+            app:layout_constraintHorizontal_bias="0.1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.022" />
@@ -37,6 +39,7 @@
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/selMov"
+            android:layout_marginStart="30dp"
             android:layout_marginTop="2dp"
             android:fontFamily="@font/montserrat"
             android:textSize="14sp"
@@ -52,6 +55,7 @@
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/selDate"
+            android:layout_marginStart="30dp"
             android:layout_marginTop="2dp"
             android:fontFamily="@font/montserrat"
             android:textSize="14sp"
@@ -67,6 +71,7 @@
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/selCost"
+            android:layout_marginStart="30dp"
             android:layout_marginTop="2dp"
             android:fontFamily="@font/montserrat"
             android:textSize="14sp"
@@ -108,6 +113,54 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.659" />
 
+        <Button
+            android:id="@+id/movieLogo"
+            android:layout_width="19dp"
+            android:layout_height="19dp"
+            android:background="@drawable/movie"
+            android:backgroundTint="#FF8F00"
+            app:layout_constraintBottom_toBottomOf="@+id/selMov"
+            app:layout_constraintEnd_toStartOf="@+id/selMov"
+            app:layout_constraintHorizontal_bias="0.57"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/selMov"
+            app:layout_constraintVertical_bias="0.72" />
+
+        <Button
+            android:id="@+id/CostLogo"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:background="@drawable/rupee"
+            android:backgroundTint="#FC2F89"
+            app:layout_constraintBottom_toBottomOf="@+id/selCost"
+            app:layout_constraintEnd_toStartOf="@+id/selDate"
+            app:layout_constraintHorizontal_bias="0.57"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/selCost" />
+
+        <Button
+            android:id="@+id/CalLogo"
+            android:layout_width="19dp"
+            android:layout_height="20dp"
+            android:background="@drawable/calender1"
+            app:layout_constraintBottom_toBottomOf="@+id/selDate"
+            app:layout_constraintEnd_toStartOf="@+id/selCost"
+            app:layout_constraintHorizontal_bias="0.625"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/selDate" />
+
+        <Button
+            android:id="@+id/NumLogo"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:background="@drawable/num_of_ppl"
+            android:backgroundTint="#2700FF"
+            app:layout_constraintBottom_toBottomOf="@+id/selNum"
+            app:layout_constraintEnd_toStartOf="@+id/selCost"
+            app:layout_constraintHorizontal_bias="0.55"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/selNum"
+            app:layout_constraintVertical_bias="0.26" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
