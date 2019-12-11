@@ -84,7 +84,7 @@ public class YourTickets extends AppCompatActivity {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             TicketDetails sList=dataSnapshot.getValue(TicketDetails.class);
-                            if(sList != null&&(sList.getTransactionMode()==2||sList.getTransactionMode()==3)) {
+                            if(sList != null&&sList.getTransactionMode()!=0) {
                                 TicList.add(sList);
                                 mAdapter.notifyDataSetChanged();
                             }
