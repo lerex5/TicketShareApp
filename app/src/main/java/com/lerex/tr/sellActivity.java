@@ -29,7 +29,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Objects;
 public class sellActivity extends Fragment{
 
@@ -125,8 +128,21 @@ public class sellActivity extends Fragment{
                             TicketDetails sList=dataSnapshot.getValue(TicketDetails.class);
                             if(sList != null&&sList.getTransactionMode()==0
                             ) {
-                                selList.add(sList);
-                                mAdapter.notifyDataSetChanged();
+                                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                                Date strDate = null,curDate = null;
+                                try {
+                                    strDate = sdf.parse(sList.getDate());
+                                    curDate = sdf.parse(sdf.format(new Date()));
+                                } catch (ParseException e) {
+                                    e.printStackTrace();
+                                }
+                                if (curDate.after(strDate)) {
+                                    tick.child(sList.getFirebaseId()).child("transactionMode").setValue(4);//Inactive Tickets;
+                                }
+                                else {
+                                    selList.add(sList);
+                                    mAdapter.notifyDataSetChanged();
+                                }
                             }
                         }
                         @Override

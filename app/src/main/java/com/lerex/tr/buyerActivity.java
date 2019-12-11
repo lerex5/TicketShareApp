@@ -27,19 +27,24 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Objects;
 
 import static androidx.core.content.ContextCompat.getSystemService;
 
 public class buyerActivity extends Fragment{
 
+    private FirebaseAuth mAuth=FirebaseAuth.getInstance();
     protected AutoCompleteTextView search;
     private ArrayList<TicketDetails> buylist;
     private RecyclerView.Adapter adapter;
@@ -119,9 +124,22 @@ public class buyerActivity extends Fragment{
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             TicketDetails bList = dataSnapshot.getValue(TicketDetails.class);
-                            if (bList != null&&bList.getTransactionMode()==0&&bList.getCity().equals(tinydb.getString("CurCity"))) {
-                                buylist.add(bList);
-                                adapter.notifyDataSetChanged();
+                            if (bList != null&&bList.getTransactionMode()==0&&bList.getCity().equals(tinydb.getString("CurCity"))&&!bList.getSellerId().equals(mAuth.getCurrentUser().getPhoneNumber())) {
+                                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                                Date strDate = null,curDate = null;
+                                try {
+                                    strDate = sdf.parse(bList.getDate());
+                                    curDate = sdf.parse(sdf.format(new Date()));
+                                } catch (ParseException e) {
+                                    e.printStackTrace();
+                                }
+                                if (curDate.after(strDate)) {
+                                    tick.child(bList.getFirebaseId()).child("transactionMode").setValue(4);//Inactive Tickets;
+                                }
+                                else {
+                                    buylist.add(bList);
+                                    adapter.notifyDataSetChanged();
+                                }
                             }
                         }
                         @Override
