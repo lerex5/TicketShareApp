@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
@@ -108,6 +109,7 @@ public class StartActivity extends AppCompatActivity {
                                 Toast.makeText(getApplicationContext(), "Json parsing error: " + e.getMessage(),
                                         Toast.LENGTH_LONG).show();
                                 ErrorText.setText("Json parsing error: " + e.getMessage());
+                                findViewById(R.id.loadingPanel).setVisibility(View.GONE);
 
                             }
                         });
@@ -123,6 +125,7 @@ public class StartActivity extends AppCompatActivity {
                                     "Couldn't get json from server. Check LogCat for possible errors!",
                                     Toast.LENGTH_LONG).show();
                             ErrorText.setText("Check Your Connection,\nCouldn't retrieve data from servers");
+                            findViewById(R.id.loadingPanel).setVisibility(View.GONE);
                         }
                     });
                 }
@@ -137,6 +140,7 @@ public class StartActivity extends AppCompatActivity {
             if(ErrorText.getText().toString().isEmpty()) {
                 FirebaseAuth mAuth = FirebaseAuth.getInstance();
                 FirebaseUser currentUser = mAuth.getCurrentUser();
+                findViewById(R.id.loadingPanel).setVisibility(View.GONE);
                 if (currentUser != null && !tinydb.getString("CurCity").isEmpty()) {
                     startActivity(new Intent(getApplicationContext(), FragHome.class));
                     overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
