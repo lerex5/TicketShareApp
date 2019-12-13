@@ -129,16 +129,20 @@ public class addTickets extends AppCompatActivity {
         timesetlistener = new TimePickerDialog.OnTimeSetListener(){
             @Override
             public void onTimeSet(TimePicker view,int hour,int minute){
-                String hours,minutes;
+                String hours,minutes,session=" AM";
                 hours=Integer.toString(hour);
                 minutes=Integer.toString(minute);
+                if(hour>12){
+                    hour=hour-11;
+                    session=" PM";
+                }
                 if(hour<10){
                     hours="0"+hours;
                 }
                 if(minute<10){
                     minutes="0"+minutes;
                 }
-                time=hours+":"+minutes;
+                time=hours+":"+minutes+session;
                 eTime.setText(time);
             }
 
