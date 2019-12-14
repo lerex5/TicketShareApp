@@ -65,7 +65,7 @@ public class sellActivity extends Fragment{
         ref= database.getReference(Objects.requireNonNull(mAuth.getCurrentUser()).getUid());
         Add=view.findViewById(R.id.btnAdd);
 
-        //curCity=view.findViewById(R.id.textCurrentLocation);
+        curCity=view.findViewById(R.id.textCurrentLocation);
         recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
 
@@ -87,12 +87,12 @@ public class sellActivity extends Fragment{
             }
         });
 
-        /*curCity.setOnClickListener(new View.OnClickListener() {
+        curCity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getActivity(),LocationActivity.class));
             }
-        });*/
+        });
 
         return view;
     }
