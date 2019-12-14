@@ -39,7 +39,8 @@ import java.util.Objects;
 public class addTickets extends AppCompatActivity {
 
 
-    //private String TAG = addTickets.class.getSimpleName();
+    //To Add FireSotre
+
     //Auth
     private FirebaseAuth mAuth=FirebaseAuth.getInstance();
     private TinyDB tinydb;
