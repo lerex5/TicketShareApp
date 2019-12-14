@@ -4,6 +4,103 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CostDetails">
+    android:background="#fff"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tealView"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="#5BE2EA"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/TicLogo"
+        android:layout_width="143dp"
+        android:layout_height="61dp"
+        android:src="@drawable/ticklogowhite"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/Venue"
+        android:layout_width="250dp"
+        android:layout_height="37dp"
+        android:ems="10"
+        android:focusableInTouchMode="true"
+        android:fontFamily="@font/montserrat"
+        android:hint="@string/enter_the_venue"
+        android:inputType="textPersonName"
+        android:textAlignment="center"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tealView"
+        app:layout_constraintVertical_bias="0.26" />
+
+    <EditText
+        android:id="@+id/Cost"
+        android:layout_width="250dp"
+        android:layout_height="37dp"
+        android:ems="10"
+        android:fontFamily="@font/montserrat"
+        android:hint="@string/enter_the_cost"
+        android:inputType="textPersonName"
+        android:textAlignment="center"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/btnNext1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Venue"
+        app:layout_constraintVertical_bias="0.19"
+        tools:ignore="TextFields" />
+
+    <Spinner
+        android:id="@+id/Number"
+        android:layout_width="250dp"
+        android:layout_height="37dp"
+        android:ems="10"
+        android:fontFamily="@font/montserrat"
+        android:inputType="number"
+        android:spinnerMode="dropdown"
+        android:textAlignment="center"
+        android:textSize="14sp"
+        android:theme="@style/CustomSpinnerTheme"
+        app:layout_constraintBottom_toTopOf="@+id/btnNext1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Cost"
+        app:layout_constraintVertical_bias="0.26" />
+
+    <Button
+        android:id="@+id/btnNext1"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@drawable/next"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.842"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.85"  />
+
+    <Button
+        android:id="@+id/btnBack1"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@drawable/back"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.173"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.85" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

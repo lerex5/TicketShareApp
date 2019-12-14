@@ -42,4 +42,18 @@
     <string name="your_location">My Location</string>
     <string name="select_your_city">Select Your City</string>
     <string name="intial_time">00:00</string>
+    <string name="enter_event_movie_name">Enter event/movie name</string>
+    <string name="dd_mm_yyyy">DD/MM/YYYY</string>
+    <string name="_00_00">00:00</string>
+    <string name="event">Event</string>
+    <string name="movie">Movie</string>
+    <string name="enter_the_venue">Enter the venue</string>
+    <string name="enter_the_cost">Enter the cost</string>
+    <string name="name">name</string>
+    <string name="select">select</string>
+    <string name="date">date</string>
+    <string name="time">time</string>
+    <string name="venue">venue</string>
+    <string name="cost">cost</string>
+    <string name="num">num</string>
 </resources>
