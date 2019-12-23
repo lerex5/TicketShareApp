@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tealView"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="#5BE2EA"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/TicLogo"
+        android:layout_width="115dp"
+        android:layout_height="62dp"
+        android:src="@drawable/ticklogowhite"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <RadioGroup
+        android:id="@+id/select"
+        android:layout_width="wrap_content"
+        android:layout_height="80dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tealView"
+        app:layout_constraintVertical_bias="0.23000002">
+
+        <RadioButton
+            android:id="@+id/rbEvent"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:buttonTint="#9E9E9E"
+            android:fontFamily="@font/montserrat"
+            android:scaleX="0.75"
+            android:scaleY="0.75"
+            android:text="@string/event"
+            android:textColor="#9E9E9E"
+            android:textSize="18sp"
+            app:layout_constraintVertical_bias="0.00999999" />
+
+        <RadioButton
+            android:id="@+id/rbMovie"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:buttonTint="#9E9E9E"
+            android:fontFamily="@font/montserrat"
+            android:scaleX="0.75"
+            android:scaleY="0.75"
+            android:text="@string/movie"
+            android:textColor="#9E9E9E"
+            android:textSize="18sp"
+            app:layout_constraintVertical_bias="0.32" />
+    </RadioGroup>
+
+    <AutoCompleteTextView
+        android:id="@+id/Name"
+        android:layout_width="250dp"
+        android:layout_height="37dp"
+        android:background="@drawable/etborder1"
+        android:completionThreshold="1"
+        android:ems="10"
+        android:focusableInTouchMode="true"
+        android:fontFamily="@font/montserrat"
+        android:hint="@string/enter_event_movie_name"
+        android:inputType="textPersonName"
+        android:textAlignment="center"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnNext"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@drawable/next"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.842"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.85" />
+
+    <TextView
+        android:id="@+id/Date"
+        android:layout_width="129dp"
+        android:layout_height="37dp"
+        android:layout_marginTop="60dp"
+        android:background="@drawable/etborder1"
+        android:ems="10"
+        android:focusableInTouchMode="false"
+        android:fontFamily="@font/montserrat"
+        android:gravity="center"
+        android:hint="@string/dd_mm_yyyy"
+        android:textAlignment="center"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/btnNext"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.283"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Name"
+        app:layout_constraintVertical_bias="0.0"
+        tools:ignore="TextFields" />
+
+    <TextView
+        android:id="@+id/Time"
+        android:layout_width="60dp"
+        android:layout_height="37dp"
+        android:layout_marginTop="60dp"
+        android:background="@drawable/etborder1"
+        android:ems="10"
+        android:focusableInTouchMode="false"
+        android:fontFamily="@font/montserrat"
+        android:gravity="center"
+        android:hint="@string/_00_00"
+        android:textAlignment="center"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/btnNext"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.429"
+        app:layout_constraintStart_toEndOf="@+id/Date"
+        app:layout_constraintTop_toBottomOf="@+id/Name"
+        app:layout_constraintVertical_bias="0.031" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

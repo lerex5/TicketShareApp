@@ -9,7 +9,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -81,7 +83,18 @@ public class sellActivity extends Fragment{
         Add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(getActivity(),addTickets.class);
+                Intent intent=new Intent(getActivity(),BasicTicketDetails.class);
+                SharedPreferences sharedPreferences= PreferenceManager.getDefaultSharedPreferences(getContext());
+                SharedPreferences.Editor editor=sharedPreferences.edit();
+                String empty="";
+                editor.putString(getString(R.string.name),empty);
+                editor.putString(getString(R.string.date),empty);
+                editor.putString(getString(R.string.time),empty);
+                editor.putString(getString(R.string.venue),empty);
+                editor.putString(getString(R.string.cost),empty);
+                editor.putInt("select",0);
+                editor.putInt("num",0);
+                editor.commit();
                 startActivity(intent);
 
             }
