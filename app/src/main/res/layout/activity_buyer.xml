@@ -20,42 +20,105 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
+    <TextView
+        android:id="@+id/tv"
+        android:layout_width="0dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/etborder3"
+        android:backgroundTint="#ffffff"
+        android:completionThreshold="1"
+        android:cursorVisible="false"
+        android:fontFamily="@font/montserrat"
+        android:textCursorDrawable="@null"
+        app:layout_constraintBottom_toBottomOf="@+id/relPar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.783"
+        tools:ignore="HardcodedText,TextViewEdits" />
+
+
     <AutoCompleteTextView
         android:id="@+id/tvSearch"
-        android:layout_width="250dp"
-        android:layout_height="50dp"
+        android:layout_width="0dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="75dp"
+        android:background="#00FFFFFF"
         android:backgroundTint="#ffffff"
         android:completionThreshold="1"
         android:cursorVisible="true"
         android:fontFamily="@font/montserrat"
         android:hint="Select a movie"
-        android:textColor="#ffffff"
-        android:textColorHint="#ffffff"
-        android:textColorLink="#ffffff"
+        android:scrollHorizontally="true"
+        android:textColor="#fff"
+        android:textColorHint="#B3FFFFFF"
+        android:textColorLink="#fff"
         android:textCursorDrawable="@null"
-        app:layout_constraintBottom_toBottomOf="@+id/relPar"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.06"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.77"
+        app:layout_constraintTop_toTopOf="@+id/tv"
         tools:ignore="HardcodedText" />
 
     <Button
+        android:id="@+id/btnClear"
+        android:layout_width="38dp"
+        android:layout_height="37dp"
+        android:layout_toEndOf="@+id/tvSearch"
+        android:background="#00FFFFFF"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/relPar"
+        app:layout_constraintEnd_toEndOf="@+id/tv"
+        app:layout_constraintHorizontal_bias="0.85"
+        app:layout_constraintStart_toStartOf="@+id/tv"
+        app:layout_constraintTop_toBottomOf="@+id/imageView3"
+        app:layout_constraintVertical_bias="0.56" />
+
+    <Button
         android:id="@+id/btnSearch"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="100dp"
+        android:layout_width="38dp"
+        android:layout_height="37dp"
+        android:layout_toEndOf="@+id/tvSearch"
+        android:background="#00FFFFFF"
+        app:layout_constraintBottom_toBottomOf="@+id/relPar"
+        app:layout_constraintEnd_toEndOf="@+id/tv"
+        app:layout_constraintHorizontal_bias="0.979"
+        app:layout_constraintStart_toStartOf="@+id/tv"
+        app:layout_constraintTop_toBottomOf="@+id/imageView3"
+        app:layout_constraintVertical_bias="0.542" />
+
+    <Button
+        android:id="@+id/SearchLogo"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
         android:layout_toEndOf="@+id/tvSearch"
         android:background="@drawable/search"
         android:backgroundTint="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="@+id/relPar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.594"
-        app:layout_constraintStart_toEndOf="@+id/tvSearch"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintBottom_toBottomOf="@+id/tv"
+        app:layout_constraintEnd_toEndOf="@+id/tv"
+        app:layout_constraintHorizontal_bias="0.96"
+        app:layout_constraintStart_toStartOf="@+id/tv"
+        app:layout_constraintTop_toTopOf="@+id/tv"
+        app:layout_constraintVertical_bias="0.53" />
+
+    <Button
+        android:id="@+id/ClearLogo"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:layout_toEndOf="@+id/tvSearch"
+        android:background="@drawable/clear1"
+        android:backgroundTint="#FFFFFF"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/tv"
+        app:layout_constraintEnd_toEndOf="@+id/tv"
+        app:layout_constraintHorizontal_bias="0.82"
+        app:layout_constraintStart_toStartOf="@+id/tv"
+        app:layout_constraintTop_toTopOf="@+id/tv" />
 
     <ImageView
         android:id="@+id/TicLogo"
@@ -68,7 +131,7 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.16000003" />
 
     <ImageView
         android:id="@+id/imageView3"
@@ -81,7 +144,7 @@
         app:layout_constraintHorizontal_bias="0.604"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.16000003" />
 
     <TextView
         android:id="@+id/textCurrentLocation"
@@ -94,8 +157,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.03"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.277" />
+        app:layout_constraintTop_toBottomOf="@+id/relPar"
+        app:layout_constraintVertical_bias="0.03" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvAvailable"
@@ -124,8 +187,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.03"
         app:layout_constraintStart_toEndOf="@+id/textCurrentLocation"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.271" />
+        app:layout_constraintTop_toBottomOf="@+id/relPar"
+        app:layout_constraintVertical_bias="0.02" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

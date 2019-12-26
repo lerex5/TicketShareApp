@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,22 +16,37 @@ import android.widget.TextView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.Objects;
+
+import static androidx.constraintlayout.widget.Constraints.TAG;
 
 public class accountActivity extends Fragment {
 
     private Button LogOut,chngLocation,YourTickets;
-    private TextView curCity,LocSpace,TicSpace,UserId;
+    private TextView curCity,LocSpace,TicSpace,UserId,SoldCnt;
     private TinyDB tinydb;
+    private FirebaseAuth mAuth;
+    private FirebaseUser currentUser;
+    private FirebaseDatabase database = FirebaseDatabase.getInstance();
+    private DatabaseReference ref,sold;
+    private long count;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_account, null);
 
-        FirebaseAuth mAuth = FirebaseAuth.getInstance();
-        FirebaseUser currentUser = mAuth.getCurrentUser();
+        mAuth = FirebaseAuth.getInstance();
+        currentUser = mAuth.getCurrentUser();
+        ref= database.getReference(Objects.requireNonNull(mAuth.getCurrentUser()).getUid());
+        sold =FirebaseDatabase.getInstance().getReference("Sold");
 
         tinydb = new TinyDB(getActivity());
         chngLocation=view.findViewById(R.id.chngLocation);
@@ -38,12 +54,25 @@ public class accountActivity extends Fragment {
         LocSpace=view.findViewById(R.id.LocSpace);
         TicSpace=view.findViewById(R.id.TicSpace);
         UserId=view.findViewById(R.id.UserId);
+        SoldCnt=view.findViewById(R.id.SoldCnt);
 
         LogOut = view.findViewById(R.id.btnLogout);
         YourTickets = view.findViewById(R.id.viewTickets);
 
         curCity.setText(tinydb.getString("CurCity"));
         UserId.setText(currentUser.getPhoneNumber());
+        sold.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                count=dataSnapshot.getChildrenCount();
+                SoldCnt.setText(String.valueOf(count));
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
         LogOut.setOnClickListener(new View.OnClickListener() {
             @Override

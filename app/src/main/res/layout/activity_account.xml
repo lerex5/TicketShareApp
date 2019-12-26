@@ -45,7 +45,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/montserrat"
-        android:text="My Account"
+        android:text="@string/my_account"
         android:textColor="#555454"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="@+id/UserAccount"
@@ -55,12 +55,29 @@
         app:layout_constraintTop_toTopOf="@+id/UserAccount"
         app:layout_constraintVertical_bias="0.1" />
 
+
+    <TextView
+        android:id="@+id/TickSold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montserrat"
+        android:text="@string/number_of_tickets_sold"
+        android:textColor="#6D6B6B"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/UserAccount"
+        app:layout_constraintEnd_toEndOf="@+id/UserAccount"
+        app:layout_constraintHorizontal_bias="0.117"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/UserAccount"
+        app:layout_constraintVertical_bias="0.714" />
+
     <TextView
         android:id="@+id/UserId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:fontFamily="@font/montserrat"
+        android:textColor="#6D6B6B"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@+id/UserAccount"
         app:layout_constraintEnd_toEndOf="@+id/UserAccount"
@@ -68,6 +85,21 @@
         app:layout_constraintStart_toStartOf="@+id/UserAccount"
         app:layout_constraintTop_toBottomOf="@+id/AccountTitle"
         app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/SoldCnt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montserrat"
+        android:gravity="center"
+        android:textColor="#6D6B6B"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/TickSold"
+        app:layout_constraintEnd_toEndOf="@+id/UserAccount"
+        app:layout_constraintHorizontal_bias="0.046"
+        app:layout_constraintStart_toEndOf="@+id/TickSold"
+        app:layout_constraintTop_toTopOf="@+id/TickSold"
+        app:layout_constraintVertical_bias="0.54" />
 
     <Button
         android:id="@+id/btnLogout"

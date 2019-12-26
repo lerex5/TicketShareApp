@@ -77,7 +77,7 @@ public class sellActivity extends Fragment{
 
         // specify an adapter (see also next example)
         selList=new ArrayList<>();
-        mAdapter = new SellerListView(selList);
+        mAdapter = new SellerListView(selList,getContext());
         recyclerView.setAdapter(mAdapter);
 
         Add.setOnClickListener(new View.OnClickListener() {
