@@ -18,6 +18,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0">
 
+
         <TextView
             android:id="@+id/selMov"
             android:layout_width="250dp"
@@ -29,10 +30,10 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.1"
+            app:layout_constraintHorizontal_bias="0.107"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.022" />
+            app:layout_constraintVertical_bias="0.044" />
 
         <TextView
             android:id="@+id/selDate"
@@ -45,11 +46,10 @@
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.075"
+            app:layout_constraintHorizontal_bias="0.05"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/selMov"
             app:layout_constraintVertical_bias="0.0" />
-
 
         <TextView
             android:id="@+id/selTime"
@@ -79,10 +79,10 @@
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.075"
+            app:layout_constraintHorizontal_bias="0.077"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/selDate"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintVertical_bias="0.045" />
 
         <TextView
             android:id="@+id/selNum"
@@ -117,19 +117,20 @@
 
         <Button
             android:id="@+id/Sold"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignEnd="@+id/selDate"
-            android:background="@drawable/sold"
-            android:backgroundTint="   #5F5F5F"
-            android:textColor="#19232D"
+            android:background="#FFFFFF"
+            android:fontFamily="@font/montserrat"
+            android:text="@string/sold"
+            android:textColor="#DF0A0A"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.832"
+            app:layout_constraintHorizontal_bias="0.916"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.659" />
+            app:layout_constraintVertical_bias="0.904" />
 
         <Button
             android:id="@+id/movieLogo"
@@ -151,8 +152,8 @@
             android:background="@drawable/rupee"
             android:backgroundTint="#FC2F89"
             app:layout_constraintBottom_toBottomOf="@+id/selCost"
-            app:layout_constraintEnd_toStartOf="@+id/selDate"
-            app:layout_constraintHorizontal_bias="0.57"
+            app:layout_constraintEnd_toStartOf="@+id/selCost"
+            app:layout_constraintHorizontal_bias="0.51"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/selCost" />
 
@@ -163,9 +164,20 @@
             android:background="@drawable/calender1"
             app:layout_constraintBottom_toBottomOf="@+id/selDate"
             app:layout_constraintEnd_toStartOf="@+id/selCost"
-            app:layout_constraintHorizontal_bias="0.625"
+            app:layout_constraintHorizontal_bias="0.56"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/selDate" />
+
+        <Button
+            android:id="@+id/TimeLogo"
+            android:layout_width="19dp"
+            android:layout_height="20dp"
+            android:background="@drawable/time"
+            app:layout_constraintBottom_toBottomOf="@+id/selDate"
+            app:layout_constraintEnd_toStartOf="@+id/selTime"
+            app:layout_constraintStart_toEndOf="@+id/selDate"
+            app:layout_constraintTop_toTopOf="@+id/selDate"
+            app:layout_constraintVertical_bias="0.0" />
 
         <Button
             android:id="@+id/NumLogo"
@@ -175,10 +187,11 @@
             android:backgroundTint="#2700FF"
             app:layout_constraintBottom_toBottomOf="@+id/selNum"
             app:layout_constraintEnd_toStartOf="@+id/selCost"
-            app:layout_constraintHorizontal_bias="0.55"
+            app:layout_constraintHorizontal_bias="0.51"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/selNum"
             app:layout_constraintVertical_bias="0.26" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

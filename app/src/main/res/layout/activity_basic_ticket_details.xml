@@ -64,7 +64,7 @@
 
     <AutoCompleteTextView
         android:id="@+id/Name"
-        android:layout_width="250dp"
+        android:layout_width="300dp"
         android:layout_height="37dp"
         android:background="@drawable/etborder1"
         android:completionThreshold="1"
@@ -95,7 +95,7 @@
 
     <TextView
         android:id="@+id/Date"
-        android:layout_width="129dp"
+        android:layout_width="150dp"
         android:layout_height="37dp"
         android:layout_marginTop="60dp"
         android:background="@drawable/etborder1"
@@ -108,15 +108,15 @@
         android:textSize="14sp"
         app:layout_constraintBottom_toTopOf="@+id/btnNext"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.283"
+        app:layout_constraintHorizontal_bias="0.21"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Name"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintVertical_bias="0.034"
         tools:ignore="TextFields" />
 
     <TextView
         android:id="@+id/Time"
-        android:layout_width="60dp"
+        android:layout_width="80dp"
         android:layout_height="37dp"
         android:layout_marginTop="60dp"
         android:background="@drawable/etborder1"
@@ -129,9 +129,9 @@
         android:textSize="14sp"
         app:layout_constraintBottom_toTopOf="@+id/btnNext"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.429"
+        app:layout_constraintHorizontal_bias="0.555"
         app:layout_constraintStart_toEndOf="@+id/Date"
         app:layout_constraintTop_toBottomOf="@+id/Name"
-        app:layout_constraintVertical_bias="0.031" />
+        app:layout_constraintVertical_bias="0.034" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

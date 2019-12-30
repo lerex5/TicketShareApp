@@ -51,7 +51,7 @@ public class buyerActivity extends Fragment{
     private RecyclerView.LayoutManager layoutManager;
     private RecyclerView recyclerView;
     private TextView chngCurCity,curCity;
-    private Button searchbtn;
+    private Button searchbtn,clear,clearLogo,searchLogo;
     private TinyDB tinydb;
 
 
@@ -59,15 +59,18 @@ public class buyerActivity extends Fragment{
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.activity_buyer, null);
+        final View view = inflater.inflate(R.layout.activity_buyer, null);
 
         tinydb = new TinyDB(getActivity());//Shared Preference To Get Localized Data
         ArrayList<String> tickets = tinydb.getListString("Movies");
 
         search=view.findViewById(R.id.tvSearch);
         searchbtn=view.findViewById(R.id.btnSearch);
+        searchLogo=view.findViewById(R.id.SearchLogo);
         chngCurCity=view.findViewById(R.id.textCurrentLocation);
         curCity=view.findViewById(R.id.currentCity);
+        clear=view.findViewById(R.id.btnClear);
+        clearLogo=view.findViewById(R.id.ClearLogo);
 
         final AutoCompList searchAdapter = new AutoCompList(Objects.requireNonNull(getActivity()), android.R.layout.simple_dropdown_item_1line, tickets);
         search.setAdapter(searchAdapter);
@@ -82,11 +85,41 @@ public class buyerActivity extends Fragment{
         adapter = new BuyerListView(buylist);
         recyclerView.setAdapter(adapter);
 
+        search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clear.setVisibility(View.VISIBLE);
+                clearLogo.setVisibility(View.VISIBLE);
+                clear.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        search.setText("");
+                    }
+                });
+
+            }
+        });
 
         searchbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ((InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(search.getWindowToken(),0);
+                clear.setVisibility(View.INVISIBLE);
+                clearLogo.setVisibility(View.INVISIBLE);
+                if(search.getEditableText().toString().isEmpty()){
+                    Toast.makeText(getActivity(), "Enter A Movie Name",Toast.LENGTH_LONG).show();
+                }
+                else {
+                    GetAvailable();
+                }
+            }
+        });
+        searchLogo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(search.getWindowToken(),0);
+                clear.setVisibility(View.INVISIBLE);
+                clearLogo.setVisibility(View.INVISIBLE);
                 if(search.getEditableText().toString().isEmpty()){
                     Toast.makeText(getActivity(), "Enter A Movie Name",Toast.LENGTH_LONG).show();
                 }
@@ -141,7 +174,9 @@ public class buyerActivity extends Fragment{
                                     adapter.notifyDataSetChanged();
                                 }
                             }
+
                         }
+
                         @Override
                         public void onCancelled(@NonNull DatabaseError databaseError) {
 
@@ -154,6 +189,7 @@ public class buyerActivity extends Fragment{
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
+
         });
 
         //Is this Necessary And If So Why is It
@@ -161,6 +197,8 @@ public class buyerActivity extends Fragment{
         /*assert getFragmentManager() != null;
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         ft.detach(buyerActivity.this).attach(buyerActivity.this).commit();*/
+        if(buylist==null)
+            Toast.makeText(getActivity(),"No Tickets available",Toast.LENGTH_SHORT).show();
     }
 
     @Override

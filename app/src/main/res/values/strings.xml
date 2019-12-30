@@ -56,4 +56,11 @@
     <string name="venue">venue</string>
     <string name="cost">cost</string>
     <string name="num">num</string>
+    <string name="sold">Sold</string>
+    <string name="my_account">My Account</string>
+    <string name="number_of_tickets_sold">Number of tickets sold : </string>
+    <string name="SoldTextView">Do you want to mark the ticket sold?</string>
+    <string name="DelTextView">Do you want to delete the ticket?</string>
+    <string name="soldtext2">You can view your sold tickets in \'Your Tickets\'  option in your account tab.</string>
+    <string name="deltext2">You can view the deleted tickets in \'Your Tickets\'  option in your account tab.</string>
 </resources>
